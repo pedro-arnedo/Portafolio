@@ -1,0 +1,32 @@
+<main class="main">
+	<div class="content">
+		<!-- Sección izquierda: Presentación -->
+		<div class="left-side">
+			<h1>{{ title() }}</h1>
+			<p>¡Hola! Soy desarrollador Full Stack y este es mi portafolio.</p>
+		</div>
+
+		<!-- Divider -->
+		<div class="divider" role="separator" aria-label="Divider"></div>
+
+		<!-- Sección derecha: Links y habilidades -->
+		<div class="right-side">
+			<div class="pill-group">
+				<a class="pill" href="https://angular.dev" target="_blank">Angular Docs</a>
+				<a class="pill" href="https://github.com" target="_blank">GitHub</a>
+				<a class="pill" href="https://linkedin.com" target="_blank">LinkedIn</a>
+			</div>
+
+			<div class="skills">
+				<h3>Skills</h3>
+				<ul>
+					<li>Angular</li>
+					<li>TypeScript</li>
+					<li>Node.js</li>
+					<li>SQL / NoSQL</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</main>
+<router-outlet />
