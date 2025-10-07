@@ -1,0 +1,27 @@
+.intro-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1e1e1e;
+    color: #fff;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.125rem;
+    text-transform: uppercase;
+    z-index: 999;
+    transition: transform 1s ease-in-out;
+
+    &.hide {
+        transform: translateY(-100%);
+    }
+
+    .intro-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: center;
+        user-select: none;
+    }
+}
