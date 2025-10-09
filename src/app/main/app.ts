@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { IntroComponent } from '../features/intro/intro';
+import { Intro } from '../features/intro/intro';
+import { Hero } from '../features/hero/hero';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [IntroComponent],
+    imports: [Intro, Hero],
     templateUrl: './app.html',
     styleUrl: './app.scss'
 })
@@ -16,7 +17,7 @@ export class App {
     private readonly titles: Record<string, string> = {
         '/': 'Portafolio | Inicio',
         '/home': 'Portafolio | Inicio',
-        '/skills': 'Portafolio | Habilidades',
+        '/about': 'Portafolio | Habilidades',
         '/projects': 'Portafolio | Proyectos',
         '/contact': 'Portafolio | Contacto',
     };

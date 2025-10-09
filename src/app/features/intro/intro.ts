@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
     templateUrl: './intro.html',
     styleUrl: './intro.scss',
 })
-export class IntroComponent {
+export class Intro {
     fullText = 'BIENVENIDO A MI PORTAFOLIO';
     displayedText = '';
     hideIntro = false;
@@ -19,14 +19,14 @@ export class IntroComponent {
 
     private async animateIntro(): Promise<void> {
         await this.typeText();
-        await this.wait(1000);
+        await this.wait(800);
         this.hideIntro = true;
     }
 
     private async typeText(): Promise<void> {
         for (let i = 0; i < this.fullText.length; i++) {
             this.displayedText = this.fullText.slice(0, i + 1);
-            await this.wait(80);
+            await this.wait(70);
         }
     }
 

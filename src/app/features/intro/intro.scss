@@ -4,24 +4,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1e1e1e;
+    background: linear-gradient(to right, #2B32B2, #1488CC);
     color: #fff;
     font-family: 'Rubik', sans-serif;
-    font-size: 1rem;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: 600;
-    letter-spacing: 0.125rem;
+    letter-spacing: 0.12rem;
     text-transform: uppercase;
     z-index: 999;
-    transition: transform 1s ease-in-out;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
 
     &.hide {
-        transform: translateY(-100%);
+        transform: translateY(-100vh);
     }
 
     .intro-text {
-        white-space: nowrap;
-        overflow: hidden;
-        text-align: center;
+        border-right: 2px solid rgba(255, 255, 255, 0.7);
+        animation: blink 0.7s steps(1) infinite;
         user-select: none;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
     }
 }
