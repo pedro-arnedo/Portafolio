@@ -1,20 +1,15 @@
 <nav class="navbar" [class.scrolled]="scrolled">
     <div class="navbar-wrapper">
         <a class="navbar-logo" href="#home" (click)="scrollTo($event, 'home')">
-            <img src="assets/avatar.jpg" alt="Foto" class="logo-img" />
+            <img src="assets/icon.jpg" alt="Foto" class="logo-img" />
         </a>
 
         <ul class="navbar-links">
-            <li><a href="#home" (click)="scrollTo($event, 'home')">Home</a></li>
-            <li><a href="#about" (click)="scrollTo($event, 'about')">About</a></li>
-            <li><a href="#projects" (click)="scrollTo($event, 'projects')">Projects</a></li>
-            <li><a href="#skills" (click)="scrollTo($event, 'skills')">Skills</a></li>
-            <li><a href="#experience" (click)="scrollTo($event, 'experience')">Experience</a></li>
-            <li><a href="#contact" (click)="scrollTo($event, 'contact')">Contact</a></li>
+            <li *ngFor="let link of navLinks">
+                <a href="#" (click)="scrollTo($event, link.targetId)">
+                    {{ link.label }}
+                </a>
+            </li>
         </ul>
-
-        <button class="navbar-toggle" (click)="toggleMenu()">
-            <i class="fa" [ngClass]="menuOpen ? 'fa-times' : 'fa-bars'"></i>
-        </button>
     </div>
 </nav>

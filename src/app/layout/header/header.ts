@@ -4,6 +4,7 @@ import { Hero } from '../../features/hero/hero';
 
 @Component({
     selector: 'app-header',
+    standalone: true,
     imports: [Navbar, Hero],
     templateUrl: './header.html',
     styleUrl: './header.scss'

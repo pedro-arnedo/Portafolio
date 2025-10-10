@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,21 +12,21 @@ export class Navbar {
     menuOpen = false;
     scrolled = false;
 
-    toggleMenu() {
-        this.menuOpen = !this.menuOpen;
-    }
+    navLinks = [
+        { label: 'Intro', targetId: 'intro' },
+        { label: 'About', targetId: 'about' },
+        { label: 'Projects', targetId: 'projects' },
+        { label: 'Experience', targetId: 'experience' },
+        { label: 'Contact', targetId: 'contact' },
+        
+    ];
 
-    scrollTo(event: Event, id: string) {
+    scrollTo(event: Event, targetId: string) {
         event.preventDefault();
-        const element = document.getElementById(id);
+        const element = document.getElementById(targetId);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
         this.menuOpen = false;
-    }
-
-    @HostListener('window:scroll')
-    onScroll() {
-        this.scrolled = window.scrollY > 30;
     }
 }

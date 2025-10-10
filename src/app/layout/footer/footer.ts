@@ -4,7 +4,8 @@ import { Credits } from '../../features/credits/credits';
 
 @Component({
     selector: 'app-footer',
-    // imports: [Contact, Credits],
+    standalone: true,
+    imports: [Contact, Credits],
     templateUrl: './footer.html',
     styleUrl: './footer.scss'
 })
