@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from '../../core/environment';
+import { ParticleService } from '../../core/particles.service';
 
 @Component({
     selector: 'app-hero',
@@ -14,27 +15,23 @@ export class Hero implements AfterViewInit {
     role = environment.profile.role;
     links = environment.profile.links;
 
-    constructor(private sanitizer: DomSanitizer) { }
+    constructor(
+        private sanitizer: DomSanitizer,
+        private particles: ParticleService
+    ) {}
 
-    ngAfterViewInit() {
-        this.loadParticles();
-    }
+    async ngAfterViewInit() {
+        await this.particles.loadParticles();
 
-    private loadParticles() {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-        script.onload = () => {
-            (window as any).particlesJS('particles-js', {
-                particles: {
-                    number: { value: 120 },
-                    size: { value: 3 },
-                    color: { value: '#ffffff' },
-                    line_linked: { enable: true, color: '#ffffff', opacity: 0.4 },
-                    move: { speed: 1.2 }
-                }
-            });
-        };
-        document.body.appendChild(script);
+        (window as any).particlesJS('particles-js', {
+            particles: {
+                number: { value: 120 },
+                size: { value: 3 },
+                color: { value: '#ffffff' },
+                line_linked: { enable: true, color: '#ffffff', opacity: 0.4 },
+                move: { speed: 1.3 }
+            }
+        });
     }
 
     safeLink(url: string): SafeUrl {

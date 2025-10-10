@@ -1,8 +1,10 @@
+@use '../../core/variables.scss' as *;
+
 .hero {
     position: relative;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(to right, #2B32B2, #1488CC);
+    background: $primary-gradient;
     color: #fff;
     overflow: hidden;
     display: flex;

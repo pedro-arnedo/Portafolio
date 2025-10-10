@@ -1,10 +1,12 @@
+@use '../../core/variables.scss' as *;
+
 .intro-screen {
     position: fixed;
     inset: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to right, #2B32B2, #1488CC);
+    background: $primary-gradient;
     color: #fff;
     font-family: 'Rubik', sans-serif;
     font-size: clamp(1.5rem, 3vw, 2.5rem);
