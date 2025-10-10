@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import { Header } from '../layout/header/header';
 import { Body } from '../layout/body/body';
 import { Footer } from '../layout/footer/footer';
+import { environment } from '../core/environment';
 
 @Component({
     selector: 'app-root',
@@ -13,21 +14,21 @@ import { Footer } from '../layout/footer/footer';
     styleUrl: './app.scss'
 })
 export class App {
-    protected readonly title = signal('Portafolio | Inicio');
+
+    protected readonly titleBase = environment.titleBase || 'Portafolio';
+    protected readonly title = signal(`${this.titleBase} | Inicio`);
 
     private readonly titles: Record<string, string> = {
-        '/': 'Portafolio | Inicio',
-        '/home': 'Portafolio | Inicio',
-        '/about': 'Portafolio | Habilidades',
-        '/contact': 'Portafolio | Contacto',
-        '/credits': 'Portafolio | Créditos',
-        '/experience': 'Portafolio | Experiencia',
-        '/hero': 'Portafolio | Héroe',
-        '/intro': 'Portafolio | Introducción',
-        '/project': 'Portafolio | Proyectos',
-        '/services': 'Portafolio | Servicios',
-        '/stack': 'Portafolio | Stack',
-        '/**': 'Portafolio | No Encontrado',
+        '/': `${this.titleBase} | Inicio`,
+        '/about': `${this.titleBase} | Habilidades`,
+        '/contact': `${this.titleBase} | Contacto`,
+        '/experience': `${this.titleBase} | Experiencia`,
+        '/project': `${this.titleBase} | Proyectos`,
+        '/stack': `${this.titleBase} | Stack`,
+        '/intro': `${this.titleBase} | Introducción`,
+        '/services': `${this.titleBase} | Servicios`,
+        '/credits': `${this.titleBase} | Créditos`,
+        '/**': `${this.titleBase} | No Encontrado`
     };
 
     constructor(private router: Router) {
@@ -37,8 +38,7 @@ export class App {
     }
 
     private updateTitle(url: string) {
-        const newTitle =
-            this.titles[url] || 'Portafolio';
+        const newTitle = this.titles[url] || this.titleBase;
         this.title.set(newTitle);
         document.title = newTitle;
     }

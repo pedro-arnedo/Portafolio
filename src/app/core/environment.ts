@@ -1,5 +1,7 @@
 export const environment = {
     production: false,
+    titleBase: 'Portafolio',
+    introText: 'BIENVENIDO A MI PORTAFOLIO',
     profile: {
         name: 'PEDRO DAVID ARNEDO ROMERO',
         role: '• Full Stack Developer • Software Engineer',
@@ -10,5 +12,4 @@ export const environment = {
             email: 'pedroarnedo24@gmail.com'
         }
     },
-    introText: 'BIENVENIDO A MI PORTAFOLIO'
 };
