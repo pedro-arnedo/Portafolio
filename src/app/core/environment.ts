@@ -9,5 +9,6 @@ export const environment = {
             cv: 'https://docs.google.com/document/d/1L89BTuDOXz9rT158ONChy7zvl-07KrcW/edit?usp=sharing&ouid=113738187012050333452&rtpof=true&sd=true',
             email: 'pedroarnedo24@gmail.com'
         }
-    }
+    },
+    introText: 'BIENVENIDO A MI PORTAFOLIO'
 };

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../core/environment';
 
 @Component({
     selector: 'app-intro',
@@ -9,7 +10,7 @@ import { CommonModule } from '@angular/common';
     styleUrl: './intro.scss',
 })
 export class Intro {
-    fullText = 'BIENVENIDO A MI PORTAFOLIO';
+    fullText = environment.introText;
     displayedText = '';
     hideIntro = false;
 
