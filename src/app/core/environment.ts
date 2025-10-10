@@ -4,7 +4,7 @@ export const environment = {
     introText: 'BIENVENIDO A MI PORTAFOLIO',
     profile: {
         name: 'PEDRO DAVID ARNEDO ROMERO',
-        role: '• Full Stack Developer • Software Engineer',
+        role: ['Full Stack Developer', 'Software Engineer', 'Web Developer', 'Frontend Developer', 'Backend Developer', 'Sql Database Administrator'],
         links: {
             linkedin: 'https://www.linkedin.com/in/pedro-arnedo',
             github: 'https://github.com/pedro-arnedo',
