@@ -1,11 +1,23 @@
 <section class="hero" aria-label="Hero">
     <div id="particles-js" class="particles"></div>
 
-    <div class="hero-content">
-        <h1 class="hero-heading" aria-hidden="false">
-            <span class="hero-intro" [class.typing]="typingField === 'intro'">{{ displayedIntro }}</span>
-            <span class="hero-title" [class.typing]="typingField === 'name'">{{ displayedName }}</span>
-            <span class="hero-subtitle" [class.typing]="typingField === 'role'">{{ displayedRole }}</span>
-        </h1>
+    <div class="hero-container">
+        <div class="hero-photo-wrapper" *ngIf="photo">
+            <img class="hero-photo" [src]="safePhoto" alt="Foto de {{ fullName }}" />
+        </div>
+
+        <div class="hero-text">
+            <h1 class="hero-heading">
+                <span class="hero-intro" [class.typing]="typingField === 'intro'">{{ displayedIntro }}</span>
+
+                <div class="hero-title">
+                    <span class="hero-name" [class.typing]="typingField === 'name'">{{ displayedName }}</span>
+                    <span class="hero-lastname" [class.typing]="typingField === 'lastname'">{{ displayedLastName
+                        }}</span>
+                </div>
+
+                <span class="hero-subtitle" [class.typing]="typingField === 'role'">{{ displayedRole }}</span>
+            </h1>
+        </div>
     </div>
 </section>

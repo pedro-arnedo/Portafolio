@@ -1,10 +1,11 @@
 export const environment = {
     production: false,
     titleBase: 'Portafolio',
-    introText: 'BIENVENIDO A MI PORTAFOLIO',
+    introText: 'BIENVENIDOS A MI PORTAFOLIO',
     profile: {
         name: 'PEDRO DAVID ARNEDO ROMERO',
-        role: ['Full Stack Developer', 'Software Engineer', 'Frontend & Backend Developer', 'REST API Architect', 'SQL Database Administrator'],
+        role: ['Full Stack Developer', 'Software Engineer', 'Frontend & Backend Developer', 'Rest API Architect', 'SQL Database Administrator'],
+        photo: 'assets/foto.png',
         links: {
             linkedin: 'https://www.linkedin.com/in/pedro-arnedo',
             github: 'https://github.com/pedro-arnedo',
