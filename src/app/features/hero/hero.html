@@ -1,27 +1,11 @@
-<section class="hero">
-    <div id="particles-js"></div>
+<section class="hero" aria-label="Hero">
+    <div id="particles-js" class="particles"></div>
 
     <div class="hero-content">
-        <h1>
-            <span class="hero-title">{{ name }}</span>
-            <span class="hero-subtitle">{{ role }}</span>
+        <h1 class="hero-heading" aria-hidden="false">
+            <span class="hero-intro" [class.typing]="typingField === 'intro'">{{ displayedIntro }}</span>
+            <span class="hero-title" [class.typing]="typingField === 'name'">{{ displayedName }}</span>
+            <span class="hero-subtitle" [class.typing]="typingField === 'role'">{{ displayedRole }}</span>
         </h1>
-
-        <div class="hero-icons">
-            <a aria-label="GitHub" [href]="safeLink(links.github)" target="_blank">
-                <i class="fa fa-github"></i>
-            </a>
-            <a aria-label="LinkedIn" [href]="safeLink(links.linkedin)" target="_blank">
-                <i class="fa fa-linkedin"></i>
-            </a>
-            <a aria-label="Email" [href]="safeLink(links.email)" target="_blank">
-                <i class="fa fa-envelope"></i>
-            </a>
-            <a aria-label="Currículum" [href]="safeLink(links.cv)" target="_blank" rel="noopener noreferrer">
-                <i class="fa fa-file-pdf-o"></i>
-            </a>
-
-        </div>
-
     </div>
 </section>

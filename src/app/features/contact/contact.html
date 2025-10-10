@@ -1,1 +1,16 @@
-<p>contact works!</p>
+<section class="contact">
+    <div class="contact-icons">
+        <a aria-label="GitHub" [href]="safeLink(links.github)" target="_blank">
+            <i class="fa fa-github"></i>
+        </a>
+        <a aria-label="LinkedIn" [href]="safeLink(links.linkedin)" target="_blank">
+            <i class="fa fa-linkedin"></i>
+        </a>
+        <a aria-label="Email" [href]="safeLink(links.email)" target="_blank">
+            <i class="fa fa-envelope"></i>
+        </a>
+        <a aria-label="Currículum" [href]="safeLink(links.cv)" target="_blank" rel="noopener noreferrer">
+            <i class="fa fa-file-pdf-o"></i>
+        </a>
+    </div>
+</section>
