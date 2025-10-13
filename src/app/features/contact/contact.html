@@ -1,16 +1,71 @@
-<section class="contact" aria-label="Contacto" id="contact">
-    <div class="contact-icons">
-        <a aria-label="GitHub" [href]="safeLink(links.github)" target="_blank">
-            <i class="fa fa-github"></i>
-        </a>
-        <a aria-label="LinkedIn" [href]="safeLink(links.linkedin)" target="_blank">
-            <i class="fa fa-linkedin"></i>
-        </a>
-        <a aria-label="Email" [href]="safeLink(links.email)" target="_blank">
-            <i class="fa fa-envelope"></i>
-        </a>
-        <a aria-label="Currículum" [href]="safeLink(links.cv)" target="_blank" rel="noopener noreferrer">
-            <i class="fa fa-file-pdf-o"></i>
-        </a>
+<section class="contact-footer" id="contact">
+    <div class="footer-top">
+        <!-- Marca y redes -->
+        <div class="footer-brand">
+            <h4 class="logo-name">Pedro Arnedo</h4>
+            <p> Desarrollador Full Stack apasionado por crear soluciones web innovadoras y dar vida a las ideas mediante
+                código limpio y eficiente. </p>
+
+            <div class="social-icons">
+                <a [href]="links.github" target="_blank" aria-label="GitHub">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a [href]="links.linkedin" target="_blank" aria-label="LinkedIn">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+                <a [href]="safeLink(links.email)" target="_blank" aria-label="Correo">
+                    <i class="fa fa-envelope"></i>
+                </a>
+                <a (click)="openCV()" role="button" aria-label="Ver CV">
+                    <i class="fa fa-file-pdf-o"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Enlaces rápidos -->
+        <div class="footer-links">
+            <h4>Enlaces rápidos</h4>
+            <ul>
+                <li *ngFor="let link of navLinks; let i = index" [hidden]="link.label === 'Contacto'">
+                    <a href="#" (click)="scrollTo($event, link.targetId)">
+                        {{ link.label }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Contacto directo -->
+        <div class="footer-contact">
+            <h4>Ponte en contacto</h4>
+            <p>
+                <i class="fa fa-envelope"></i>
+                <a [href]="'mailto:' + links.email">{{ links.email }}</a>
+            </p>
+            <p><i class="fa fa-phone"></i> +57 300 123 4567</p>
+            <p><i class="fa fa-map-marker"></i> Valledupar, Colombia</p>
+        </div>
+
+        <!-- Suscripción -->
+        <div class="footer-subscribe">
+            <h4>Permanece actualizado</h4>
+            <input type="email" placeholder="Tu correo electrónico" [(ngModel)]="subscriberEmail" />
+            <button (click)="subscribe()">Suscribirse</button>
+            <p class="footer-note">
+                Sin spam. Te puedes desuscribir cuando quieras.
+            </p>
+        </div>
     </div>
+
+    <!-- Línea divisoria -->
+    <hr class="footer-divider" />
+
+    <!-- Copy -->
+    <div class="footer-bottom">
+        <p>© {{ currentYear }} Pedro Arnedo. Todos los derechos reservados.</p>
+    </div>
+
+    <!-- Botón flotante -->
+    <button class="floating-btn" aria-label="Ir arriba" (click)="scrollToTop()">
+        <i class="fa fa-chevron-up"></i>
+    </button>
 </section>
