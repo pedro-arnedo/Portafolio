@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from '../../core/environment';
@@ -14,8 +14,13 @@ import { ParticleService } from '../../core/particles.service';
 export class Hero implements AfterViewInit {
 
     readonly fullName = environment.profile.name ?? '';
-    readonly roles: string[] = Array.isArray(environment.profile.role) ? environment.profile.role : [String(environment.profile.role ?? '')];
-    readonly photo = environment.profile.photo;
+    readonly roles: string[] = (
+        Array.isArray(environment.profile.role)
+            ? environment.profile.role
+            : [String(environment.profile.role ?? '')]
+    ).filter(r => !!r && r.trim().length > 0);
+
+    readonly photo = environment.profile.photo ?? '';
     safePhoto: SafeUrl = '';
 
     displayedIntro = '';
@@ -33,28 +38,36 @@ export class Hero implements AfterViewInit {
 
     constructor(
         private particles: ParticleService,
-        private sanitizer: DomSanitizer
+        private sanitizer: DomSanitizer,
+        private cd: ChangeDetectorRef
     ) { }
 
     ngAfterViewInit() {
-        this.safePhoto = this.sanitizer.bypassSecurityTrustUrl(this.photo);
+        setTimeout(() => {
+            this.safePhoto = this.sanitizer.bypassSecurityTrustUrl(this.photo);
 
-        this.nameParts = this.fullName.trim().split(/\s+/);
-        const mid = Math.ceil(this.nameParts.length / 2);
-        this.nameParts = [this.nameParts.slice(0, mid).join(' '), this.nameParts.slice(mid).join(' ')];
+            const parts = this.fullName.trim().split(/\s+/);
+            const mid = Math.ceil(parts.length / 2);
+            this.nameParts = [
+                parts.slice(0, mid).join(' '),
+                parts.slice(mid).join(' ')
+            ];
 
-        this.startTypingSequence();
+            this.startTypingSequence();
 
-        this.particles.loadParticles().then(() => {
-            (window as any).particlesJS?.('particles-js', {
-                particles: {
-                    number: { value: 120 },
-                    size: { value: 3 },
-                    color: { value: '#ffffff' },
-                    line_linked: { enable: true, color: '#ffffff', opacity: 0.4 },
-                    move: { speed: 1.3 }
-                }
+            this.particles.loadParticles().then(() => {
+                (window as any).particlesJS?.('particles-js', {
+                    particles: {
+                        number: { value: 120 },
+                        size: { value: 3 },
+                        color: { value: '#ffffff' },
+                        line_linked: { enable: true, color: '#ffffff', opacity: 0.4 },
+                        move: { speed: 1.3 }
+                    }
+                });
             });
+
+            this.cd.detectChanges();
         });
     }
 
@@ -67,11 +80,11 @@ export class Hero implements AfterViewInit {
 
         await this.wait(400);
         this.typingField = 'name';
-        await this.typeText(this.nameParts[0], 'name');
+        await this.typeText(this.nameParts[0] ?? '', 'name');
 
         await this.wait(300);
         this.typingField = 'lastname';
-        await this.typeText(this.nameParts[1], 'lastname');
+        await this.typeText(this.nameParts[1] ?? '', 'lastname');
 
         await this.wait(500);
         this.typingField = 'role';
@@ -81,7 +94,7 @@ export class Hero implements AfterViewInit {
     private async loopRoles(): Promise<void> {
         let idx = 0;
         while (true) {
-            const role = this.roles[idx % this.roles.length] ?? '';
+            const role = this.roles?.[idx % this.roles.length] || '';
             this.typingField = 'role';
             await this.typeText(role, 'role');
             await this.wait(1200);
@@ -91,11 +104,12 @@ export class Hero implements AfterViewInit {
         }
     }
 
-    private async typeText(text: string, field: 'intro' | 'name' | 'lastname' | 'role'): Promise<void> {
+    private async typeText(text: string | undefined, field: 'intro' | 'name' | 'lastname' | 'role'): Promise<void> {
+        const safeText = text ?? '';
         this.updateField(field, '');
-        for (let i = 0; i < text.length; i++) {
-            this.updateField(field, text.slice(0, i + 1));
-            const speed = this.typingSpeedStart - ((this.typingSpeedStart - this.typingSpeedBase) * (i / text.length));
+        for (let i = 0; i < safeText.length; i++) {
+            this.updateField(field, safeText.slice(0, i + 1));
+            const speed = this.typingSpeedStart - ((this.typingSpeedStart - this.typingSpeedBase) * (i / safeText.length));
             await this.wait(speed);
         }
     }

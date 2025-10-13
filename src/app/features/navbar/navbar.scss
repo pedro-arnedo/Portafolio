@@ -23,69 +23,53 @@
         align-items: center;
     }
 
-    .navbar-logo {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-
-        .logo-img {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            object-fit: cover;
-        }
+    .navbar-logo .logo-img {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        object-fit: cover;
     }
 
     .navbar-links {
+        position: relative;
         display: flex;
-        justify-content: center;
+        align-items: center;
         list-style: none;
         gap: 2rem;
         margin: 0;
         padding: 0 1.5rem;
 
-        li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
+        li {
+            z-index: 2;
 
-            font-family: 'Rubik', sans-serif;
-            position: relative;
-            padding: 0.2rem 0;
-            transition: all 0.3s ease;
-
-            &::after {
-                content: '';
-                position: absolute;
-                left: 0;
-                bottom: -2px;
-                width: 100%;
-                height: 2px;
-                background: rgba(255, 255, 255, 0);
-                border-radius: 2px;
-                transform: scaleY(0);
+            a {
+                color: #fff;
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 0.95rem;
+                font-family: 'Rubik', sans-serif;
+                border-radius: 25px;
                 transition: all 0.3s ease;
-            }
 
-            &:hover::after {
-                transform: scaleY(1);
-                background: #00c3ff;
-            }
-
-            &:hover {
-                transform: translateY(-4px);
+                &:hover {
+                    transform: translateY(-3px);
+                }
             }
         }
-    }
 
-    .navbar-toggle {
-        display: none;
-        background: transparent;
-        border: none;
-        color: #fff;
-        font-size: 1.5rem;
-        cursor: pointer;
+        .active-pill {
+            position: absolute;
+            height: 30px;
+            left: 0;
+            background: linear-gradient(90deg, #00c3ff, #29ffd9);
+            box-shadow: 0 0 15px rgba(0, 195, 255, 0.6), 0 0 30px rgba(0, 255, 217, 0.25);
+            animation: glowMove 3s ease-in-out infinite alternate;
+            border-radius: 10px;
+            z-index: 1;
+            transition:
+                transform 0.45s cubic-bezier(0.25, 1.25, 0.5, 1),
+                width 0.3s ease;
+        }
     }
 }

@@ -13,4 +13,13 @@ export const environment = {
             email: 'pedroarnedo24@gmail.com'
         }
     },
+    navLinks: [
+        { label: 'Home', targetId: 'home' },
+        { label: 'About', targetId: 'about' },
+        { label: 'Projects', targetId: 'projects' },
+        { label: 'Experience', targetId: 'experience' },
+        { label: 'Services', targetId: 'services' },
+        { label: 'Stack', targetId: 'stack' },
+        { label: 'Contact', targetId: 'contact' },
+    ]
 };

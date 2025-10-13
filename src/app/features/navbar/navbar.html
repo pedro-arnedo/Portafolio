@@ -1,12 +1,13 @@
 <nav class="navbar" [class.scrolled]="scrolled">
     <div class="navbar-wrapper">
-        <a class="navbar-logo" href="#home" (click)="scrollTo($event, 'home')">
+        <a class="navbar-logo" href="#home" (click)="scrollTo($event, 'home', 0)">
             <img src="assets/icon.jpg" alt="Foto" class="logo-img" />
         </a>
 
         <ul class="navbar-links">
-            <li *ngFor="let link of navLinks">
-                <a href="#" (click)="scrollTo($event, link.targetId)">
+            <div class="active-pill" [style.transform]="activeIndicatorTransform"></div>
+            <li *ngFor="let link of navLinks; let i = index" [class.active]="activeSection === link.targetId">
+                <a href="#" (click)="scrollTo($event, link.targetId, i)">
                     {{ link.label }}
                 </a>
             </li>
