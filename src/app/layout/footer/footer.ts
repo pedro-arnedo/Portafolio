@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { Contact } from '../../features/contact/contact';
-import { Credits } from '../../features/credits/credits';
 
 @Component({
     selector: 'app-footer',
     standalone: true,
-    imports: [Contact, Credits],
+    imports: [Contact],
     templateUrl: './footer.html',
     styleUrl: './footer.scss'
 })

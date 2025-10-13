@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    titleBase: 'Portafolio',
+    titleBase: 'Pedro Arnedo | Portafolio',
     introText: 'BIENVENIDOS A MI PORTAFOLIO',
     profile: {
         name: 'PEDRO DAVID ARNEDO ROMERO',
@@ -14,12 +14,12 @@ export const environment = {
         }
     },
     navLinks: [
-        { label: 'Home', targetId: 'home' },
-        { label: 'About', targetId: 'about' },
-        { label: 'Projects', targetId: 'projects' },
-        { label: 'Experience', targetId: 'experience' },
-        { label: 'Services', targetId: 'services' },
-        { label: 'Stack', targetId: 'stack' },
-        { label: 'Contact', targetId: 'contact' },
+        { label: 'Inicio', targetId: 'home' },
+        { label: 'Perfil', targetId: 'about' },
+        { label: 'Experiencia', targetId: 'experience' },
+        { label: 'Proyectos', targetId: 'projects' },
+        { label: 'Servicios', targetId: 'services' },
+        { label: 'Tecnologías', targetId: 'stack' },
+        { label: 'Contacto', targetId: 'contact' },
     ]
 };

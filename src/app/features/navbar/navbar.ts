@@ -1,6 +1,8 @@
 import { Component, HostListener, ElementRef, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../core/environment';
+import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-navbar',
@@ -17,7 +19,7 @@ export class Navbar implements AfterViewInit {
     activeIndicatorTransform = 'translateX(0px) scaleX(1)';
     private linkPositions: DOMRect[] = [];
 
-    constructor(private el: ElementRef) { }
+    constructor(private el: ElementRef, private location: Location, private title: Title) { }
 
     ngAfterViewInit() {
         this.storeLinkPositions();
@@ -46,6 +48,7 @@ export class Navbar implements AfterViewInit {
                 const rect = el.getBoundingClientRect();
                 if (rect.top <= 150 && rect.bottom >= 150) {
                     this.activeSection = link.targetId;
+                    this.location.replaceState(`#${link.targetId}`);
                     this.moveActivePill(i);
                     break;
                 }
@@ -58,6 +61,7 @@ export class Navbar implements AfterViewInit {
         const element = document.getElementById(targetId);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.history.replaceState(null, '', `#${targetId}`);
         }
         this.activeSection = targetId;
         this.moveActivePill(index);
@@ -79,5 +83,7 @@ export class Navbar implements AfterViewInit {
             pillEl.style.transform = `translateX(${offsetX}px)`;
             pillEl.style.width = `${rect.width}px`;
         }
+        const sectionLabel = this.navLinks[index]?.label || 'Inicio';
+        this.title.setTitle(`Pedro Arnedo | ${sectionLabel}`);
     }
 }
