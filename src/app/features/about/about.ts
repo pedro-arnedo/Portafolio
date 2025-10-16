@@ -7,4 +7,19 @@ import { CommonModule } from '@angular/common';
     templateUrl: './about.html',
     styleUrl: './about.scss'
 })
-export class About { }
+export class About {
+
+    ngAfterViewInit() {
+        const section = document.querySelector('.about-container');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    section?.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        if (section) observer.observe(section);
+    }
+
+}

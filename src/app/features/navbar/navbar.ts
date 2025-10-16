@@ -61,7 +61,7 @@ export class Navbar implements AfterViewInit {
         const element = document.getElementById(targetId);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            window.history.replaceState(null, '', `#${targetId}`);
+            // window.history.replaceState(null, '', `#${targetId}`);
         }
         this.activeSection = targetId;
         this.moveActivePill(index);

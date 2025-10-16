@@ -30,8 +30,8 @@ export class Hero implements AfterViewInit {
     typingField: 'intro' | 'name' | 'lastname' | 'role' | null = null;
 
     private readonly introText = environment.introText ?? 'Bienvenidos a mi portafolio';
-    private readonly typingSpeedBase = 80;
-    private readonly typingSpeedStart = 130;
+    private readonly typingSpeedBase = 50;
+    private readonly typingSpeedStart = 80;
     private running = false;
 
     private nameParts: string[] = [];

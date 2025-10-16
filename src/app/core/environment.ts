@@ -4,16 +4,22 @@ export const environment = {
     introText: 'BIENVENIDOS A MI PORTAFOLIO',
     profile: {
         name: 'PEDRO DAVID ARNEDO ROMERO',
-        role: ['Full Stack Developer', 'Software Engineer', 'Frontend & Backend Developer', 'Rest API Architect', 'SQL Database Administrator'],
+        role: [
+            'Full Stack Developer',
+            'Software Engineer',
+            'Frontend & Backend Developer',
+            'Rest API Architect',
+            'SQL Database Administrator'
+        ],
         photo: 'assets/foto.png',
         links: {
             linkedin: 'https://www.linkedin.com/in/pedro-arnedo',
             github: 'https://github.com/pedro-arnedo',
             cv: 'https://docs.google.com/document/d/1L89BTuDOXz9rT158ONChy7zvl-07KrcW/edit?usp=sharing&ouid=113738187012050333452&rtpof=true&sd=true',
-            email: 'pedroarnedo24@gmail.com'
+            email: 'pedrodavidarnedoromero@gmail.com'
         }
     },
-    navLinks: [
+        navLinks: [
         { label: 'Inicio', targetId: 'home' },
         { label: 'Perfil', targetId: 'about' },
         { label: 'Experiencia', targetId: 'experience' },
@@ -21,5 +27,10 @@ export const environment = {
         { label: 'Servicios', targetId: 'services' },
         { label: 'Tecnologías', targetId: 'stack' },
         { label: 'Contacto', targetId: 'contact' },
-    ]
+    ],
+    emailService: {
+        serviceID: 'service_z6zzxti',
+        templateID: 'template_dnfp29o',
+        publicKey: 'B3CHZZ5qH5CB7aGSw'
+    }
 };
