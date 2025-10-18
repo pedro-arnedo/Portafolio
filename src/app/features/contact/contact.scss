@@ -1,4 +1,9 @@
 .contact-footer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     background: #0f111a;
     color: #d0d6e2;
     font-family: 'Rubik', sans-serif;
@@ -157,7 +162,7 @@
         .footer-subscribe {
             h4 {
                 color: #fff;
-                margin-bottom: 0.5rem; // 🔹 reducido
+                margin-bottom: 0.5rem;
             }
 
             input {
@@ -264,6 +269,7 @@
             border-radius: 14px;
             box-shadow: 0 6px 20px rgba(0, 195, 255, 0.1);
             transition: transform 0.3s ease;
+            height: 200px;
 
             &:hover {
                 transform: scale(1.01);

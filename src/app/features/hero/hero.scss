@@ -12,6 +12,7 @@
     justify-content: center;
     font-family: 'Rubik', sans-serif;
     text-align: center;
+    scroll-snap-align: start;
 
     .particles {
         position: absolute;
@@ -29,6 +30,7 @@
         max-width: 1200px;
         padding: 4rem;
         width: 100%;
+        min-height: calc(100vh - 6rem);
     }
 
     .hero-photo-wrapper {
@@ -134,5 +136,23 @@
         height: 2.6rem;
         transition: opacity 0.2s ease;
         text-align: center;
+    }
+
+    @keyframes blink {
+        50% {
+            border-color: transparent;
+        }
+    }
+
+    @keyframes fadeInZoom {
+        0% {
+            opacity: 0;
+            transform: scale(0.85);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
 }

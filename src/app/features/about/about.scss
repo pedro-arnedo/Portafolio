@@ -1,11 +1,15 @@
 .about-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 4rem 2rem;
     background: radial-gradient(circle at top left, #0f111a 0%, #0b0d13 100%);
     color: #d0d6e2;
-    padding: 5rem 2rem;
     font-family: 'Rubik', sans-serif;
     overflow: hidden;
 
     .about-container {
+        height: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 3rem;
@@ -31,11 +35,19 @@
 
     .intro-quote {
         font-style: italic;
-        color: #b0b6c5;
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
+        font-size: 1rem;
         border-left: 3px solid #00c3ff;
-        padding-left: 1rem;
+        padding-left: 0.9rem;
+        line-height: 1.5;
+        color: #b0b6c5;
+
+        .quote-author {
+            display: inline;
+            margin-left: 0.3rem;
+            font-size: 0.95rem;
+            color: #8fa3c7;
+            font-style: normal;
+        }
     }
 
     .about-text {
