@@ -23,19 +23,24 @@
 
             <p>
                 He liderado proyectos que digitalizaron procesos y optimizaron la gestión de información en entornos
-                académicos
-                y corporativos. Mi propósito es aportar <strong>visión arquitectónica</strong>, <strong>código
-                    limpio</strong>
-                y <strong>soluciones tecnológicas</strong> que generen impacto real en las organizaciones.
+                académicos y corporativos. Mi propósito es aportar <strong>visión arquitectónica</strong>,
+                <strong>código limpio</strong> y <strong>soluciones tecnológicas</strong> que generen impacto real en
+                las organizaciones.
             </p>
 
             <p>
-                ¿Quieres ver mis proyectos o coordinar una conversación? <a href="#contact">Contáctame</a>.
+                ¿Quieres ver mis proyectos o coordinar una conversación? <strong><a href="#contact">Contáctame</a></strong>.
             </p>
         </div>
 
-        <div class="about-photo">
-            <img src="assets/img/profile.jpg" alt="Pedro Arnedo" />
+        <!-- Carrusel -->
+        <div class="about-carousel">
+            <div class="carousel-wrapper" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+                <img *ngFor="let img of images" [src]="img" alt="Pedro Arnedo - Imagen" />
+            </div>
+
+            <button class="carousel-btn prev" (click)="prevImage()">‹</button>
+            <button class="carousel-btn next" (click)="nextImage()">›</button>
         </div>
     </div>
 </section>
