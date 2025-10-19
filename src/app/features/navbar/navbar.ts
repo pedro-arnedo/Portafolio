@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, HostListener, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../core/environment';
 import { Location } from '@angular/common';
@@ -11,48 +11,55 @@ import { Title } from '@angular/platform-browser';
     templateUrl: './navbar.html',
     styleUrl: './navbar.scss'
 })
-export class Navbar implements AfterViewInit {
+export class Navbar implements AfterViewInit, OnDestroy {
+
     menuOpen = false;
     scrolled = false;
     navLinks = environment.navLinks;
     activeSection = 'home';
     activeIndicatorTransform = 'translateX(0px) scaleX(1)';
-    private linkPositions: DOMRect[] = [];
+    private currentIndex = 0;
+
+    private observer?: IntersectionObserver;
 
     constructor(private el: ElementRef, private location: Location, private title: Title) { }
 
     ngAfterViewInit() {
-        this.storeLinkPositions();
-        window.addEventListener('resize', () => this.storeLinkPositions());
-        setTimeout(() => this.moveActivePill(0), 0);
+        this.observeSections();
+        this.moveActivePill(0);
     }
 
-    @HostListener('window:scroll', [])
+    ngOnDestroy() {
+        this.observer?.disconnect();
+    }
+
+    @HostListener('window:scroll')
     onScroll() {
         this.scrolled = window.scrollY > 50;
-        this.detectActiveSection();
     }
 
-    private storeLinkPositions() {
-        const linkElements = this.el.nativeElement.querySelectorAll('.navbar-links li a');
-        this.linkPositions = Array.from(linkElements as NodeListOf<HTMLElement>).map(
-            (el) => el.getBoundingClientRect()
-        );
-    }
-
-    detectActiveSection() {
-        for (let i = 0; i < this.navLinks.length; i++) {
-            const link = this.navLinks[i];
-            const el = document.getElementById(link.targetId);
-            if (el) {
-                const rect = el.getBoundingClientRect();
-                if (rect.top <= 150 && rect.bottom >= 150) {
-                    this.activeSection = link.targetId;
-                    this.location.replaceState(`#${link.targetId}`);
-                    this.moveActivePill(i);
-                    break;
+    private observeSections() {
+        this.observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        const index = this.navLinks.findIndex(l => l.targetId === id);
+                        if (index !== -1 && this.currentIndex !== index) {
+                            this.currentIndex = index;
+                            this.activeSection = id;
+                            this.location.replaceState(`#${id}`);
+                            this.moveActivePill(index);
+                        }
+                    }
                 }
-            }
+            },
+            { threshold: 0.6 }
+        );
+
+        for (const link of this.navLinks) {
+            const section = document.getElementById(link.targetId);
+            if (section) this.observer.observe(section);
         }
     }
 
@@ -61,9 +68,9 @@ export class Navbar implements AfterViewInit {
         const element = document.getElementById(targetId);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            // window.history.replaceState(null, '', `#${targetId}`);
         }
         this.activeSection = targetId;
+        this.currentIndex = index;
         this.moveActivePill(index);
     }
 
@@ -78,11 +85,11 @@ export class Navbar implements AfterViewInit {
         if (targetEl && pillEl) {
             const rect = targetEl.getBoundingClientRect();
             const containerRect = targetEl.closest('.navbar-links')!.getBoundingClientRect();
-
             const offsetX = rect.left - containerRect.left;
             pillEl.style.transform = `translateX(${offsetX}px)`;
             pillEl.style.width = `${rect.width}px`;
         }
+
         const sectionLabel = this.navLinks[index]?.label || 'Inicio';
         this.title.setTitle(`Pedro Arnedo | ${sectionLabel}`);
     }

@@ -1,4 +1,6 @@
-export const environment = {
+import { Environment } from "./models/environment.model";
+
+export const environment: Environment = {
     production: false,
     titleBase: 'Pedro Arnedo | Portafolio',
     introText: 'BIENVENIDOS A MI PORTAFOLIO',
@@ -12,6 +14,10 @@ export const environment = {
             'SQL Database Administrator'
         ],
         photo: 'assets/foto.png',
+        images: [
+            'assets/img1.jpeg',
+            'assets/foto1.png',
+        ],
         links: {
             linkedin: 'https://www.linkedin.com/in/pedro-arnedo',
             github: 'https://github.com/pedro-arnedo',
@@ -19,14 +25,14 @@ export const environment = {
             email: 'pedrodavidarnedoromero@gmail.com'
         }
     },
-        navLinks: [
+    navLinks: [
         { label: 'Inicio', targetId: 'home' },
         { label: 'Perfil', targetId: 'about' },
         { label: 'Experiencia', targetId: 'experience' },
         { label: 'Proyectos', targetId: 'projects' },
         { label: 'Servicios', targetId: 'services' },
         { label: 'Tecnologías', targetId: 'stack' },
-        { label: 'Contacto', targetId: 'contact' },
+        { label: 'Contacto', targetId: 'contact' }
     ],
     emailService: {
         serviceID: 'service_z6zzxti',

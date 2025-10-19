@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { environment } from '../../core/environment';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import emailjs from 'emailjs-com';
+import { BehaviorSubject, interval, Subscription } from 'rxjs';
+import { map, takeWhile } from 'rxjs/operators';
+import { EmailService } from '../../core/services/email.service';
 
 @Component({
     selector: 'app-contact',
@@ -11,29 +13,38 @@ import emailjs from 'emailjs-com';
     templateUrl: './contact.html',
     styleUrl: './contact.scss'
 })
-export class Contact implements OnInit {
+export class Contact implements OnInit, OnDestroy {
 
-    links = environment.profile.links;
-    navLinks = environment.navLinks;
-    currentYear = new Date().getFullYear();
+    readonly links = environment.profile.links;
+    readonly navLinks = environment.navLinks;
+    readonly currentYear = new Date().getFullYear();
 
     showEmailModal = false;
     emailData = { name: '', email: '', message: '' };
     loading = false;
-    cooldown = 0;
-    cooldownInterval: any;
+
+    private cooldownSeconds$ = new BehaviorSubject<number>(0);
+    cooldown$ = this.cooldownSeconds$.asObservable();
+    private cooldownSub?: Subscription;
+    private readonly COOLDOWN_SECONDS = 180;
+    private readonly LOCAL_KEY = 'cooldownEnd';
+
+    constructor(private emailService: EmailService) { }
 
     ngOnInit() {
-        const savedCooldownEnd = localStorage.getItem('cooldownEnd');
-        if (savedCooldownEnd) {
-            const remaining = Math.floor((+savedCooldownEnd - Date.now()) / 1000);
+        const saved = localStorage.getItem(this.LOCAL_KEY);
+        if (saved) {
+            const remaining = Math.floor((+saved - Date.now()) / 1000);
             if (remaining > 0) {
-                this.cooldown = remaining;
-                this.startCooldownTimer();
+                this.startCooldown(remaining);
             } else {
-                localStorage.removeItem('cooldownEnd');
+                localStorage.removeItem(this.LOCAL_KEY);
             }
         }
+    }
+
+    ngOnDestroy() {
+        this.clearCooldownSub();
     }
 
     openCV() {
@@ -51,21 +62,33 @@ export class Contact implements OnInit {
         document.body.style.overflow = '';
     }
 
-    startCooldownTimer() {
-        this.cooldownInterval = setInterval(() => {
-            this.cooldown--;
-            if (this.cooldown <= 0) {
-                clearInterval(this.cooldownInterval);
-                localStorage.removeItem('cooldownEnd');
-            }
-        }, 1000);
+    private clearCooldownSub() {
+        if (this.cooldownSub) {
+            this.cooldownSub.unsubscribe();
+            this.cooldownSub = undefined;
+        }
+        this.cooldownSeconds$.next(0);
+        localStorage.removeItem(this.LOCAL_KEY);
     }
 
-    startCooldown() {
-        const cooldownEnd = Date.now() + 180000; // 3 min
-        localStorage.setItem('cooldownEnd', cooldownEnd.toString());
-        this.cooldown = 180;
-        this.startCooldownTimer();
+    private startCooldown(seconds = this.COOLDOWN_SECONDS) {
+        const end = Date.now() + seconds * 1000;
+        localStorage.setItem(this.LOCAL_KEY, end.toString());
+        this.cooldownSeconds$.next(seconds);
+
+        this.clearCooldownSub();
+
+        this.cooldownSub = interval(1000)
+            .pipe(
+                map(i => seconds - i - 1),
+                takeWhile(val => val >= 0)
+            )
+            .subscribe({
+                next: val => this.cooldownSeconds$.next(val),
+                complete: () => {
+                    this.clearCooldownSub();
+                }
+            });
     }
 
     isValidEmail(email: string): boolean {
@@ -74,59 +97,52 @@ export class Contact implements OnInit {
     }
 
     async sendEmail() {
-        if (this.cooldown > 0) {
-            const minutes = Math.floor(this.cooldown / 60);
-            const seconds = this.cooldown % 60;
-            alert(`Debes esperar ${minutes}:${seconds.toString().padStart(2, '0')} antes de enviar otro mensaje.`);
+        const { name, email, message } = this.emailData;
+        if (this.cooldownSeconds$.value > 0) {
+            const t = this.cooldownSeconds$.value;
+            alert(`Debes esperar ${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')} antes de enviar otro mensaje.`);
             return;
         }
-
-        const { name, email, message } = this.emailData;
         if (!name.trim() || !email.trim() || !message.trim()) {
             alert('Por favor completa todos los campos.');
             return;
         }
-
         if (!this.isValidEmail(email)) {
             alert('Por favor ingresa un correo electrónico válido.');
             return;
         }
-
-        const confirmSend = confirm('¿Estás seguro de que deseas enviar este mensaje?');
-        if (!confirmSend) return;
+        if (!confirm('¿Estás seguro de que deseas enviar este mensaje?')) return;
 
         this.loading = true;
-
         const templateParams = {
             name: name.trim(),
             email: email.trim(),
-            message: message.trim()
+            message: message.trim(),
+            reply_to: email.trim()
         };
 
         try {
-            await emailjs.send(
-                environment.emailService.serviceID,
-                environment.emailService.templateID,
-                templateParams,
-                environment.emailService.publicKey
-            );
-
+            await this.emailService.sendMail(templateParams);
             alert(`Gracias ${name}, tu mensaje ha sido enviado con éxito.`);
             this.emailData = { name: '', email: '', message: '' };
             this.closeEmailModal();
             this.startCooldown();
-        } catch (error) {
-            console.error('Error al enviar el correo:', error);
+        } catch (err) {
+            console.error('Error al enviar el correo:', err);
             alert('Hubo un problema al enviar el mensaje. Intenta más tarde.');
         } finally {
             this.loading = false;
         }
     }
 
+    get cooldown() {
+        return this.cooldownSeconds$.value;
+    }
+
     scrollTo(event: Event, targetId: string) {
         event.preventDefault();
-        const element = document.getElementById(targetId);
-        if (element) element.scrollIntoView({ behavior: 'smooth' });
+        const el = document.getElementById(targetId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
 
     scrollToTop() {
