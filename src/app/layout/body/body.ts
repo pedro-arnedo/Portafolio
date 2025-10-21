@@ -8,7 +8,8 @@ import { Stack } from '../../features/stack/stack';
 @Component({
     selector: 'app-body',
     standalone: true,
-    imports: [About, Experience, Project, Services, Stack],
+    // imports: [About, Experience, Project, Services, Stack],
+    imports: [About, Stack],
     templateUrl: './body.html',
     styleUrl: './body.scss'
 })
