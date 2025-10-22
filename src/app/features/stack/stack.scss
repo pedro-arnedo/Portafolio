@@ -1,143 +1,108 @@
 .stack-section {
-    width: 100%;
-    background: radial-gradient(circle at top left, #0b0d13 0%, #0f111a 100%);
+    background: radial-gradient(circle at top left, #0e1118 0%, #080a10 100%);
     color: #d0d6e2;
     font-family: 'Rubik', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    padding: 3rem 1.5rem;
     overflow: hidden;
-    padding: 2rem;
 
-    .stack-container {
-        display: grid;
-        grid-template-columns: 1fr 1.2fr;
-        gap: 3rem;
-        align-items: center;
-        width: 100%;
-        max-width: 1300px;
+    .section-title {
+        color: #00c3ff;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2.5rem;
     }
 
-    .stack-left {
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.08);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+
+            &:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 0 25px rgba(0, 195, 255, 0.15);
+            }
+
+            .category-header {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.6rem;
+                margin-bottom: 1rem;
+
+                h3 {
+                    font-size: 1.05rem;
+                    color: #00b8ff;
+                    font-weight: 600;
+                }
+
+                i {
+                    color: #00b8ff;
+                    font-size: 1.1rem;
+                }
+            }
+
+            .tech-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+                gap: 1rem;
+                justify-items: center;
+
+                .tech-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 0.4rem;
+                    font-size: 0.8rem;
+                    color: rgba(255, 255, 255, 0.85);
+                    transition: all 0.3s ease;
+
+                    img {
+                        width: 36px;
+                        height: 36px;
+                        object-fit: contain;
+                        filter: drop-shadow(0 0 8px rgba(0, 195, 255, 0.3));
+                        transition: transform 0.3s ease;
+                    }
+
+                    &:hover {
+                        transform: scale(1.1);
+                        color: #00c3ff;
+
+                        img {
+                            transform: scale(1.15);
+                            filter: drop-shadow(0 0 10px rgba(0, 195, 255, 0.5));
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .stack-canvas-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 480px;
+        height: 400px;
+        margin-top: 2rem;
 
         .stack-canvas {
             width: 100%;
+            max-width: 700px;
             height: 100%;
-            max-width: 550px;
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.03);
-            box-shadow: 0 0 25px rgba(0, 195, 255, 0.2);
-        }
-    }
-
-    .stack-right {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 2rem;
-        text-align: left;
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #00c3ff;
-            margin-bottom: 1rem;
-        }
-
-        .stack-category {
-            .category-title {
-                font-size: 1.2rem;
-                font-weight: 600;
-                margin-bottom: 0.7rem;
-                color: #a7b2c3;
-                border-left: 4px solid #00c3ff;
-                padding-left: 0.6rem;
-            }
-
-            .icon-grid {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 1.2rem;
-            }
-
-            .icon-item {
-                position: relative;
-                width: 55px;
-                height: 55px;
-                cursor: pointer;
-                transition: transform 0.3s ease;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                    filter: drop-shadow(0 0 8px rgba(0, 195, 255, 0.25));
-                    transition: transform 0.3s ease, filter 0.3s ease;
-                }
-
-                &:hover {
-                    transform: scale(1.25);
-
-                    img {
-                        filter: drop-shadow(0 0 12px rgba(0, 195, 255, 0.8));
-                    }
-
-                    &::after {
-                        content: attr(data-tooltip);
-                        position: absolute;
-                        bottom: 115%;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        background: rgba(0, 195, 255, 0.12);
-                        color: #fff;
-                        font-size: 0.8rem;
-                        padding: 0.35rem 0.6rem;
-                        border-radius: 6px;
-                        backdrop-filter: blur(8px);
-                        white-space: nowrap;
-                        box-shadow: 0 0 10px rgba(0, 195, 255, 0.4);
-                    }
-                }
-            }
-        }
-    }
-
-    @media (max-width: 900px) {
-        .stack-container {
-            grid-template-columns: 1fr;
-            text-align: center;
-        }
-
-        .stack-left {
-            height: 350px;
-            order: 2;
-        }
-
-        .stack-right {
-            order: 1;
-            align-items: center;
-
-            .section-title {
-                text-align: center;
-            }
-
-            .stack-category {
-                .category-title {
-                    text-align: center;
-                    border-left: none;
-                    border-bottom: 2px solid #00c3ff;
-                    padding-left: 0;
-                    padding-bottom: 0.4rem;
-                }
-
-                .icon-grid {
-                    justify-content: center;
-                }
-            }
+            box-shadow: 0 0 30px rgba(0, 195, 255, 0.1);
         }
     }
 }

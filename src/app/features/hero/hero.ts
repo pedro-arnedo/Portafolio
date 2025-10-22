@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { environment } from '../../core/environment';
+import { environment } from '../../core/config/environment';
 import { ParticleService } from '../../core/services/particles.service';
 
 @Component({

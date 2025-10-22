@@ -1,8 +1,8 @@
-import { Environment } from "./models/environment.model";
+import { Environment } from "../models/environment.model";
 
 export const environment: Environment = {
     production: false,
-    titleBase: 'Pedro Arnedo | Portafolio',
+    titleBase: 'Pedro Arnedo',
     introText: 'BIENVENIDOS A MI PORTAFOLIO',
     profile: {
         name: 'PEDRO DAVID ARNEDO ROMERO',
@@ -21,7 +21,7 @@ export const environment: Environment = {
         links: {
             linkedin: 'https://www.linkedin.com/in/pedro-arnedo',
             github: 'https://github.com/pedro-arnedo',
-            cv: 'https://docs.google.com/document/d/1L89BTuDOXz9rT158ONChy7zvl-07KrcW/edit?usp=sharing&ouid=113738187012050333452&rtpof=true&sd=true',
+            cv: 'https://docs.google.com/document/d/1L89BTuDOXz9rT158ONChy7zvl-07KrcW/edit?usp=sharing',
             email: 'pedrodavidarnedoromero@gmail.com'
         }
     },

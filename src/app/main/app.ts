@@ -4,7 +4,7 @@ import { filter } from 'rxjs/operators';
 import { Header } from '../layout/header/header';
 import { Body } from '../layout/body/body';
 import { Footer } from '../layout/footer/footer';
-import { environment } from '../core/environment';
+import { environment } from '../core/config/environment';
 
 @Component({
     selector: 'app-root',

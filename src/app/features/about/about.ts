@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { environment } from '../../core/environment';
+import { environment } from '../../core/config/environment';
 
 @Component({
     selector: 'app-about',

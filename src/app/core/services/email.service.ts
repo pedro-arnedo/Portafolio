@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { environment } from '../environment';
+import { environment } from '../config/environment';
 import emailjs from 'emailjs-com';
 
 @Injectable({ providedIn: 'root' })

@@ -1,20 +1,25 @@
 <section class="stack-section" id="stack">
     <div class="stack-container">
-        <div class="stack-left">
-            <canvas #stackCanvas class="stack-canvas"></canvas>
-        </div>
+        <h2 class="section-title">Stack Tecnológico</h2>
 
-        <div class="stack-right">
-            <h2 class="section-title">Tecnologías y Herramientas</h2>
+        <div class="categories-grid">
+            <div *ngFor="let category of techCategories" class="category-card">
+                <div class="category-header">
+                    <i [class]="category.icon"></i>
+                    <h3>{{ category.title }}</h3>
+                </div>
 
-            <div class="stack-category" *ngFor="let category of categories">
-                <h3 class="category-title">{{ category.name }}</h3>
-                <div class="icon-grid">
-                    <div class="icon-item" *ngFor="let tech of category.items" [attr.data-tooltip]="tech.name">
+                <div class="tech-grid">
+                    <div *ngFor="let tech of category.items" class="tech-item">
                         <img [src]="tech.icon" [alt]="tech.name" />
+                        <span>{{ tech.name }}</span>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="stack-canvas-wrapper">
+            <canvas #stackCanvas class="stack-canvas"></canvas>
         </div>
     </div>
 </section>
