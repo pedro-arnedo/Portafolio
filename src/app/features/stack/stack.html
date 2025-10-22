@@ -1,18 +1,19 @@
 <section class="stack-section" id="stack">
     <div class="stack-container">
-        <h2 class="section-title">Tecnologías y Herramientas</h2>
-        <p class="section-subtitle">
-            Mi ecosistema de desarrollo: escalabilidad, rendimiento y buen diseño.
-        </p>
-
-        <div class="stack-canvas-wrapper">
+        <div class="stack-left">
             <canvas #stackCanvas class="stack-canvas"></canvas>
         </div>
 
-        <div class="stack-list">
-            <div *ngFor="let tech of techStack" class="tech-item">
-                <img [src]="tech.icon" [alt]="tech.name" />
-                <span>{{ tech.name }}</span>
+        <div class="stack-right">
+            <h2 class="section-title">Tecnologías y Herramientas</h2>
+
+            <div class="stack-category" *ngFor="let category of categories">
+                <h3 class="category-title">{{ category.name }}</h3>
+                <div class="icon-grid">
+                    <div class="icon-item" *ngFor="let tech of category.items" [attr.data-tooltip]="tech.name">
+                        <img [src]="tech.icon" [alt]="tech.name" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>

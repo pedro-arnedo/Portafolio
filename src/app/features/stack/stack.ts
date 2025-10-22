@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 declare const THREE: any;
 
@@ -17,36 +17,67 @@ export class Stack implements AfterViewInit, OnDestroy {
     private animationId!: number;
     private icons: any[] = [];
 
-    techStack = [
-        { name: 'Angular', icon: 'https://cdn.simpleicons.org/angular/FF2D20' },
-        { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
-        { name: 'Node.js', icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
-        { name: 'NestJS', icon: 'https://cdn.simpleicons.org/nestjs/E0234E' },
-        { name: '.NET', icon: 'https://cdn.simpleicons.org/dotnet/512BD4' },
-        { name: 'PostgreSQL', icon: 'https://cdn.simpleicons.org/postgresql/336791' },
-        { name: 'MongoDB', icon: 'https://cdn.simpleicons.org/mongodb/47A248' },
-        { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032' },
-        { name: 'AWS', icon: 'https://cdn.simpleicons.org/amazonaws' }, //no sirve
-        { name: 'Power BI', icon: 'https://cdn.simpleicons.org/powerbi' }, //no sirve
-        { name: 'HTML5', icon: 'https://cdn.simpleicons.org/html5/E34F26' },
-        { name: 'CSS3', icon: 'https://cdn.simpleicons.org/css3/1572B6' }, //no sirve
-        { name: 'Python', icon: 'https://cdn.simpleicons.org/python/3776AB' },
-        { name: 'Firebase', icon: 'https://cdn.simpleicons.org/firebase/FFCA28' },
-        //git
-        { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032' },
-        { name: 'GitHub', icon: 'https://cdn.simpleicons.org/github/181717' },
-        { name: 'GitKraken', icon: 'https://cdn.simpleicons.org/gitkraken/008C4A' },
-        { name: 'Copilot', icon: 'https://cdn.simpleicons.org/copilot/3E8DD8' }, //no sirve
-        { name: 'GitLab', icon: 'https://cdn.simpleicons.org/gitlab/FC6D26' },
-        { name: 'Bitbucket', icon: 'https://cdn.simpleicons.org/bitbucket/205081' },
-        //cpg
-        { name: 'C#', icon: 'https://cdn.simpleicons.org/csharp/239120' }, //no sirve
-        { name: 'C++', icon: 'https://cdn.simpleicons.org/cplusplus/00599C' },
-        { name: 'Java', icon: 'https://cdn.simpleicons.org/java/007396' }, //no sirve
-        //google cloud
-        { name: 'GCP', icon: 'https://cdn.simpleicons.org/googlecloud/4285F4' },
-        { name: 'Docker', icon: 'https://cdn.simpleicons.org/docker/2496ED' },
-        { name: 'Kubernetes', icon: 'https://cdn.simpleicons.org/kubernetes/326CE5' }
+    categories = [
+        {
+            name: 'Frontend',
+            items: [
+                { name: 'Angular', icon: 'https://cdn.simpleicons.org/angular/FF2D20' },
+                { name: 'HTML5', icon: 'https://cdn.simpleicons.org/html5/E34F26' },
+                { name: 'SCSS', icon: 'https://cdn.simpleicons.org/sass/CC6699' },
+                { name: 'Bootstrap', icon: 'https://cdn.simpleicons.org/bootstrap/7952B3' },
+                { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
+                { name: 'JavaScript', icon: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
+            ],
+        },
+        {
+            name: 'Backend & APIs',
+            items: [
+                { name: 'Node.js', icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
+                { name: 'NestJS', icon: 'https://cdn.simpleicons.org/nestjs/E0234E' },
+                { name: '.NET Core', icon: 'https://cdn.simpleicons.org/dotnet/512BD4' },
+                { name: 'Express', icon: 'https://cdn.simpleicons.org/express/FFFFFF' },
+                { name: 'JWT', icon: 'https://cdn.simpleicons.org/jsonwebtokens/000000' },
+            ],
+        },
+        {
+            name: 'Databases',
+            items: [
+                { name: 'MySQL', icon: 'https://cdn.simpleicons.org/mysql/4479A1' },
+                { name: 'PostgreSQL', icon: 'https://cdn.simpleicons.org/postgresql/336791' },
+                { name: 'SQL Server', icon: 'https://cdn.simpleicons.org/microsoftsqlserver/CC2927' },
+                { name: 'MongoDB', icon: 'https://cdn.simpleicons.org/mongodb/47A248' },
+                { name: 'Firebase', icon: 'https://cdn.simpleicons.org/firebase/FFCA28' },
+            ],
+        },
+        {
+            name: 'Dev & Workflows',
+            items: [
+                { name: 'Git', icon: 'https://cdn.simpleicons.org/git/F05032' },
+                { name: 'GitHub', icon: 'https://cdn.simpleicons.org/github/181717' },
+                { name: 'Bitbucket', icon: 'https://cdn.simpleicons.org/bitbucket/205081' },
+                { name: 'Postman', icon: 'https://cdn.simpleicons.org/postman/FF6C37' },
+                { name: 'VS Code', icon: 'https://cdn.simpleicons.org/visualstudiocode/007ACC' },
+                { name: 'Jira', icon: 'https://cdn.simpleicons.org/jira/0052CC' },
+            ],
+        },
+        {
+            name: 'Data & BI',
+            items: [
+                { name: 'Python', icon: 'https://cdn.simpleicons.org/python/3776AB' },
+                { name: 'Pandas', icon: 'https://cdn.simpleicons.org/pandas/150458' },
+                { name: 'Power BI', icon: 'https://cdn.simpleicons.org/powerbi/F2C811' },
+                { name: 'Excel', icon: 'https://cdn.simpleicons.org/microsoftexcel/217346' },
+            ],
+        },
+        {
+            name: 'Architectures & Methodologies',
+            items: [
+                { name: 'Clean Architecture', icon: 'https://cdn.simpleicons.org/archlinux/1793D1' },
+                { name: 'SOLID', icon: 'https://cdn.simpleicons.org/solidity/363636' },
+                { name: 'Scrum', icon: 'https://cdn.simpleicons.org/scrumalliance/009FDA' },
+                { name: 'DevOps', icon: 'https://cdn.simpleicons.org/azuredevops/0078D7' },
+            ],
+        },
     ];
 
     async ngAfterViewInit() {
@@ -88,12 +119,13 @@ export class Stack implements AfterViewInit, OnDestroy {
         this.scene.add(light);
 
         const radius = 1.5;
-        const iconCount = this.techStack.length;
+        const iconCount = this.categories.flatMap(c => c.items).length;
+        const allIcons = this.categories.flatMap(c => c.items);
 
         const loader = new THREE.TextureLoader();
         loader.crossOrigin = 'anonymous';
 
-        this.techStack.forEach((tech, i) => {
+        allIcons.forEach((tech, i) => {
             loader.load(
                 tech.icon,
                 (texture: any) => {
@@ -108,9 +140,7 @@ export class Stack implements AfterViewInit, OnDestroy {
                     this.icons.push(sprite);
                 },
                 undefined,
-                () => {
-                    console.warn(`⚠️ No se pudo cargar el ícono de ${tech.name}`);
-                }
+                () => console.warn(`⚠️ No se pudo cargar el ícono de ${tech.name}`)
             );
         });
 
