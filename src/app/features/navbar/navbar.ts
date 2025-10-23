@@ -1,7 +1,6 @@
 import { Component, HostListener, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../core/config/environment';
-import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -19,26 +18,25 @@ export class Navbar implements AfterViewInit, OnDestroy {
     activeSection = 'home';
     activeIndicatorTransform = 'translateX(0px) scaleX(1)';
     private currentIndex = 0;
-
     private observer?: IntersectionObserver;
 
-    constructor(private el: ElementRef, private location: Location, private title: Title) { }
+    constructor(private el: ElementRef, private title: Title) { }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         this.observeSections();
         this.moveActivePill(0);
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.observer?.disconnect();
     }
 
     @HostListener('window:scroll')
-    onScroll() {
+    onScroll(): void {
         this.scrolled = window.scrollY > 50;
     }
 
-    private observeSections() {
+    private observeSections(): void {
         this.observer = new IntersectionObserver(
             (entries) => {
                 for (const entry of entries) {
@@ -48,8 +46,8 @@ export class Navbar implements AfterViewInit, OnDestroy {
                         if (index !== -1 && this.currentIndex !== index) {
                             this.currentIndex = index;
                             this.activeSection = id;
-                            this.location.replaceState(`#${id}`);
                             this.moveActivePill(index);
+                            window.history.replaceState(null, '', `#/${id}`);
                         }
                     }
                 }
@@ -63,7 +61,7 @@ export class Navbar implements AfterViewInit, OnDestroy {
         }
     }
 
-    scrollTo(event: Event, targetId: string, index: number) {
+    scrollTo(event: Event, targetId: string, index: number): void {
         event.preventDefault();
         const element = document.getElementById(targetId);
         if (element) {
@@ -72,9 +70,10 @@ export class Navbar implements AfterViewInit, OnDestroy {
         this.activeSection = targetId;
         this.currentIndex = index;
         this.moveActivePill(index);
+        window.history.replaceState(null, '', `#/${targetId}`);
     }
 
-    private moveActivePill(index: number) {
+    private moveActivePill(index: number): void {
         const linkEls = Array.from(
             this.el.nativeElement.querySelectorAll('.navbar-links li a')
         ) as HTMLElement[];

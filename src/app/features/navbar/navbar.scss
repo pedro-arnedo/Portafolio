@@ -10,7 +10,11 @@
     border: 1px solid rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(12px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    transition: all 0.4s ease;
+    transition: background 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+    overflow: hidden;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     &.scrolled {
         background: rgba(255, 255, 255, 0.2);
@@ -24,17 +28,19 @@
         align-items: center;
     }
 
-    .navbar-logo .logo-img {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        border: 2px solid rgba(255, 255, 255, 0.8);
-        object-fit: cover;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .navbar-logo {
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-        &:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 12px rgba(41, 255, 217, 0.5);
+            &:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 12px rgba(41, 255, 217, 0.5);
+            }
         }
     }
 
@@ -53,9 +59,7 @@
             a {
                 color: #d0d6e2;
                 text-decoration: none;
-                font-weight: 500;
-                font-size: 0.95rem;
-                font-family: 'Rubik', sans-serif;
+                font: 500 0.95rem 'Rubik', sans-serif;
                 border-radius: 12px;
                 padding: 0.5rem 1rem;
                 transition: all 0.3s ease;
@@ -88,12 +92,13 @@
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
             border-radius: 10px;
             z-index: 1;
+            opacity: 0.9;
             transition:
                 transform 0.45s cubic-bezier(0.25, 1.25, 0.5, 1),
                 width 0.3s ease,
                 opacity 0.3s ease;
             animation: glowMove 3s ease-in-out infinite alternate;
-            opacity: 0.9;
+            pointer-events: none;
         }
     }
 
@@ -103,6 +108,7 @@
                 0 0 10px rgba(0, 151, 204, 0.6),
                 0 0 25px rgba(0, 204, 181, 0.2);
         }
+
         to {
             box-shadow:
                 0 0 20px rgba(0, 151, 204, 0.9),

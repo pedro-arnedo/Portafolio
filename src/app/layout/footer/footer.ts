@@ -8,6 +8,4 @@ import { Contact } from '../../features/contact/contact';
     templateUrl: './footer.html',
     styleUrl: './footer.scss'
 })
-export class Footer {
-
-}
+export class Footer {}

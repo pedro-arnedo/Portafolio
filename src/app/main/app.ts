@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, signal, AfterViewInit } from '@angular/core';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { Header } from '../layout/header/header';
 import { Body } from '../layout/body/body';
@@ -13,33 +14,45 @@ import { environment } from '../core/config/environment';
     templateUrl: './app.html',
     styleUrl: './app.scss'
 })
-export class App {
-
+export class App implements AfterViewInit {
     protected readonly titleBase = environment.titleBase || 'Portafolio';
     protected readonly title = signal(`${this.titleBase} | Inicio`);
 
-    private readonly titles: Record<string, string> = {
-        '/': `${this.titleBase} | Inicio`,
-        '/about': `${this.titleBase} | Habilidades`,
-        '/contact': `${this.titleBase} | Contacto`,
-        '/experience': `${this.titleBase} | Experiencia`,
-        '/project': `${this.titleBase} | Proyectos`,
-        '/stack': `${this.titleBase} | Stack`,
-        '/intro': `${this.titleBase} | Introducción`,
-        '/services': `${this.titleBase} | Servicios`,
-        '/credits': `${this.titleBase} | Créditos`,
-        '/**': `${this.titleBase} | No Encontrado`
-    };
-
-    constructor(private router: Router) {
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private titleService: Title
+    ) {
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe((event: NavigationEnd) => this.updateTitle(event.urlAfterRedirects));
+            .subscribe(() => this.updateTitle());
     }
 
-    private updateTitle(url: string) {
-        const newTitle = this.titles[url] || this.titleBase;
+    ngAfterViewInit(): void {
+        const hash = window.location.hash;
+        if (hash.startsWith('#/')) {
+            const sectionId = hash.substring(2);
+            const section = document.getElementById(sectionId);
+            if (section) {
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 300);
+            }
+        }
+    }
+
+    private updateTitle() {
+        let child = this.route.firstChild;
+        while (child?.firstChild) {
+            child = child.firstChild;
+        }
+
+        const pageTitle = child?.snapshot.data?.['title'] || '';
+        const newTitle = pageTitle
+            ? `${this.titleBase} | ${pageTitle}`
+            : this.titleBase;
+
         this.title.set(newTitle);
-        document.title = newTitle;
+        this.titleService.setTitle(newTitle);
     }
 }

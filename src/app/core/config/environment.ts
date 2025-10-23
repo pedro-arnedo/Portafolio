@@ -30,7 +30,7 @@ export const environment: Environment = {
         { label: 'Perfil', targetId: 'about' },
         { label: 'Experiencia', targetId: 'experience' },
         { label: 'Proyectos', targetId: 'projects' },
-        { label: 'Servicios', targetId: 'services' },
+        { label: 'Servicios', targetId: 'service' },
         { label: 'Tecnologías', targetId: 'stack' },
         { label: 'Contacto', targetId: 'contact' }
     ],
