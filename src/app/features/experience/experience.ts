@@ -7,7 +7,7 @@ import { timeline } from '../../core/config/data-experience';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './experience.html',
-    styleUrls: ['./experience.scss']
+    styleUrl: './experience.scss'
 })
 export class Experience {
     timeline = timeline;

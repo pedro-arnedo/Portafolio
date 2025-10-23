@@ -30,7 +30,7 @@ export class App implements AfterViewInit {
 
     ngAfterViewInit(): void {
         const hash = window.location.hash;
-        if (hash.startsWith('#/')) {
+        if (hash.startsWith('#')) {
             const sectionId = hash.substring(2);
             const section = document.getElementById(sectionId);
             if (section) {

@@ -3,6 +3,10 @@
     color: #d0d6e2;
     padding: 4rem 2rem;
     font-family: 'Rubik', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    scroll-margin-top: 80px;
+    overflow: visible;
 
     .section-title {
         font-size: 2.2rem;
