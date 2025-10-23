@@ -25,6 +25,19 @@ export class Navbar implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         this.observeSections();
         this.moveActivePill(0);
+
+        const initialHash = window.location.hash.replace('#', '');
+        if (initialHash) {
+            const element = document.getElementById(initialHash);
+            if (element) {
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    this.activeSection = initialHash;
+                    const idx = this.navLinks.findIndex(l => l.targetId === initialHash);
+                    if (idx !== -1) this.moveActivePill(idx);
+                }, 50);
+            }
+        }
     }
 
     ngOnDestroy(): void {
@@ -47,12 +60,12 @@ export class Navbar implements AfterViewInit, OnDestroy {
                             this.currentIndex = index;
                             this.activeSection = id;
                             this.moveActivePill(index);
-                            window.history.replaceState(null, '', `#/${id}`);
+                            window.history.replaceState(null, '', `#${id}`);
                         }
                     }
                 }
             },
-            { threshold: 0.6 }
+            { threshold: 0.3 }
         );
 
         for (const link of this.navLinks) {
@@ -70,7 +83,7 @@ export class Navbar implements AfterViewInit, OnDestroy {
         this.activeSection = targetId;
         this.currentIndex = index;
         this.moveActivePill(index);
-        window.history.replaceState(null, '', `#/${targetId}`);
+        window.history.replaceState(null, '', `#${targetId}`);
     }
 
     private moveActivePill(index: number): void {

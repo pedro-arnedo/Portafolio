@@ -1,4 +1,37 @@
-<section class="project" aria-label="Proyectos" id="project">
-    <h2>Proyectos</h2>
-    <p>He participado en diversos proyectos que abarcan desde aplicaciones web hasta soluciones móviles. Cada proyecto ha sido una oportunidad para aplicar mis conocimientos y aprender nuevas tecnologías. A continuación, se presentan algunos de los proyectos más destacados en los que he trabajado:</p>
+<section class="projects-section" id="projects">
+    <div class="projects-container">
+        <h2 class="section-title">Proyectos</h2>
+        <p class="section-subtitle">
+            Algunos de los proyectos en los que he trabajado, enfocados en desarrollo web, integración de APIs y buenas
+            prácticas.
+        </p>
+
+        <div class="projects-grid">
+            <div class="project-card" *ngFor="let project of projects">
+                <div class="project-image">
+                    <img [src]="project.image" [alt]="project.title" />
+                </div>
+
+                <div class="project-content">
+                    <h3 class="project-title">{{ project.title }}</h3>
+                    <p class="project-description">{{ project.description }}</p>
+
+                    <div class="project-tags">
+                        <span *ngFor="let tech of project.technologies" class="tag">
+                            <i [class]="tech.icon"></i> {{ tech.name }}
+                        </span>
+                    </div>
+
+                    <div class="project-buttons">
+                        <a *ngIf="project.repo" [href]="project.repo" target="_blank" class="btn repo">
+                            <i class="fa fa-github"></i> Repo
+                        </a>
+                        <a *ngIf="project.demo" [href]="project.demo" target="_blank" class="btn demo">
+                            <i class="fa fa-play"></i> Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

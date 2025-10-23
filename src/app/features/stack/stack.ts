@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { stack } from '../../core/config/stack';
+import { stack } from '../../core/config/data-stack';
 declare global {
     interface Window { THREE: any; }
 }
@@ -25,6 +25,9 @@ export class Stack implements AfterViewInit, OnDestroy {
     async ngAfterViewInit(): Promise<void> {
         await this.loadThreeJS();
         this.init3DScene();
+        setTimeout(() => {
+            this.animate();
+        }, 800);
     }
 
     ngOnDestroy(): void {
@@ -62,7 +65,6 @@ export class Stack implements AfterViewInit, OnDestroy {
         this.scene.add(light);
 
         this.loadTechIcons();
-        this.animate();
     }
 
     private loadTechIcons(): void {

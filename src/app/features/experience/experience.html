@@ -1,4 +1,28 @@
-<section class="experience" aria-label="Experiencia" id="experience">
-    <h2>Experiencia</h2>
-    <p>A lo largo de mi carrera, he trabajado en una variedad de proyectos que me han permitido desarrollar mis habilidades y conocimientos en el campo del desarrollo de software. Aquí hay un resumen de mi experiencia laboral:</p>
+<section class="experience-section" id="experience">
+    <div class="experience-container">
+        <h2 class="section-title">Experiencia & Formación</h2>
+        <p class="section-subtitle">
+            Un recorrido por mi trayectoria profesional, académica y certificaciones más relevantes.
+        </p>
+
+        <div class="timeline">
+            <div *ngFor="let item of timeline" class="timeline-item" [class.work]="item.type === 'work'"
+                [class.education]="item.type === 'education'" [class.cert]="item.type === 'cert'">
+                <div class="timeline-icon">
+                    <i [class]="item.icon"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3>{{ item.title }}</h3>
+                        <span class="timeline-date">{{ item.date }}</span>
+                    </div>
+                    <h4 class="timeline-entity">{{ item.entity }}</h4>
+                    <p class="timeline-description">{{ item.description }}</p>
+                    <div class="timeline-tags">
+                        <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

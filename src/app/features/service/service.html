@@ -1,4 +1,19 @@
-<section class="service" aria-label="Servicios" id="service">
-    <h2>Servicios</h2>
-    <p>Ofrezco una variedad de servicios en el ámbito del desarrollo de software, incluyendo desarrollo web, aplicaciones móviles, consultoría tecnológica y más. Mi objetivo es ayudar a las empresas y emprendedores a llevar sus ideas a la realidad mediante soluciones tecnológicas efectivas y personalizadas.</p>
+<section class="service-section" id="service">
+    <div class="service-container">
+        <h2 class="section-title">Servicios</h2>
+        <p class="section-subtitle">
+            Transformo ideas en soluciones digitales sólidas y escalables. Cada proyecto combina funcionalidad, diseño y
+            rendimiento.
+        </p>
+
+        <div class="service-grid">
+            <div class="service-card" *ngFor="let service of services">
+                <div class="icon-wrapper">
+                    <i [class]="service.icon"></i>
+                </div>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+            </div>
+        </div>
+    </div>
 </section>
