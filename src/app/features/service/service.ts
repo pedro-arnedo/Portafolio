@@ -6,38 +6,28 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './service.html',
-    styleUrl: './service.scss'
+    styleUrls: ['./service.scss']
 })
 export class Service {
     services = [
         {
-            title: 'Desarrollo Web',
-            description: 'Creación de sitios y aplicaciones web modernas, optimizadas y adaptadas a cualquier dispositivo.',
+            title: 'Desarrollo Web Full Stack',
+            description: 'Construcción de aplicaciones web robustas y escalables, integrando frontend moderno (Angular) y backend estructurado (Node.js, .NET Core).',
             icon: 'fa fa-code'
         },
         {
-            title: 'Diseño Responsivo',
-            description: 'Interfaces adaptativas con experiencia fluida en todos los tamaños de pantalla.',
-            icon: 'fa fa-desktop'
+            title: 'Integración de APIs y Plataformas',
+            description: 'Diseño e implementación de APIs REST y servicios conectados a Salesforce, AWS o sistemas empresariales, garantizando seguridad y eficiencia.',
+            icon: 'fa fa-plug'
         },
         {
-            title: 'Aplicaciones Móviles',
-            description: 'Aplicaciones híbridas y progresivas que integran rendimiento y diseño.',
-            icon: 'fa fa-mobile'
+            title: 'Arquitectura y Optimización',
+            description: 'Diseño de estructuras limpias (Clean Architecture, MVC) y optimización de rendimiento, escalabilidad y mantenimiento del código.',
+            icon: 'fa fa-sitemap'
         },
         {
-            title: 'Integración de APIs',
-            description: 'Diseño e implementación de APIs REST seguras y eficientes para conectar sistemas.',
-            icon: 'fa fa-exchange'
-        },
-        {
-            title: 'Consultoría Técnica',
-            description: 'Asesoría en arquitectura de software, rendimiento y buenas prácticas.',
-            icon: 'fa fa-lightbulb-o'
-        },
-        {
-            title: 'Automatización de Procesos',
-            description: 'Implementación de flujos automatizados con scripts, bots y herramientas DevOps.',
+            title: 'Automatización y Herramientas DevOps',
+            description: 'Configuración de pipelines, scripts y despliegues automatizados con Git, Bitbucket y entornos en la nube para flujos CI/CD eficientes.',
             icon: 'fa fa-cogs'
         }
     ];
