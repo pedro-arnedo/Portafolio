@@ -11,8 +11,7 @@
                 <i class="fa fa-chevron-left"></i>
             </button>
 
-            <div class="carousel-track" [style.transform]="getTransform()"
-                [style.transition]="isTransitioning ? 'transform 1.3s cubic-bezier(0.65, 0, 0.35, 1)' : 'none'">
+            <div class="carousel-track" [style.transform]="transformStyle">
                 <div class="project-card" *ngFor="let project of visibleProjects">
                     <div class="project-image">
                         <img [src]="project.image" [alt]="project.title" />
@@ -23,8 +22,8 @@
                         <p class="project-description">{{ project.description }}</p>
 
                         <div class="project-tags">
-                            <span *ngFor="let tech of project.technologies" class="tag"
-                                [ngStyle]="getTagStyle(tech.name)">
+                            <span *ngFor="let tech of project.technologies.slice(0, 8)" class="tag"
+                                [ngStyle]="{ background: getTagColor(tech.name).bg, color: getTagColor(tech.name).text }">
                                 <i [class]="tech.icon"></i> {{ tech.name }}
                             </span>
                         </div>
@@ -44,6 +43,10 @@
             <button class="nav-btn right" (click)="nextSlide()">
                 <i class="fa fa-chevron-right"></i>
             </button>
+        </div>
+
+        <div class="carousel-dots">
+            <span *ngFor="let dot of totalDots; let i = index" class="dot" [class.active]="i === currentIndex"></span>
         </div>
     </div>
 </section>

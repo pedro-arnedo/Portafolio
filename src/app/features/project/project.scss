@@ -25,41 +25,44 @@
     .section-subtitle {
         font-size: 1.1rem;
         color: #a9b3c1;
-        margin: 0 1rem 1.5rem;
+        margin: 0 1rem 1rem 1rem;
     }
 
     .carousel-wrapper {
         position: relative;
         overflow: hidden;
         width: 100%;
+        margin: 2rem 0;
     }
 
     .carousel-track {
         display: flex;
+        transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         gap: 1.5rem;
-        transition: transform 1.3s cubic-bezier(0.65, 0, 0.35, 1);
+        justify-content: center;
     }
 
     .project-card {
-        flex: 0 0 400px;
-        height: 460px;
+        flex: 0 0 380px;
+        height: 520px;
         background: rgba(255, 255, 255, 0.05);
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 0 20px rgba(0, 195, 255, 0.05);
-        transition: all 0.3s ease;
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
         display: flex;
         flex-direction: column;
 
         &:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 0 30px rgba(0, 195, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 195, 255, 0.25);
+            z-index: 5;
         }
 
         .project-image {
             width: 100%;
             height: 160px;
-            background: linear-gradient(135deg, #13202f, #0a101a);
+            flex-shrink: 0;
 
             img {
                 width: 100%;
@@ -69,21 +72,27 @@
         }
 
         .project-content {
-            padding: 1.2rem;
+            padding: 1rem;
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
 
             .project-title {
-                font-size: 1.1rem;
+                font-size: 1rem;
                 font-weight: 600;
                 color: #ffffff;
-                margin-bottom: 0.5rem;
+                height: 45px;
+                overflow: hidden;
             }
 
             .project-description {
                 font-size: 0.9rem;
                 color: #b0b6c5;
-                margin-bottom: 0.8rem;
-                line-height: 1.5;
+                height: 100px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .project-tags {
@@ -99,45 +108,12 @@
                     display: flex;
                     align-items: center;
                     gap: 0.3rem;
-                    transition: all 0.3s ease;
                 }
             }
 
             .project-buttons {
                 display: flex;
                 gap: 0.6rem;
-
-                .btn {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.4rem;
-                    font-size: 0.8rem;
-                    font-weight: 500;
-                    padding: 0.4rem 0.8rem;
-                    border-radius: 8px;
-                    transition: all 0.3s ease;
-                    text-decoration: none;
-
-                    &.repo {
-                        color: #00c3ff;
-                        border: 1px solid rgba(0, 195, 255, 0.5);
-
-                        &:hover {
-                            background: #00c3ff;
-                            color: #0b0d13;
-                        }
-                    }
-
-                    &.demo {
-                        color: #00d8b4;
-                        border: 1px solid rgba(0, 216, 180, 0.5);
-
-                        &:hover {
-                            background: #00d8b4;
-                            color: #0b0d13;
-                        }
-                    }
-                }
             }
         }
     }
@@ -146,13 +122,13 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(0, 195, 255, 0.1);
+        background: rgba(0, 195, 255, 0.15);
         border: 1px solid rgba(0, 195, 255, 0.3);
         color: #00c3ff;
         font-size: 1.2rem;
         border-radius: 50%;
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -165,11 +141,31 @@
         }
 
         &.left {
-            left: -2rem;
+            left: 0;
         }
 
         &.right {
-            right: -2rem;
+            right: 0;
+        }
+    }
+
+    .carousel-dots {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.6rem;
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.3);
+            transition: all 0.3s;
+
+            &.active {
+                background: #00c3ff;
+                transform: scale(1.3);
+            }
         }
     }
 }

@@ -13,78 +13,64 @@ export class Project implements OnInit, OnDestroy {
     projects = projects;
     visibleProjects: any[] = [];
     currentIndex = 0;
-    isTransitioning = false;
-    interval: any;
+    autoSlideInterval: any;
+    transformStyle = 'translateX(0)';
+    totalDots: any[] = [];
 
     ngOnInit() {
-        this.setupInitialProjects();
+        this.updateVisibleProjects();
         this.startAutoSlide();
+        this.totalDots = Array(this.projects.length).fill(0);
     }
 
-    setupInitialProjects() {
+    ngOnDestroy() {
+        clearInterval(this.autoSlideInterval);
+    }
+
+    updateVisibleProjects() {
+        const total = this.projects.length;
+        const start = this.currentIndex;
         this.visibleProjects = [
-            this.projects[this.currentIndex % this.projects.length],
-            this.projects[(this.currentIndex + 1) % this.projects.length],
-            this.projects[(this.currentIndex + 2) % this.projects.length]
+            this.projects[start % total],
+            this.projects[(start + 1) % total],
+            this.projects[(start + 2) % total]
         ];
     }
 
     nextSlide() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-
         this.currentIndex = (this.currentIndex + 1) % this.projects.length;
-        setTimeout(() => {
-            this.setupInitialProjects();
-            this.isTransitioning = false;
-        }, 1300);
+        this.updateVisibleProjects();
     }
 
     prevSlide() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-
-        this.currentIndex = (this.currentIndex - 1 + this.projects.length) % this.projects.length;
-        setTimeout(() => {
-            this.setupInitialProjects();
-            this.isTransitioning = false;
-        }, 1300);
+        this.currentIndex =
+            (this.currentIndex - 1 + this.projects.length) % this.projects.length;
+        this.updateVisibleProjects();
     }
 
     startAutoSlide() {
-        this.interval = setInterval(() => this.nextSlide(), 7000);
+        this.autoSlideInterval = setInterval(() => {
+            this.nextSlide();
+        }, 5500);
     }
 
-    ngOnDestroy() {
-        clearInterval(this.interval);
-    }
-
-    getTransform() {
-        return this.isTransitioning ? 'translateX(-33.33%)' : 'translateX(0)';
-    }
-
-    getTagStyle(name: string) {
-        const colors: any = {
-            Angular: '#DD0031',
-            'Node.js': '#3C873A',
-            NestJS: '#E0234E',
-            PostgreSQL: '#336791',
-            '.NET Core': '#512BD4',
-            MySQL: '#00758F',
-            Salesforce: '#00A1E0',
-            TypeScript: '#3178C6',
-            Bootstrap: '#7952B3',
-            'Git / Bitbucket': '#0052CC',
-            GitHub: '#171515',
-            Jira: '#0052CC',
-            'Repository Pattern': '#40C057'
+    getTagColor(tech: string) {
+        const map: any = {
+            Angular: { bg: '#ff4c4c20', text: '#ff4c4c' },
+            TypeScript: { bg: '#3178c620', text: '#3178c6' },
+            JavaScript: { bg: '#f7df1e20', text: '#f7df1e' },
+            Node: { bg: '#68a06320', text: '#68a063' },
+            'Node.js': { bg: '#68a06320', text: '#68a063' },
+            Firebase: { bg: '#ffca2820', text: '#ffca28' },
+            'Firebase Hosting': { bg: '#ffca2820', text: '#ffca28' },
+            PostgreSQL: { bg: '#33679120', text: '#336791' },
+            MySQL: { bg: '#00758f20', text: '#00758f' },
+            Bootstrap: { bg: '#563d7c20', text: '#563d7c' },
+            '.NET Core': { bg: '#512bd420', text: '#512bd4' },
+            Sass: { bg: '#cf649a20', text: '#cf649a' },
+            Figma: { bg: '#a259ff20', text: '#a259ff' },
+            default: { bg: '#00c3ff20', text: '#00c3ff' }
         };
-
-        const color = colors[name] || '#00c3ff';
-        return {
-            background: `${color}1A`,
-            border: `1px solid ${color}80`,
-            color
-        };
+        return map[tech] || map.default;
     }
 }
