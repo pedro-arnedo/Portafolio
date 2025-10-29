@@ -7,54 +7,84 @@ import { projects } from '../../core/config/data-project';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './project.html',
-    styleUrls: ['./project.scss']
+    styleUrl: './project.scss'
 })
 export class Project implements OnInit, OnDestroy {
     projects = projects;
+    visibleProjects: any[] = [];
     currentIndex = 0;
-    autoSlide: any;
-    visibleCount = 3;
+    isTransitioning = false;
+    interval: any;
 
     ngOnInit() {
+        this.setupInitialProjects();
         this.startAutoSlide();
     }
 
-    ngOnDestroy() {
-        clearInterval(this.autoSlide);
-    }
-
-    startAutoSlide() {
-        this.autoSlide = setInterval(() => {
-            this.nextSlide();
-        }, 6000);
+    setupInitialProjects() {
+        this.visibleProjects = [
+            this.projects[this.currentIndex % this.projects.length],
+            this.projects[(this.currentIndex + 1) % this.projects.length],
+            this.projects[(this.currentIndex + 2) % this.projects.length]
+        ];
     }
 
     nextSlide() {
-        this.currentIndex = (this.currentIndex + this.visibleCount) % this.projects.length;
+        if (this.isTransitioning) return;
+        this.isTransitioning = true;
+
+        this.currentIndex = (this.currentIndex + 1) % this.projects.length;
+        setTimeout(() => {
+            this.setupInitialProjects();
+            this.isTransitioning = false;
+        }, 1300);
     }
 
     prevSlide() {
-        this.currentIndex =
-            (this.currentIndex - this.visibleCount + this.projects.length) % this.projects.length;
+        if (this.isTransitioning) return;
+        this.isTransitioning = true;
+
+        this.currentIndex = (this.currentIndex - 1 + this.projects.length) % this.projects.length;
+        setTimeout(() => {
+            this.setupInitialProjects();
+            this.isTransitioning = false;
+        }, 1300);
+    }
+
+    startAutoSlide() {
+        this.interval = setInterval(() => this.nextSlide(), 7000);
+    }
+
+    ngOnDestroy() {
+        clearInterval(this.interval);
     }
 
     getTransform() {
-        const offset = this.currentIndex * (350 + 24); // ancho + gap
-        return `translateX(-${offset}px)`;
+        return this.isTransitioning ? 'translateX(-33.33%)' : 'translateX(0)';
     }
 
-    getTechColor(tech: string) {
+    getTagStyle(name: string) {
         const colors: any = {
-            Angular: { color: '#DD0031', border: '1px solid #DD0031', background: 'rgba(221,0,49,0.1)' },
-            'Node.js': { color: '#8CC84B', border: '1px solid #8CC84B', background: 'rgba(140,200,75,0.1)' },
-            'NestJS': { color: '#E0234E', border: '1px solid #E0234E', background: 'rgba(224,35,78,0.1)' },
-            'PostgreSQL': { color: '#336791', border: '1px solid #336791', background: 'rgba(51,103,145,0.1)' },
-            '.NET Core': { color: '#512BD4', border: '1px solid #512BD4', background: 'rgba(81,43,212,0.1)' },
-            MySQL: { color: '#00618A', border: '1px solid #00618A', background: 'rgba(0,97,138,0.1)' },
-            Salesforce: { color: '#00A1E0', border: '1px solid #00A1E0', background: 'rgba(0,161,224,0.1)' },
-            Firebase: { color: '#FFCA28', border: '1px solid #FFCA28', background: 'rgba(255,202,40,0.1)' },
-            Default: { color: '#00C3FF', border: '1px solid rgba(0,195,255,0.5)', background: 'rgba(0,195,255,0.1)' }
+            Angular: '#DD0031',
+            'Node.js': '#3C873A',
+            NestJS: '#E0234E',
+            PostgreSQL: '#336791',
+            '.NET Core': '#512BD4',
+            MySQL: '#00758F',
+            Salesforce: '#00A1E0',
+            TypeScript: '#3178C6',
+            Bootstrap: '#7952B3',
+            'Git / Bitbucket': '#0052CC',
+            GitHub: '#171515',
+            Jira: '#0052CC',
+            'Repository Pattern': '#40C057'
         };
-        return colors[tech] || colors['Default'];
+
+        const color = colors[name] || '#00c3ff';
+        return {
+            background: `${color}1A`,
+            border: `1px solid ${color}80`,
+            color
+        };
     }
 }

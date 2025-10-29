@@ -19,31 +19,30 @@
         font-size: 2.2rem;
         font-weight: 700;
         color: #00c3ff;
-        margin: 0rem;
+        margin: 0;
     }
 
     .section-subtitle {
         font-size: 1.1rem;
         color: #a9b3c1;
-        margin: 0rem 1rem 1rem 1rem;
+        margin: 0 1rem 1.5rem;
     }
 
     .carousel-wrapper {
         position: relative;
         overflow: hidden;
         width: 100%;
-        margin: 1.5rem 0rem;
     }
 
     .carousel-track {
         display: flex;
-        transition: transform 0.8s ease-in-out;
         gap: 1.5rem;
+        transition: transform 1.3s cubic-bezier(0.65, 0, 0.35, 1);
     }
 
     .project-card {
-        flex: 0 0 415px;
-        height: 500px;
+        flex: 0 0 400px;
+        height: 460px;
         background: rgba(255, 255, 255, 0.05);
         border-radius: 16px;
         overflow: hidden;
@@ -61,9 +60,6 @@
             width: 100%;
             height: 160px;
             background: linear-gradient(135deg, #13202f, #0a101a);
-            display: flex;
-            align-items: center;
-            justify-content: center;
 
             img {
                 width: 100%;
@@ -75,7 +71,6 @@
         .project-content {
             padding: 1.2rem;
             text-align: left;
-            overflow: hidden;
 
             .project-title {
                 font-size: 1.1rem;
@@ -163,7 +158,6 @@
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin: 0rem 2rem;
 
         &:hover {
             background: #00c3ff;
