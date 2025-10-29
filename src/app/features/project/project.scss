@@ -30,15 +30,17 @@
 
     .carousel-wrapper {
         position: relative;
-        overflow: hidden;
+        overflow: visible;
         width: 100%;
         margin: 1.5rem 0;
+        z-index: 2;
     }
 
     .carousel-track {
         display: flex;
         gap: 1.5rem;
-        transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); // Cinemático Netflix
+        transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        overflow: visible;
     }
 
     .project-card {
@@ -52,6 +54,8 @@
         display: flex;
         flex-direction: column;
         cursor: pointer;
+        position: relative;
+        z-index: 1;
 
         &:hover {
             transform: scale(1.07);
@@ -80,6 +84,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            overflow: visible;
 
             .project-title {
                 font-size: 1rem;
@@ -101,8 +106,9 @@
                 display: flex;
                 flex-wrap: wrap;
                 gap: 0.5rem;
-                max-height: 3.5rem;
+                max-height: none;
                 overflow: hidden;
+                justify-content: flex-start;
 
                 .tag {
                     border-radius: 20px;

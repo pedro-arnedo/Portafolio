@@ -24,7 +24,7 @@ export class Project implements OnInit, OnDestroy {
     }
 
     startAutoSlide() {
-        this.interval = setInterval(() => this.nextSlide(), 46000);
+        this.interval = setInterval(() => this.nextSlide(), 10000);
     }
 
     nextSlide() {

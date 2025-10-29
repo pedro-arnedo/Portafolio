@@ -22,7 +22,7 @@
                         <p class="project-description">{{ project.description }}</p>
 
                         <div class="project-tags">
-                            <span *ngFor="let tech of project.technologies | slice:0:8" class="tag"
+                            <span *ngFor="let tech of project.technologies | slice:0:9" class="tag"
                                 [ngStyle]="{ background: getTagColor(tech.name).bg, color: getTagColor(tech.name).color }">
                                 <i [class]="tech.icon"></i> {{ tech.name }}
                             </span>
