@@ -6,32 +6,43 @@
             prácticas.
         </p>
 
-        <div class="projects-grid">
-            <div class="project-card" *ngFor="let project of projects">
-                <div class="project-image">
-                    <img [src]="project.image" [alt]="project.title" />
-                </div>
+        <div class="carousel-wrapper">
+            <button class="nav-btn left" (click)="prevSlide()">
+                <i class="fa fa-chevron-left"></i>
+            </button>
 
-                <div class="project-content">
-                    <h3 class="project-title">{{ project.title }}</h3>
-                    <p class="project-description">{{ project.description }}</p>
-
-                    <div class="project-tags">
-                        <span *ngFor="let tech of project.technologies" class="tag">
-                            <i [class]="tech.icon"></i> {{ tech.name }}
-                        </span>
+            <div class="carousel-track" [style.transform]="getTransform()">
+                <div class="project-card" *ngFor="let project of projects">
+                    <div class="project-image">
+                        <img [src]="project.image" [alt]="project.title" />
                     </div>
 
-                    <div class="project-buttons">
-                        <a *ngIf="project.repo" [href]="project.repo" target="_blank" class="btn repo">
-                            <i class="fa fa-github"></i> Repo
-                        </a>
-                        <a *ngIf="project.demo" [href]="project.demo" target="_blank" class="btn demo">
-                            <i class="fa fa-play"></i> Demo
-                        </a>
+                    <div class="project-content">
+                        <h3 class="project-title">{{ project.title }}</h3>
+                        <p class="project-description">{{ project.description }}</p>
+
+                        <div class="project-tags">
+                            <span *ngFor="let tech of project.technologies" class="tag"
+                                [ngStyle]="getTechColor(tech.name)">
+                                <i [class]="tech.icon"></i> {{ tech.name }}
+                            </span>
+                        </div>
+
+                        <div class="project-buttons">
+                            <a *ngIf="project.repo" [href]="project.repo" target="_blank" class="btn repo">
+                                <i class="fa fa-github"></i> Repo
+                            </a>
+                            <a *ngIf="project.demo" [href]="project.demo" target="_blank" class="btn demo">
+                                <i class="fa fa-play"></i> Demo
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <button class="nav-btn right" (click)="nextSlide()">
+                <i class="fa fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 </section>
