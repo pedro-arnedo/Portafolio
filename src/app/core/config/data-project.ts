@@ -34,7 +34,7 @@ export const projects = [
         ],
     },
     {
-        title: 'Sitio Web — Kingdom Grace Foundation',
+        title: 'Sitio Web Institucional — Kingdom Grace Foundation',
         image: '../../../assets/kingdom.png',
         description:
             'Portal institucional diseñado para la organización sin fines de lucro Kingdom Grace Foundation. Incluye secciones informativas, programas sociales, donaciones y contacto. Optimizada para SEO, accesibilidad y carga rápida.',
@@ -51,7 +51,7 @@ export const projects = [
         ],
     },
     {
-        title: 'Portafolio Personal — Pedro Arnedo',
+        title: 'Portafolio web Personal — Pedro Arnedo',
         image: '../../../assets/tarjeta.png',
         description:
             'Portafolio profesional desarrollado con Angular y SCSS, integrando animaciones, diseño responsive, optimización SEO y despliegue mediante Firebase Hosting. Incluye secciones de experiencia, proyectos y contacto interactivo.',

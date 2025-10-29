@@ -11,7 +11,7 @@ import { projects } from '../../core/config/data-project';
 })
 export class Project implements OnInit, OnDestroy {
     projects = projects;
-    visibleProjects = [...this.projects];
+    visibleProjects = this.projects.slice(0, 3);
     currentIndex = 0;
     interval: any;
 
@@ -24,7 +24,7 @@ export class Project implements OnInit, OnDestroy {
     }
 
     startAutoSlide() {
-        this.interval = setInterval(() => this.nextSlide(), 10000);
+        this.interval = setInterval(() => this.nextSlide(), 15000);
     }
 
     nextSlide() {
