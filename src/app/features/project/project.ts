@@ -7,34 +7,24 @@ import { projects } from '../../core/config/data-project';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './project.html',
-    styleUrl: './project.scss'
+    styleUrls: ['./project.scss']
 })
 export class Project implements OnInit, OnDestroy {
     projects = projects;
-    visibleProjects: any[] = [];
+    visibleProjects = [...this.projects];
     currentIndex = 0;
-    autoSlideInterval: any;
-    transformStyle = 'translateX(0)';
-    totalDots: any[] = [];
+    interval: any;
 
     ngOnInit() {
-        this.updateVisibleProjects();
         this.startAutoSlide();
-        this.totalDots = Array(this.projects.length).fill(0);
     }
 
     ngOnDestroy() {
-        clearInterval(this.autoSlideInterval);
+        clearInterval(this.interval);
     }
 
-    updateVisibleProjects() {
-        const total = this.projects.length;
-        const start = this.currentIndex;
-        this.visibleProjects = [
-            this.projects[start % total],
-            this.projects[(start + 1) % total],
-            this.projects[(start + 2) % total]
-        ];
+    startAutoSlide() {
+        this.interval = setInterval(() => this.nextSlide(), 46000);
     }
 
     nextSlide() {
@@ -43,34 +33,39 @@ export class Project implements OnInit, OnDestroy {
     }
 
     prevSlide() {
-        this.currentIndex =
-            (this.currentIndex - 1 + this.projects.length) % this.projects.length;
+        this.currentIndex = (this.currentIndex - 1 + this.projects.length) % this.projects.length;
         this.updateVisibleProjects();
     }
 
-    startAutoSlide() {
-        this.autoSlideInterval = setInterval(() => {
-            this.nextSlide();
-        }, 5500);
+    updateVisibleProjects() {
+        const total = this.projects.length;
+        this.visibleProjects = [
+            this.projects[this.currentIndex % total],
+            this.projects[(this.currentIndex + 1) % total],
+            this.projects[(this.currentIndex + 2) % total]
+        ];
     }
 
-    getTagColor(tech: string) {
-        const map: any = {
-            Angular: { bg: '#ff4c4c20', text: '#ff4c4c' },
-            TypeScript: { bg: '#3178c620', text: '#3178c6' },
-            JavaScript: { bg: '#f7df1e20', text: '#f7df1e' },
-            Node: { bg: '#68a06320', text: '#68a063' },
-            'Node.js': { bg: '#68a06320', text: '#68a063' },
-            Firebase: { bg: '#ffca2820', text: '#ffca28' },
-            'Firebase Hosting': { bg: '#ffca2820', text: '#ffca28' },
-            PostgreSQL: { bg: '#33679120', text: '#336791' },
-            MySQL: { bg: '#00758f20', text: '#00758f' },
-            Bootstrap: { bg: '#563d7c20', text: '#563d7c' },
-            '.NET Core': { bg: '#512bd420', text: '#512bd4' },
-            Sass: { bg: '#cf649a20', text: '#cf649a' },
-            Figma: { bg: '#a259ff20', text: '#a259ff' },
-            default: { bg: '#00c3ff20', text: '#00c3ff' }
+    getTransform() {
+        return `translateX(0)`;
+    }
+
+    getTagColor(name: string) {
+        const colors: any = {
+            Angular: { bg: 'rgba(221,27,49,0.15)', color: '#DD1B31' },
+            'Node.js': { bg: 'rgba(87,187,79,0.15)', color: '#57BB4F' },
+            NestJS: { bg: 'rgba(206,48,86,0.15)', color: '#CE3056' },
+            PostgreSQL: { bg: 'rgba(51,103,145,0.15)', color: '#336791' },
+            'Salesforce API': { bg: 'rgba(0,113,188,0.15)', color: '#0071BC' },
+            TypeScript: { bg: 'rgba(0,122,204,0.15)', color: '#007ACC' },
+            MySQL: { bg: 'rgba(0,117,143,0.15)', color: '#00758F' },
+            '.NET Core': { bg: 'rgba(90,45,145,0.15)', color: '#5A2D91' },
+            AWS: { bg: 'rgba(255,153,0,0.15)', color: '#FF9900' },
+            Python: { bg: 'rgba(255,230,0,0.15)', color: '#FFE600' },
+            Jira: { bg: 'rgba(0,82,204,0.15)', color: '#0052CC' },
+            Git: { bg: 'rgba(240,80,50,0.15)', color: '#F05032' },
+            default: { bg: 'rgba(0,195,255,0.1)', color: '#00C3FF' }
         };
-        return map[tech] || map.default;
+        return colors[name] || colors.default;
     }
 }

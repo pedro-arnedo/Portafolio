@@ -11,8 +11,8 @@
                 <i class="fa fa-chevron-left"></i>
             </button>
 
-            <div class="carousel-track" [style.transform]="transformStyle">
-                <div class="project-card" *ngFor="let project of visibleProjects">
+            <div class="carousel-track" [style.transform]="getTransform()">
+                <div class="project-card" *ngFor="let project of visibleProjects; let i = index">
                     <div class="project-image">
                         <img [src]="project.image" [alt]="project.title" />
                     </div>
@@ -22,19 +22,10 @@
                         <p class="project-description">{{ project.description }}</p>
 
                         <div class="project-tags">
-                            <span *ngFor="let tech of project.technologies.slice(0, 8)" class="tag"
-                                [ngStyle]="{ background: getTagColor(tech.name).bg, color: getTagColor(tech.name).text }">
+                            <span *ngFor="let tech of project.technologies | slice:0:8" class="tag"
+                                [ngStyle]="{ background: getTagColor(tech.name).bg, color: getTagColor(tech.name).color }">
                                 <i [class]="tech.icon"></i> {{ tech.name }}
                             </span>
-                        </div>
-
-                        <div class="project-buttons">
-                            <a *ngIf="project.repo" [href]="project.repo" target="_blank" class="btn repo">
-                                <i class="fa fa-github"></i> Repo
-                            </a>
-                            <a *ngIf="project.demo" [href]="project.demo" target="_blank" class="btn demo">
-                                <i class="fa fa-play"></i> Demo
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -46,7 +37,7 @@
         </div>
 
         <div class="carousel-dots">
-            <span *ngFor="let dot of totalDots; let i = index" class="dot" [class.active]="i === currentIndex"></span>
+            <span *ngFor="let dot of projects; let i = index" [class.active]="i === currentIndex"></span>
         </div>
     </div>
 </section>

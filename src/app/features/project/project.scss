@@ -19,50 +19,53 @@
         font-size: 2.2rem;
         font-weight: 700;
         color: #00c3ff;
-        margin: 0;
+        margin: 0rem;
     }
 
     .section-subtitle {
         font-size: 1.1rem;
         color: #a9b3c1;
-        margin: 0 1rem 1rem 1rem;
+        margin: 0rem 1rem 1rem 1rem;
     }
 
     .carousel-wrapper {
         position: relative;
         overflow: hidden;
         width: 100%;
-        margin: 2rem 0;
+        margin: 1.5rem 0;
     }
 
     .carousel-track {
         display: flex;
-        transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         gap: 1.5rem;
-        justify-content: center;
+        transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); // Cinemático Netflix
     }
 
     .project-card {
-        flex: 0 0 380px;
-        height: 520px;
+        flex: 0 0 385px;
+        height: 500px;
         background: rgba(255, 255, 255, 0.05);
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 0 20px rgba(0, 195, 255, 0.05);
-        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         display: flex;
         flex-direction: column;
+        cursor: pointer;
 
         &:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 195, 255, 0.25);
+            transform: scale(1.07);
             z-index: 5;
+            box-shadow: 0 0 40px rgba(0, 195, 255, 0.25);
         }
 
         .project-image {
             width: 100%;
             height: 160px;
-            flex-shrink: 0;
+            background: linear-gradient(135deg, #13202f, #0a101a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             img {
                 width: 100%;
@@ -72,34 +75,34 @@
         }
 
         .project-content {
-            padding: 1rem;
+            padding: 1.2rem;
             text-align: left;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;
 
             .project-title {
                 font-size: 1rem;
                 font-weight: 600;
                 color: #ffffff;
-                height: 45px;
+                height: 2.2rem;
                 overflow: hidden;
             }
 
             .project-description {
                 font-size: 0.9rem;
                 color: #b0b6c5;
-                height: 100px;
+                height: 5rem;
+                line-height: 1.5;
                 overflow: hidden;
-                text-overflow: ellipsis;
             }
 
             .project-tags {
                 display: flex;
                 flex-wrap: wrap;
                 gap: 0.5rem;
-                margin-bottom: 1rem;
+                max-height: 3.5rem;
+                overflow: hidden;
 
                 .tag {
                     border-radius: 20px;
@@ -108,12 +111,13 @@
                     display: flex;
                     align-items: center;
                     gap: 0.3rem;
-                }
-            }
+                    font-weight: 500;
+                    transition: all 0.3s ease;
 
-            .project-buttons {
-                display: flex;
-                gap: 0.6rem;
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+                }
             }
         }
     }
@@ -123,17 +127,18 @@
         top: 50%;
         transform: translateY(-50%);
         background: rgba(0, 195, 255, 0.15);
-        border: 1px solid rgba(0, 195, 255, 0.3);
+        border: 1px solid rgba(0, 195, 255, 0.4);
         color: #00c3ff;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s ease;
+        z-index: 10;
 
         &:hover {
             background: #00c3ff;
@@ -141,26 +146,26 @@
         }
 
         &.left {
-            left: 0;
+            left: 10px;
         }
 
         &.right {
-            right: 0;
+            right: 10px;
         }
     }
 
     .carousel-dots {
-        margin-top: 1rem;
         display: flex;
         justify-content: center;
-        gap: 0.6rem;
+        margin-top: 1rem;
+        gap: 0.5rem;
 
-        .dot {
-            width: 8px;
-            height: 8px;
+        span {
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: rgba(0, 195, 255, 0.3);
-            transition: all 0.3s;
+            transition: all 0.3s ease;
 
             &.active {
                 background: #00c3ff;
