@@ -34,9 +34,4 @@ export const environment: Environment = {
         { label: 'Tecnologías', targetId: 'stack' },
         { label: 'Contacto', targetId: 'contact' }
     ],
-    emailService: {
-        serviceID: 'service_z6zzxti',
-        templateID: 'template_dnfp29o',
-        publicKey: 'B3CHZZ5qH5CB7aGSw'
-    }
 };

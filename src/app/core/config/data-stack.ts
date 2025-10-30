@@ -38,6 +38,7 @@ export const stack = {
                 { name: 'Firebase', icon: 'https://cdn.simpleicons.org/firebase/FFCA28' },
                 { name: 'MongoDB', icon: 'https://cdn.simpleicons.org/mongodb/47A248' },
                 { name: 'Oracle', icon: 'https://img.icons8.com/color/48/oracle-logo.png' },
+                { name: 'XAMPP', icon: 'https://cdn.simpleicons.org/xampp/FF7A18' },
                 { name: 'phpMyAdmin', icon: 'https://cdn.simpleicons.org/phpmyadmin/6C78C5' }
             ]
         },
