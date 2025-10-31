@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { projects } from '../../core/config/data-project';
+import { projects } from '../../core/env/data-project';
 import { ViewEncapsulation } from '@angular/core';
 
 @Component({

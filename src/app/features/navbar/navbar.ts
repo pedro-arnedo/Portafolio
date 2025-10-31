@@ -1,6 +1,6 @@
 import { Component, HostListener, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { environment } from '../../core/config/environment';
+import { environment } from '../../core/env/environment';
 import { Title } from '@angular/platform-browser';
 
 @Component({

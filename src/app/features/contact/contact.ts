@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { environment } from '../../core/config/environment';
+import { environment } from '../../core/env/environment';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BehaviorSubject, interval, Subscription } from 'rxjs';

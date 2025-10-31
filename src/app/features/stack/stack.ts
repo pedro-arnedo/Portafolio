@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { stack } from '../../core/config/data-stack';
+import { stack } from '../../core/env/data-stack';
 
 declare global {
     interface Window { THREE: any; }
