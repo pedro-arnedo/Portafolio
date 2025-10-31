@@ -1,22 +1,22 @@
 @use '../../core/config/variables.scss' as *;
 
 .stack-section {
+    min-height: 100vh;
     background: $bg-stack;
     color: #d0d6e2;
     font-family: 'Rubik', sans-serif;
     text-align: center;
-    padding: 2rem;
+    padding: 5rem 2rem;
     overflow: hidden;
     min-height: 100vh;
     position: relative;
-    scroll-margin-top: 80px;
     overflow: visible;
 
     .section-title {
         color: #00c3ff;
         font-size: 2rem;
         font-weight: 700;
-        margin-bottom: 2.5rem;
+        margin: 0rem;
     }
 
     .categories-grid {
@@ -106,19 +106,5 @@
             background: rgba(255, 255, 255, 0.03);
             box-shadow: 0 0 30px rgba(0, 195, 255, 0.1);
         }
-    }
-}
-
-@keyframes pulseRotate {
-    0% {
-        transform: rotate(0) scale(1);
-    }
-
-    50% {
-        transform: rotate(10deg) scale(1.15);
-    }
-
-    100% {
-        transform: rotate(0) scale(1);
     }
 }
