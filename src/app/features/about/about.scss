@@ -1,9 +1,11 @@
+@use '../../core/config/variables.scss' as *;
+
 .about-section {
     min-height: 100vh;
     display: flex;
     align-items: center;
     padding: 4rem 2rem;
-    background: radial-gradient(circle at top left, #0f111a 0%, #0b0d13 100%);
+    background: $bg-about;
     color: #d0d6e2;
     font-family: 'Rubik', sans-serif;
     overflow: hidden;

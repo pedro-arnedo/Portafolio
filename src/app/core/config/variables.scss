@@ -1,3 +1,18 @@
-$primary-gradient: linear-gradient(to right, #2B32B2, #1488CC);
 $primary-color: #1488CC;
 $secondary-color: #2B32B2;
+$accent-color: #00C3FF;
+$text-light: #d0d6e2;
+$text-muted: #9aa9bf;
+
+$primary-gradient: linear-gradient(to right, $secondary-color, $primary-color);
+
+$bg-hero: radial-gradient(circle at top left, #0f111a 0%, #0b0d13 100%);
+$bg-about: linear-gradient(135deg, #10131c 0%, #0c1017 100%);
+$bg-experience: linear-gradient(135deg, #0b0f18 0%, #070a10 100%);
+$bg-projects: linear-gradient(135deg, #0d111a 0%, #080c13 100%);
+$bg-services: linear-gradient(135deg, #0e1320 0%, #08101b 100%);
+$bg-stack: radial-gradient(circle at top left, #0a0e16 0%, #06090f 100%);
+$bg-contact: linear-gradient(135deg, #0b0e15 0%, #05070b 100%);
+
+$accent-glow: 0 0 25px rgba(0, 195, 255, 0.25);
+$accent-shadow: 0 0 40px rgba(0, 195, 255, 0.2);

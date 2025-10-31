@@ -1,9 +1,10 @@
+@use '../../core/config/variables.scss' as *;
+
 .timeline-section {
-    background: radial-gradient(circle at top left, #0f111a 0%, #0b0d13 100%);
+    background: $bg-experience;
     color: #d0d6e2;
     font-family: 'Rubik', sans-serif;
     height: 100vh;
-    /* Tamaño fijo */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,7 +27,6 @@
         font-size: 1rem;
     }
 
-    /* Scroll interno */
     .timeline-wrapper {
         flex: 1;
         width: 100%;
@@ -37,7 +37,6 @@
     }
 }
 
-/* Timeline container */
 .timeline-container {
     position: relative;
     max-width: 1100px;
@@ -46,9 +45,9 @@
     flex-direction: column;
     gap: 3rem;
     padding-left: 3rem;
+    box-shadow: 0 0 25px rgba(0, 195, 255, 0.05);
 }
 
-/* Line */
 .timeline-line {
     position: absolute;
     top: 0;
@@ -58,7 +57,6 @@
     background: rgba(0, 195, 255, 0.2);
 }
 
-/* Items */
 .timeline-item {
     position: relative;
     display: flex;
@@ -92,7 +90,7 @@
     }
 
     .timeline-card {
-        background: rgba(255, 255, 255, 0.04);
+        box-shadow: 0 0 40px rgba(0, 195, 255, 0.15);
         border: 1px solid rgba(0, 195, 255, 0.08);
         border-radius: 14px;
         padding: 1.2rem 1.5rem;
@@ -177,7 +175,6 @@
     }
 }
 
-/* Scroll personalizado */
 .timeline-wrapper::-webkit-scrollbar {
     width: 8px;
 }
