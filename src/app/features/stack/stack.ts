@@ -20,21 +20,21 @@ export class Stack implements AfterViewInit, OnDestroy {
     private renderer!: any;
     private scene!: any;
     private camera!: any;
-    private icons: any[] = [];
+    private iconsGroup!: any;
     private animationId!: number;
 
     private isDragging = false;
     private previousMousePosition = { x: 0, y: 0 };
-    private rotationSpeed = 0.005;
-    private targetRotation = { x: 0, y: 0 };
+    private rotationVelocity = { x: 0, y: 0 };
+    private damping = 0.93;
+
+    private baseRotation = { x: 0.0015, y: 0.0025 };
 
     async ngAfterViewInit(): Promise<void> {
         await this.loadThreeJS();
         this.init3DScene();
         this.addMouseControls();
-        setTimeout(() => {
-            this.animate();
-        }, 1000);
+        setTimeout(() => this.animate(), 800);
     }
 
     ngOnDestroy(): void {
@@ -67,12 +67,15 @@ export class Stack implements AfterViewInit, OnDestroy {
         this.camera = new window.THREE.PerspectiveCamera(70, width / height, 0.1, 1000);
         this.camera.position.z = 3;
 
-        const light = new window.THREE.PointLight(0xffffff, 1.5);
-        light.position.set(3, 3, 3);
-        this.scene.add(light);
+        const pointLight = new window.THREE.PointLight(0xffffff, 1.5);
+        pointLight.position.set(3, 3, 3);
+        this.scene.add(pointLight);
 
         const ambientLight = new window.THREE.AmbientLight(0xffffff, 0.6);
         this.scene.add(ambientLight);
+
+        this.iconsGroup = new window.THREE.Group();
+        this.scene.add(this.iconsGroup);
 
         this.loadTechIcons();
     }
@@ -99,8 +102,6 @@ export class Stack implements AfterViewInit, OnDestroy {
                         map: texture,
                         color: 0xffffff,
                         transparent: true,
-                        depthTest: false,
-                        depthWrite: false,
                         opacity: 1.0
                     });
 
@@ -108,8 +109,7 @@ export class Stack implements AfterViewInit, OnDestroy {
                     sprite.position.setFromSphericalCoords(radius, phi, theta);
                     sprite.scale.set(0.42, 0.42, 0.42);
 
-                    this.scene.add(sprite);
-                    this.icons.push(sprite);
+                    this.iconsGroup.add(sprite);
                 }
             );
         });
@@ -128,8 +128,8 @@ export class Stack implements AfterViewInit, OnDestroy {
             const deltaX = e.clientX - this.previousMousePosition.x;
             const deltaY = e.clientY - this.previousMousePosition.y;
 
-            this.targetRotation.y += deltaX * this.rotationSpeed;
-            this.targetRotation.x += deltaY * this.rotationSpeed;
+            this.rotationVelocity.y = deltaX * 0.005;
+            this.rotationVelocity.x = deltaY * 0.005;
 
             this.previousMousePosition = { x: e.clientX, y: e.clientY };
         });
@@ -140,13 +140,16 @@ export class Stack implements AfterViewInit, OnDestroy {
     }
 
     private animate = (): void => {
-        this.icons.forEach(icon => {
-            icon.position.applyAxisAngle(new window.THREE.Vector3(0, 1, 0), 0.002 + this.targetRotation.y * 0.002);
-            icon.position.applyAxisAngle(new window.THREE.Vector3(1, 0, 0), 0.001 + this.targetRotation.x * 0.002);
-        });
+        this.iconsGroup.rotation.x += this.baseRotation.x;
+        this.iconsGroup.rotation.y += this.baseRotation.y;
 
-        this.targetRotation.x *= 0.95;
-        this.targetRotation.y *= 0.95;
+        if (!this.isDragging) {
+            this.rotationVelocity.x *= this.damping;
+            this.rotationVelocity.y *= this.damping;
+        }
+
+        this.iconsGroup.rotation.x += this.rotationVelocity.x;
+        this.iconsGroup.rotation.y += this.rotationVelocity.y;
 
         this.renderer.render(this.scene, this.camera);
         this.animationId = requestAnimationFrame(this.animate);
