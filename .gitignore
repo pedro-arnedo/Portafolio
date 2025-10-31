@@ -6,6 +6,7 @@
 /out-tsc
 /bazel-out
 /src/assets
+src/app/core/env/data-email.ts
 
 # Node
 /node_modules
