@@ -44,7 +44,6 @@
 
     .project-card {
         flex: 0 0 385px;
-        height: 500px;
         background: rgba(255, 255, 255, 0.05);
         border-radius: 16px;
         overflow: hidden;
@@ -98,10 +97,15 @@
             .project-description {
                 font-size: 0.9rem;
                 color: #b0b6c5;
-                height: 5rem;
                 line-height: 1.5;
+                margin: 0 0.5rem 1.5rem 0.5rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                line-clamp: 3;
+                -webkit-box-orient: vertical;
                 overflow: hidden;
-                margin: 0rem 0.5rem 1.5rem 0.5rem;
+                text-overflow: ellipsis;
+                max-height: calc(1.5em * 3);
             }
 
             .project-tags {
@@ -183,10 +187,59 @@
     }
 }
 
+$techColors: (
+    'Angular': (#DD1B31, rgba(221, 27, 49, 0.15)),
+    'Node.js': (#4CAF50, rgba(76, 175, 80, 0.15)),
+    '.NET Core': (#512BD4, rgba(81, 43, 212, 0.15)),
+    'PostgreSQL': (#336791, rgba(51, 103, 145, 0.15)),
+    'MySQL': (#00758F, rgba(0, 117, 143, 0.15)),
+    'Firebase': (#FFCA28, rgba(255, 202, 40, 0.15)),
+    'Salesforce': (#00A1E0, rgba(0, 161, 224, 0.15)),
+    'JWT': (#444444, rgba(68, 68, 68, 0.15)),
+    'Swagger': (#85EA2D, rgba(133, 234, 45, 0.15)),
+    'GitHub': (#333333, rgba(51, 51, 51, 0.15)),
+    'Bitbucket': (#2684FF, rgba(38, 132, 255, 0.15)),
+    'Jira': (#0052CC, rgba(0, 82, 204, 0.15)),
+    'Postman': (#FF6C37, rgba(255, 108, 55, 0.15)),
+    'Google Login': (#4285F4, rgba(66, 133, 244, 0.15)),
+    'Scrum': (#009688, rgba(0, 150, 136, 0.15)),
+    'CI/CD': (#00C3FF, rgba(0, 195, 255, 0.15)),
+    'CSS': (#264DE4, rgba(38, 77, 228, 0.15)),
+    'SCSS': (#CC6699, rgba(204, 102, 153, 0.15)),
+    'TypeScript': (#007ACC, rgba(0, 122, 204, 0.15)),
+    'N-layer': (#8E44AD, rgba(142, 68, 173, 0.15)),
+    'GSAP': (#88CE02, rgba(136, 206, 2, 0.15)),
+    'Responsive': (#0099CC, rgba(0, 153, 204, 0.15)),
+    'XAMPP': (#FB7A24, rgba(251, 122, 36, 0.15)),
+);
+
 .project-tags .tag {
-    &[data-tech='Angular'] { background: rgba(255, 87, 34, 0.15); color: #DD0031; }
-    &[data-tech='Node.js'] { background: rgba(76, 175, 80, 0.15); color: #68A063; }
-    &[data-tech='MySQL'] { background: rgba(0, 123, 255, 0.15); color: #00758F; }
-    &[data-tech='React'] { background: rgba(97, 218, 251, 0.15); color: #61DAFB; }
-    &[data-tech='MongoDB'] { background: rgba(76, 175, 80, 0.15); color: #4DB33D; }
+    border-radius: 20px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+    }
+
+    @each $tech, $colors in $techColors {
+        &[data-tech='#{$tech}'] {
+            color: nth($colors, 1);
+            background: nth($colors, 2);
+            border-color: rgba(nth($colors, 1), 0.25);
+        }
+    }
+
+    &:not([data-tech]) {
+        background: rgba(0, 195, 255, 0.08);
+        color: #00C3FF;
+        border-color: rgba(0, 195, 255, 0.25);
+    }
 }

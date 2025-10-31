@@ -18,8 +18,8 @@
                         <p class="project-description">{{ project.description }}</p>
 
                         <div class="project-tags">
-                            <span *ngFor="let tech of project.technologies | slice:0:9" class="tag"
-                                [ngStyle]="{ background: getTagColor(tech.name).bg, color: getTagColor(tech.name).color }">
+                            <span *ngFor="let tech of project.technologies | slice:0:10" class="tag"
+                                [attr.data-tech]="tech.name.trim()">
                                 <i [class]="tech.icon"></i> {{ tech.name }}
                             </span>
                         </div>
