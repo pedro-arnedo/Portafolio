@@ -27,7 +27,7 @@ export class Contact implements OnInit, OnDestroy {
     private cooldownSeconds$ = new BehaviorSubject<number>(0);
     cooldown$ = this.cooldownSeconds$.asObservable();
     private cooldownSub?: Subscription;
-    private readonly COOLDOWN_SECONDS = 30;
+    private readonly COOLDOWN_SECONDS = 35;
     private readonly LOCAL_KEY = 'cooldownEnd';
 
     constructor(
@@ -66,13 +66,16 @@ export class Contact implements OnInit, OnDestroy {
         document.body.style.overflow = '';
     }
 
-    private clearCooldownSub() {
+    private clearCooldownSub(removeKey = false) {
         if (this.cooldownSub) {
             this.cooldownSub.unsubscribe();
             this.cooldownSub = undefined;
         }
         this.cooldownSeconds$.next(0);
-        localStorage.removeItem(this.LOCAL_KEY);
+
+        if (removeKey) {
+            localStorage.removeItem(this.LOCAL_KEY);
+        }
     }
 
     private startCooldown(seconds = this.COOLDOWN_SECONDS) {
@@ -80,7 +83,7 @@ export class Contact implements OnInit, OnDestroy {
         localStorage.setItem(this.LOCAL_KEY, end.toString());
         this.cooldownSeconds$.next(seconds);
 
-        this.clearCooldownSub();
+        this.clearCooldownSub(); // no borra el localStorage
 
         this.cooldownSub = interval(1000)
             .pipe(
@@ -90,7 +93,7 @@ export class Contact implements OnInit, OnDestroy {
             .subscribe({
                 next: val => this.cooldownSeconds$.next(val),
                 complete: () => {
-                    this.clearCooldownSub();
+                    this.clearCooldownSub(true);
                 }
             });
     }
