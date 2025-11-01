@@ -9,8 +9,13 @@ export class EmailService {
     private templateId = emailConfig.templateID;
     private publicKey = emailConfig.publicKey;
 
-    sendMail(templateParams: Record<string, unknown>): Promise<any> {
-        return emailjs.send(this.serviceId, this.templateId, templateParams, this.publicKey);
+    async sendMail(templateParams: Record<string, unknown>): Promise<any> {
+        try {
+            return await emailjs.send(this.serviceId, this.templateId, templateParams, this.publicKey);
+        } catch (err) {
+            console.error('Error en envío EmailJS:', err);
+            throw err;
+        }
     }
 
     sendMail$(templateParams: Record<string, unknown>): Observable<any> {

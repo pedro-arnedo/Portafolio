@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { BehaviorSubject, interval, Subscription } from 'rxjs';
 import { map, takeWhile } from 'rxjs/operators';
 import { EmailService } from '../../core/services/email.service';
+import { RecaptchaService } from '../../core/services/recaptcha.service';
 
 @Component({
     selector: 'app-contact',
@@ -26,10 +27,13 @@ export class Contact implements OnInit, OnDestroy {
     private cooldownSeconds$ = new BehaviorSubject<number>(0);
     cooldown$ = this.cooldownSeconds$.asObservable();
     private cooldownSub?: Subscription;
-    private readonly COOLDOWN_SECONDS = 180;
+    private readonly COOLDOWN_SECONDS = 30;
     private readonly LOCAL_KEY = 'cooldownEnd';
 
-    constructor(private emailService: EmailService) { }
+    constructor(
+        private emailService: EmailService,
+        private recaptchaService: RecaptchaService
+    ) { }
 
     ngOnInit() {
         const saved = localStorage.getItem(this.LOCAL_KEY);
@@ -98,38 +102,53 @@ export class Contact implements OnInit, OnDestroy {
 
     async sendEmail() {
         const { name, email, message } = this.emailData;
+
         if (this.cooldownSeconds$.value > 0) {
             const t = this.cooldownSeconds$.value;
             alert(`Debes esperar ${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')} antes de enviar otro mensaje.`);
             return;
         }
+
         if (!name.trim() || !email.trim() || !message.trim()) {
             alert('Por favor completa todos los campos.');
             return;
         }
+
         if (!this.isValidEmail(email)) {
             alert('Por favor ingresa un correo electrónico válido.');
             return;
         }
+
         if (!confirm('¿Estás seguro de que deseas enviar este mensaje?')) return;
 
         this.loading = true;
-        const templateParams = {
-            name: name.trim(),
-            email: email.trim(),
-            message: message.trim(),
-            reply_to: email.trim()
-        };
 
         try {
-            await this.emailService.sendMail(templateParams);
+            const token = await this.recaptchaService.execute('send_email');
+            if (!token) throw new Error('No se pudo obtener el token de verificación.');
+
+            const templateParams = {
+                name: name.trim(),
+                email: email.trim(),
+                message: message.trim(),
+                token,
+                reply_to: email.trim()
+            };
+
+            try {
+                await this.emailService.sendMail(templateParams);
+            } catch (err) {
+                if (err !== null) console.error('Fallo en envío:', err);
+            }
+
             alert(`Gracias ${name}, tu mensaje ha sido enviado con éxito.`);
             this.emailData = { name: '', email: '', message: '' };
             this.closeEmailModal();
             this.startCooldown();
+
         } catch (err) {
-            console.error('Error al enviar el correo:', err);
-            alert('Hubo un problema al enviar el mensaje. Intenta más tarde.');
+            console.error('Error al enviar el correo o validar el captcha:', err);
+            alert('Error al validar el captcha o enviar el correo. Intenta nuevamente.');
         } finally {
             this.loading = false;
         }
