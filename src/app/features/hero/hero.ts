@@ -9,7 +9,7 @@ import { ParticleService } from '../../core/services/particles.service';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './hero.html',
-    styleUrls: ['./hero.scss']
+    styleUrl: './hero.scss'
 })
 export class Hero implements AfterViewInit, OnDestroy {
 

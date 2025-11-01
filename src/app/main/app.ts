@@ -1,11 +1,9 @@
-import { Component, signal, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { filter } from 'rxjs/operators';
+import { Component, AfterViewInit } from '@angular/core';
 import { Header } from '../layout/header/header';
 import { Body } from '../layout/body/body';
 import { Footer } from '../layout/footer/footer';
 import { environment } from '../core/env/environment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-root',
@@ -15,23 +13,28 @@ import { environment } from '../core/env/environment';
     styleUrl: './app.scss'
 })
 export class App implements AfterViewInit {
-    protected readonly titleBase = environment.titleBase || 'Portafolio';
-    protected readonly title = signal(`${this.titleBase} | Inicio`);
+    private readonly titleBase = environment.titleBase || 'Portafolio';
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private titleService: Title
-    ) {
-        this.router.events
-            .pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(() => this.updateTitle());
+    constructor(private titleService: Title) {
+        this.titleService.setTitle(`${this.titleBase} | Inicio`);
     }
 
     ngAfterViewInit(): void {
+        // Si entra sin hash (por ejemplo http://localhost:4200/), agrega #home
+        if (!window.location.hash) {
+            history.replaceState(null, '', '#home');
+        }
+
+        // Limpia rutas antiguas del tipo /#/home → #home
+        if (window.location.hash.startsWith('#/')) {
+            const cleanHash = '#' + window.location.hash.substring(2);
+            history.replaceState(null, '', cleanHash);
+        }
+
+        // Si hay hash (por ejemplo #about), hace scroll
         const hash = window.location.hash;
-        if (hash.startsWith('#')) {
-            const sectionId = hash.substring(2);
+        if (hash) {
+            const sectionId = hash.replace('#', '');
             const section = document.getElementById(sectionId);
             if (section) {
                 setTimeout(() => {
@@ -39,20 +42,23 @@ export class App implements AfterViewInit {
                 }, 300);
             }
         }
+
+        // Escucha cambios del hash y actualiza el título dinámicamente
+        window.addEventListener('hashchange', () => {
+            const current = window.location.hash.replace('#', '') || 'home';
+            const labelMap: Record<string, string> = {
+                home: 'Inicio',
+                about: 'Perfil',
+                experience: 'Experiencia',
+                project: 'Proyectos',
+                service: 'Servicios',
+                stack: 'Stack',
+                contact: 'Contacto'
+            };
+
+            const title = labelMap[current] || 'Portafolio';
+            this.titleService.setTitle(`${this.titleBase} | ${title}`);
+        });
     }
 
-    private updateTitle() {
-        let child = this.route.firstChild;
-        while (child?.firstChild) {
-            child = child.firstChild;
-        }
-
-        const pageTitle = child?.snapshot.data?.['title'] || '';
-        const newTitle = pageTitle
-            ? `${this.titleBase} | ${pageTitle}`
-            : this.titleBase;
-
-        this.title.set(newTitle);
-        this.titleService.setTitle(newTitle);
-    }
 }

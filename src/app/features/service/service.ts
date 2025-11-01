@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './service.html',
-    styleUrls: ['./service.scss']
+    styleUrl: './service.scss'
 })
 export class Service {
     services = [

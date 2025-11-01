@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 interface TLItem {
     type: 'work' | 'education' | 'cert';
     title: string;
