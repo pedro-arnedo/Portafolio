@@ -1,10 +1,7 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import * as THREE from 'three';
 import { stack } from '../../core/env/data-stack';
-
-declare global {
-    interface Window { THREE: any; }
-}
 
 @Component({
     selector: 'app-stack',
@@ -17,10 +14,10 @@ export class Stack implements AfterViewInit, OnDestroy {
     @ViewChild('stackCanvas', { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;
     techCategories = stack.techCategories;
 
-    private renderer!: any;
-    private scene!: any;
-    private camera!: any;
-    private iconsGroup!: any;
+    private renderer!: THREE.WebGLRenderer;
+    private scene!: THREE.Scene;
+    private camera!: THREE.PerspectiveCamera;
+    private iconsGroup!: THREE.Group;
     private animationId!: number;
 
     private isDragging = false;
@@ -30,8 +27,7 @@ export class Stack implements AfterViewInit, OnDestroy {
 
     private baseRotation = { x: 0.0015, y: 0.0025 };
 
-    async ngAfterViewInit(): Promise<void> {
-        await this.loadThreeJS();
+    ngAfterViewInit(): void {
         this.init3DScene();
         this.addMouseControls();
         setTimeout(() => this.animate(), 800);
@@ -42,73 +38,59 @@ export class Stack implements AfterViewInit, OnDestroy {
         if (this.renderer) this.renderer.dispose();
     }
 
-    private async loadThreeJS(): Promise<void> {
-        if (window.THREE) return;
-        return new Promise<void>((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = 'https://unpkg.com/three@0.152.2/build/three.min.js';
-            script.onload = () => resolve();
-            script.onerror = reject;
-            document.body.appendChild(script);
-        });
-    }
-
     private init3DScene(): void {
         const canvas = this.canvasRef.nativeElement;
-        this.renderer = new window.THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 
         const width = canvas.clientWidth;
         const height = canvas.clientHeight;
         this.renderer.setSize(width, height, false);
 
-        this.scene = new window.THREE.Scene();
-        this.scene.background = new window.THREE.Color(0x0f111a);
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x0f111a);
 
-        this.camera = new window.THREE.PerspectiveCamera(70, width / height, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 1000);
         this.camera.position.z = 3;
 
-        const pointLight = new window.THREE.PointLight(0xffffff, 1.5);
+        const pointLight = new THREE.PointLight(0xffffff, 1.5);
         pointLight.position.set(3, 3, 3);
         this.scene.add(pointLight);
 
-        const ambientLight = new window.THREE.AmbientLight(0xffffff, 0.6);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         this.scene.add(ambientLight);
 
-        this.iconsGroup = new window.THREE.Group();
+        this.iconsGroup = new THREE.Group();
         this.scene.add(this.iconsGroup);
 
         this.loadTechIcons();
     }
 
     private loadTechIcons(): void {
-        const loader = new window.THREE.TextureLoader();
-        loader.crossOrigin = 'anonymous';
-
+        const loader = new THREE.TextureLoader();
         const allTechItems = this.techCategories.flatMap(c => c.items);
         const radius = 1.5;
 
         allTechItems.forEach((tech, i) => {
             loader.load(
                 tech.icon,
-                (texture: any) => {
-                    texture.encoding = window.THREE.sRGBEncoding;
-                    texture.minFilter = window.THREE.LinearFilter;
-                    texture.magFilter = window.THREE.LinearFilter;
+                (texture) => {
+                    texture.colorSpace = THREE.SRGBColorSpace;
+                    texture.minFilter = THREE.LinearFilter;
+                    texture.magFilter = THREE.LinearFilter;
 
                     const phi = Math.acos(-1 + (2 * i) / allTechItems.length);
                     const theta = Math.sqrt(allTechItems.length * Math.PI) * phi;
 
-                    const material = new window.THREE.SpriteMaterial({
+                    const material = new THREE.SpriteMaterial({
                         map: texture,
                         color: 0xffffff,
                         transparent: true,
                         opacity: 1.0
                     });
 
-                    const sprite = new window.THREE.Sprite(material);
+                    const sprite = new THREE.Sprite(material);
                     sprite.position.setFromSphericalCoords(radius, phi, theta);
                     sprite.scale.set(0.42, 0.42, 0.42);
-
                     this.iconsGroup.add(sprite);
                 }
             );
