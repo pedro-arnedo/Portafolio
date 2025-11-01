@@ -9,4 +9,4 @@ import { Hero } from '../../features/hero/hero';
     templateUrl: './header.html',
     styleUrl: './header.scss'
 })
-export class Header {}
+export class Header { }

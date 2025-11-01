@@ -1,0 +1,40 @@
+<!-- Botones flotantes -->
+<div class="floating-buttons">
+    <!-- Botón de scroll -->
+    <button class="floating-btn scroll-btn" aria-label="Subir o bajar" (click)="toggleScroll()">
+        <i [class]="isAtTop ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></i>
+    </button>
+
+    <!-- Botón del agente inteligente -->
+    <button class="floating-btn chat-btn" aria-label="Agente inteligente" (click)="toggleChat()">
+        <img src="assets/img/avatar.png" alt="Agente" />
+    </button>
+</div>
+
+<!-- Panel del chat -->
+<div class="chatbot-panel" [class.show]="isOpen">
+    <div class="chat-header">
+        <h4>Chat con Pedro 🤖</h4>
+    </div>
+
+    <div class="chat-body" #chatContainer>
+        <div *ngFor="let msg of messages" class="chat-message" [ngClass]="msg.from">
+            <div class="msg-text">{{ msg.text }}</div>
+            <div class="msg-time">{{ msg.timestamp | date: 'shortTime' }}</div>
+        </div>
+
+        <div *ngIf="loading" class="chat-message bot loading">
+            <div class="msg-text">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input type="text" [(ngModel)]="userMessage" placeholder="Escribe un mensaje..."
+            (keyup.enter)="sendMessage()" />
+        <button (click)="sendMessage()" [disabled]="loading || !userMessage.trim()">
+            <i class="fa fa-paper-plane"></i>
+        </button>
+    </div>
+</div>

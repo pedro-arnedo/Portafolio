@@ -83,7 +83,7 @@ export class Contact implements OnInit, OnDestroy {
         localStorage.setItem(this.LOCAL_KEY, end.toString());
         this.cooldownSeconds$.next(seconds);
 
-        this.clearCooldownSub(); // no borra el localStorage
+        this.clearCooldownSub();
 
         this.cooldownSub = interval(1000)
             .pipe(
@@ -165,9 +165,5 @@ export class Contact implements OnInit, OnDestroy {
         event.preventDefault();
         const el = document.getElementById(targetId);
         if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }

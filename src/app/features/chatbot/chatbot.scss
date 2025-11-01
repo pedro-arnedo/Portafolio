@@ -1,0 +1,201 @@
+.chatbot-panel {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 340px;
+    max-height: 500px;
+    background: #0f111a;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(15px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 2100;
+
+    &.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+    }
+
+    .chat-header {
+        background: #00c3ff;
+        color: white;
+        text-align: center;
+        padding: 0.8rem;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chat-body {
+        flex: 1;
+        padding: 0.8rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        background: linear-gradient(180deg, #0f111a 0%, #1b1e29 100%);
+    }
+
+    .chat-message {
+        display: flex;
+        flex-direction: column;
+        max-width: 80%;
+
+        &.user {
+            align-self: flex-end;
+
+            .msg-text {
+                background: #00c3ff;
+                color: #fff;
+                border-radius: 16px 16px 0 16px;
+            }
+        }
+
+        &.bot {
+            align-self: flex-start;
+
+            .msg-text {
+                background: #23273a;
+                color: #d0d6e2;
+                border-radius: 16px 16px 16px 0;
+            }
+        }
+
+        .msg-text {
+            padding: 0.6rem 0.8rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            box-shadow: 0 2px 8px rgba(0, 195, 255, 0.1);
+        }
+
+        .msg-time {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 2px;
+            text-align: right;
+        }
+    }
+
+    .chat-input {
+        display: flex;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        background: #151823;
+        padding: 0.5rem;
+
+        input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #d0d6e2;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        button {
+            background: transparent;
+            border: none;
+            color: #00c3ff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    .loading .msg-text {
+        display: flex;
+        gap: 4px;
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #d0d6e2;
+            border-radius: 50%;
+            animation: blink 1s infinite alternate;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+    }
+}
+
+.floating-buttons {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 2000;
+
+    .floating-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        background: #00c3ff;
+        box-shadow: 0 6px 20px rgba(0, 195, 255, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        i {
+            color: #fff;
+            font-size: 22px;
+        }
+    }
+}
+
+@keyframes blink {
+    from {
+        opacity: 0.3;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 500px) {
+    .chatbot-panel {
+        right: 10px;
+        bottom: 90px;
+        width: 90%;
+        max-height: 70vh;
+    }
+}
