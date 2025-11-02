@@ -34,3 +34,13 @@ body {
     overflow-y: scroll;
     height: 100vh;
 }
+
+body {
+    cursor: url('/assets/cursor-arrow.png') 0 0, auto !important;
+}
+
+a,
+button,
+.clickable {
+    cursor: url('/assets/cursor-hand.png') 4 0, pointer !important;
+}
