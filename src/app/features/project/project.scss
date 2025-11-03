@@ -1,4 +1,5 @@
 @use '../../core/config/variables.scss' as *;
+@use "sass:list";
 
 .projects-section {
     min-height: 100vh;
@@ -195,9 +196,9 @@ $techColors: (
     'MySQL': (#00758F, rgba(0, 117, 143, 0.15)),
     'Firebase': (#FFCA28, rgba(255, 202, 40, 0.15)),
     'Salesforce': (#00A1E0, rgba(0, 161, 224, 0.15)),
-    'JWT': (#444444, rgba(68, 68, 68, 0.15)),
+    'JWT': (#5865F2, rgba(88, 101, 242, 0.15)),
+    'GitHub': (#5C6BC0, rgba(92, 107, 192, 0.15)),
     'Swagger': (#85EA2D, rgba(133, 234, 45, 0.15)),
-    'GitHub': (#333333, rgba(51, 51, 51, 0.15)),
     'Bitbucket': (#2684FF, rgba(38, 132, 255, 0.15)),
     'Jira': (#0052CC, rgba(0, 82, 204, 0.15)),
     'Postman': (#FF6C37, rgba(255, 108, 55, 0.15)),
@@ -231,9 +232,9 @@ $techColors: (
 
     @each $tech, $colors in $techColors {
         &[data-tech='#{$tech}'] {
-            color: nth($colors, 1);
-            background: nth($colors, 2);
-            border-color: rgba(nth($colors, 1), 0.25);
+            color: list.nth($colors, 1);
+            background: list.nth($colors, 2);
+            border-color: rgba(list.nth($colors, 1), 0.25);
         }
     }
 
