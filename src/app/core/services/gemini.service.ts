@@ -4,7 +4,7 @@ import { personalChatbotConfig } from '../env/data-chatbot';
 @Injectable({ providedIn: 'root' })
 export class GeminiService {
     private readonly apiUrl =
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
     private readonly apiKey = personalChatbotConfig.apiKey;
 
     async sendChat(message: string): Promise<string> {
@@ -29,9 +29,12 @@ export class GeminiService {
                 throw new Error(`Error ${response.status}: ${response.statusText}`);
 
             const data = await response.json();
-            return data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sin respuesta.';
+            return (
+                data.candidates?.[0]?.content?.parts?.[0]?.text ||
+                'Sin respuesta del modelo.'
+            );
         } catch (err) {
-            return '⚠️ No se pudo conectar con el modelo Gemini.';
+            return 'Chatbot no disponible en este momento.';
         }
     }
 }
