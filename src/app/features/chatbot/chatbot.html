@@ -22,14 +22,29 @@
     </div>
 
     <div class="chat-body">
-        <div class="placeholder">
-            <p>Hola, soy tu agente inteligente. Aquí responderé sobre tu portafolio y experiencia.</p>
-            <small>(Integración pendiente con Copilot Studio)</small>
+        <div *ngIf="messages.length === 0" class="placeholder">
+            <p>Hola, soy un agente inteligente. Aquí responderé todas tus preguntas sobre el portafolio de Pedro Arnedo.</p>
+        </div>
+
+        <!-- Historial de mensajes -->
+        <div *ngFor="let msg of messages" [ngClass]="msg.from" class="chat-message">
+            <div class="bubble">
+                <span>{{ msg.text }}</span>
+            </div>
+        </div>
+
+        <div *ngIf="loading" class="chat-message bot">
+            <div class="bubble typing">
+                <span>Escribiendo...</span>
+            </div>
         </div>
     </div>
 
     <div class="chat-input">
-        <input type="text" placeholder="Escribe un mensaje..." disabled />
-        <button disabled><i class="fa fa-paper-plane"></i></button>
+        <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="userMessage" (keyup.enter)="sendMessage()"
+            [disabled]="loading" />
+        <button (click)="sendMessage()" [disabled]="!userMessage.trim() || loading">
+            <i class="fa fa-paper-plane"></i>
+        </button>
     </div>
 </div>
