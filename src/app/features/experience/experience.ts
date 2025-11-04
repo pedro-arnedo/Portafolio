@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { timeline } from '../../core/env/data-experience';
 import { TimelineItem } from '../../core/models/timeline.model';
+import { timeline } from '../../core/env/data-experience';
 
 @Component({
     selector: 'app-experience',
