@@ -3,85 +3,93 @@
 
     <div class="controls">
         <div class="filters">
-            <!-- <button [class.active]="selectedFilter === 'all'" (click)="setFilter('all')">Todos</button> --> //quitar este filtro
-            <button [class.active]="selectedFilter === 'work'" (click)="setFilter('work')"><i
-                    class="fa fa-briefcase"></i> Experiencia</button>
-            <button [class.active]="selectedFilter === 'cert'" (click)="setFilter('cert')"><i class="fa fa-trophy"></i>
-                Certificados</button>
-            <button [class.active]="selectedFilter === 'education'" (click)="setFilter('education')"><i
-                    class="fa fa-graduation-cap"></i> Educación</button>
+            <button [class.active]="selectedFilter === 'work'" (click)="setFilter('work')">
+                <i class="fa fa-briefcase"></i> Experiencia
+            </button>
+            <button [class.active]="selectedFilter === 'cert'" (click)="setFilter('cert')">
+                <i class="fa fa-trophy"></i> Certificados
+            </button>
+            <button [class.active]="selectedFilter === 'education'" (click)="setFilter('education')">
+                <i class="fa fa-graduation-cap"></i> Educación
+            </button>
         </div>
     </div>
 
     <div class="card-viewport">
-        <button class="nav-arrow left" (click)="previous()" [disabled]="currentIndex === 0"
-            aria-label="Anterior">&larr;</button>
+        <button class="nav-arrow left" (click)="previous()" [disabled]="currentIndex === 0">&larr;</button>
 
         <div class="card-viewport-inner">
             <div class="card-container" #cardContainer>
                 <div class="card" *ngFor="let item of filteredItems; let i = index">
-                    <!-- small point / icon (no roba espacio) --> // quitar este icono que no aporta nada solo quita espacio
-                    <div class="point-circle" title="{{item.type}}">
-                        <i [class]="item.icon"></i>
-                    </div>
-
                     <div class="card-info">
                         <div class="card-top">
-                            <div class="title-wrap">
-                                <h3 class="title">{{ item.title }}</h3>
-                                <div class="meta-inline">
-                                    <span class="entity">{{ item.entity }}</span>
-                                    <span class="date">{{ item.date }}</span>
-                                </div>
+                            <h3 class="title">{{ item.title }}</h3>
+                            <div class="meta-inline">
+                                <span class="entity">{{ item.entity }}</span>
+                                <span class="date">{{ item.date }}</span>
                             </div>
                         </div>
 
                         <div class="card-body">
                             <p class="description">{{ item.description }}</p>
-
-                            <div *ngIf="(item.modules && item.modules.length)" class="section modules">
-                                <strong>Módulos / Funcionalidades</strong>
-                                <ul>
-                                    <li *ngFor="let m of item.modules">{{ m }}</li>
-                                </ul>
-                            </div>
-
-                            <div *ngIf="(item.responsibilities && item.responsibilities.length)" class="section resp">
-                                <strong>Responsabilidades</strong>
-                                <ul>
-                                    <li *ngFor="let r of item.responsibilities">{{ r }}</li>
-                                </ul>
-                            </div>
-
-                            <div *ngIf="item.architecture" class="section arch">
-                                <strong>Arquitectura</strong>
-                                <p>{{ item.architecture }}</p>
-                            </div>
-
-                            <div *ngIf="(item.results && item.results.length)" class="section results">
-                                <strong>Resultados</strong>
-                                <ul>
-                                    <li *ngFor="let res of item.results">{{ res }}</li>
-                                </ul>
-                            </div>
-
-                            <div class="stack">
-                                <strong>Stack</strong>
-                                <div class="stack-list">
-                                    <span *ngFor="let t of (item.stack || [])" class="stack-badge">{{ t }}</span>
-                                </div>
-                            </div>
+                            <button class="view-more" (click)="openDetails(item)">Ver más</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <button class="nav-arrow right" (click)="next()" [disabled]="currentIndex === (filteredItems.length - 1)"
-            aria-label="Siguiente">&rarr;</button>
+        <button class="nav-arrow right" (click)="next()" [disabled]="currentIndex === (filteredItems.length - 1)">
+            &rarr;
+        </button>
     </div>
 
     <div class="dots" #dotsContainer>
-        <span *ngFor="let _ of filteredItems; let i = index" class="dot" (click)="goTo(i)"></span>
+        <span *ngFor="let _ of filteredItems; let i = index" class="dot" [class.selected]="i === currentIndex"
+            (click)="goTo(i)"></span>
+    </div>
+
+    <!-- PANEL DETALLE -->
+    <div class="modal-overlay" *ngIf="selectedItem" (click)="closeDetails()">
+        <div class="modal-card" (click)="$event.stopPropagation()">
+            <button class="close-btn" (click)="closeDetails()">×</button>
+            <h3>{{ selectedItem.title }}</h3>
+            <p class="meta">{{ selectedItem.entity }} · {{ selectedItem.date }}</p>
+
+            <div class="modal-grid">
+                <div *ngIf="selectedItem.modules?.length" class="grid-cell">
+                    <strong>Módulos</strong>
+                    <ul>
+                        <li *ngFor="let m of selectedItem.modules">{{ m }}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="selectedItem.responsibilities?.length" class="grid-cell">
+                    <strong>Responsabilidades</strong>
+                    <ul>
+                        <li *ngFor="let r of selectedItem.responsibilities">{{ r }}</li>
+                    </ul>
+                </div>
+
+                <div *ngIf="selectedItem.architecture" class="grid-cell">
+                    <strong>Arquitectura</strong>
+                    <p>{{ selectedItem.architecture }}</p>
+                </div>
+
+                <div *ngIf="selectedItem.results?.length" class="grid-cell">
+                    <strong>Resultados</strong>
+                    <ul>
+                        <li *ngFor="let res of selectedItem.results">{{ res }}</li>
+                    </ul>
+                </div>
+
+                <div class="grid-cell">
+                    <strong>Stack</strong>
+                    <div class="stack-list">
+                        <span *ngFor="let t of (selectedItem.stack || [])" class="stack-badge">{{ t }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>

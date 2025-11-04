@@ -28,7 +28,7 @@ export const environment: Environment = {
     navLinks: [
         { label: 'Inicio', targetId: 'home' },
         { label: 'Perfil', targetId: 'about' },
-        { label: 'Experiencia', targetId: 'experience' },
+        { label: 'Trayectoria', targetId: 'experience' },
         { label: 'Proyectos', targetId: 'projects' },
         { label: 'Servicios', targetId: 'service' },
         { label: 'Tecnologías', targetId: 'stack' },
