@@ -4,6 +4,6 @@ export interface TimelineItem {
     entity: string;
     date: string;
     description: string;
-    tags: string[];
+    stack: string[];
     icon: string;
 }

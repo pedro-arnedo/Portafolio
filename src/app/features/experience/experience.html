@@ -1,33 +1,60 @@
-<section class="horizontal-timeline" id="experience">
-    <h2 class="section-title">Trayectoria</h2>
+<section class="slider-experience" id="experience">
+    <h2 class="section-title">Experiencia</h2>
 
-    <div class="filters">
-        <button [class.active]="selectedFilter === 'work'" (click)="setFilter('work')">
-            <i class="fa fa-briefcase"></i> Experiencia
-        </button>
-        <button [class.active]="selectedFilter === 'education'" (click)="setFilter('education')">
-            <i class="fa fa-graduation-cap"></i> Educación
-        </button>
-        <button [class.active]="selectedFilter === 'cert'" (click)="setFilter('cert')">
-            <i class="fa fa-certificate"></i> Certificados
-        </button>
+    <div class="controls">
+        <div class="filters">
+            <button [class.active]="selectedFilter === 'all'" (click)="setFilter('all')">Todos</button>
+            <button [class.active]="selectedFilter === 'work'" (click)="setFilter('work')"><i
+                    class="fa fa-briefcase"></i> Experiencia</button>
+            <button [class.active]="selectedFilter === 'cert'" (click)="setFilter('cert')"><i class="fa fa-trophy"></i>
+                Certificados</button>
+            <button [class.active]="selectedFilter === 'education'" (click)="setFilter('education')"><i
+                    class="fa fa-graduation-cap"></i> Educación</button>
+        </div>
     </div>
 
-    <div class="timeline-track">
-        <div class="scroll-container">
-            <div class="timeline-item" *ngFor="let item of itemsToShow">
-                <div class="point">
-                    <i [class]="item.icon"></i>
-                </div>
+    <div class="card-viewport">
+        <button class="nav-arrow left" (click)="previous()" [disabled]="currentIndex === 0"
+            aria-label="Anterior">&larr;</button>
 
-                <div class="item-info">
-                    <h3>{{ item.title }}</h3>
-                    <p class="entity">{{ item.entity }}</p>
-                    <p class="date">{{ item.date }}</p>
+        <div class="card-viewport-inner">
+            <div class="card-container" #cardContainer>
+                <div class="card" *ngFor="let item of filteredItems; let i = index" [attr.data-index]="i">
+                    <div class="point-circle" aria-hidden="true">
+                        <i [class]="item.icon"></i>
+                    </div>
+
+                    <div class="card-info">
+                        <header class="card-top">
+                            <h3 class="title">{{ item.title }}</h3>
+                            <div class="meta">
+                                <span class="entity">{{ item.entity }}</span>
+                                <span class="date">{{ item.date }}</span>
+                            </div>
+                        </header>
+
+                        <div class="card-body">
+                            <p class="description">{{ item.description }}</p>
+
+                            <div class="stack">
+                                <strong>Stack</strong>
+                                <div class="stack-list">
+                                    <span *ngFor="let t of (item.stack || [])" class="stack-badge">{{ t
+                                        }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="base-line"></div>
+        <button class="nav-arrow right" (click)="next()" [disabled]="currentIndex === (filteredItems.length - 1)"
+            aria-label="Siguiente">&rarr;</button>
+    </div>
+
+    <div class="dots" #dotsContainer>
+        <span *ngFor="let _ of filteredItems; let i = index" class="dot" [class.selected]="i === currentIndex"
+            (click)="goTo(i)" [attr.aria-label]="'Ir a '+ (i+1)"></span>
     </div>
 </section>

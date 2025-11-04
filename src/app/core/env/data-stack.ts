@@ -10,7 +10,6 @@ export const stack = {
                 { name: 'TypeScript', icon: 'https://cdn.simpleicons.org/typescript/3178C6' },
                 { name: 'JavaScript', icon: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
                 { name: 'Bootstrap', icon: 'https://cdn.simpleicons.org/bootstrap/7952B3' },
-                { name: 'RxJS', icon: 'https://cdn.simpleicons.org/reactivex/B7178C' },
                 { name: 'TailwindCSS', icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4' }
             ]
         },

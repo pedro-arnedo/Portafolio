@@ -46,7 +46,6 @@ export const projects = [
             { name: 'Node.js', icon: 'fa fa-server' },
             { name: 'Responsive', icon: 'fa fa-mobile' },
             { name: 'GitHub', icon: 'fa fa-github' },
-            { name: 'CI/CD', icon: 'fa fa-rocket' },
             { name: 'Swagger', icon: 'fa fa-book' },
         ],
     },
@@ -63,7 +62,6 @@ export const projects = [
             { name: 'GSAP', icon: 'fa fa-bolt' },
             { name: 'N-layer', icon: 'fa fa-th-large' },
             { name: 'Responsive', icon: 'fa fa-mobile' },
-            { name: 'CI/CD', icon: 'fa fa-rocket' },
         ],
     },
 ];
