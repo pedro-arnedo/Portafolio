@@ -1,12 +1,4 @@
-interface TimelineItem {
-    type: 'work' | 'education' | 'cert';
-    title: string;
-    entity: string;
-    date: string;
-    description: string;
-    tags: string[];
-    icon: string;
-}
+import { TimelineItem } from '../models/timeline.model';
 
 export const timeline: TimelineItem[] = [
     {
@@ -24,7 +16,7 @@ export const timeline: TimelineItem[] = [
         entity: 'UPARSISTEM · Valledupar, Colombia',
         date: 'Oct 2023 – Dic 2023',
         description: 'Diseñé y desarrollé módulos interactivos para Moodle, mejorando la usabilidad y presentación de materiales educativos digitales.',
-        tags: ['Moodle', 'Canva Pro', 'Diseño instruccional', 'Usabilidad'],
+        tags: ['Moodle', 'Canva Pro', 'Diseño instruccional'],
         icon: 'fa fa-briefcase'
     },
     {
@@ -40,9 +32,9 @@ export const timeline: TimelineItem[] = [
         type: 'education',
         title: 'Ingeniería de Sistemas',
         entity: 'Universidad Popular del Cesar',
-        date: '2018 – 2024',
+        date: 'Febrero 2017 – Junio 2023',
         description: 'Formación profesional en ingeniería de software, arquitectura, bases de datos, redes y gestión de proyectos. Trabajo de grado orientado al desarrollo de sistemas web institucionales.',
-        tags: ['Software', 'Arquitectura', 'Gestión de proyectos'],
+        tags: ['Software', 'Arquitectura', 'Gestión de proyectos', 'Desarrollo Web'],
         icon: 'fa fa-graduation-cap'
     },
     {
@@ -52,7 +44,7 @@ export const timeline: TimelineItem[] = [
         date: 'Mayo 2023',
         description: 'Certificación en fundamentos de programación en Python y manipulación de datos.',
         tags: ['Python', 'Cisco'],
-        icon: 'fa fa-certificate'
+        icon: 'fa fa-trophy'
     },
     {
         type: 'cert',
@@ -61,7 +53,7 @@ export const timeline: TimelineItem[] = [
         date: 'Sept 2023',
         description: 'Fundamentos de ciencia de datos, análisis y visualización.',
         tags: ['Data Science', 'Python', 'Análisis'],
-        icon: 'fa fa-certificate'
+        icon: 'fa fa-trophy'
     },
     {
         type: 'cert',
@@ -70,24 +62,24 @@ export const timeline: TimelineItem[] = [
         date: 'Oct 2022',
         description: 'Conceptos de infraestructura en la nube, redes y despliegue de servicios.',
         tags: ['Cloud', 'AWS', 'Google Cloud'],
-        icon: 'fa fa-cloud'
+        icon: 'fa fa-trophy'
     },
     {
         type: 'cert',
         title: 'Inteligencia Artificial',
         entity: 'Talento Tech Colombia',
-        date: '2024',
+        date: 'NOV 2025',
         description: 'Curso intensivo en fundamentos y aplicaciones de inteligencia artificial.',
         tags: ['IA', 'Machine Learning', 'Data'],
-        icon: 'fa fa-robot'
+        icon: 'fa fa-trophy'
     },
     {
         type: 'education',
-        title: 'Bachiller Académico',
-        entity: 'Institución Educativa Nacional Loperena Garupal',
-        date: '2017',
+        title: 'Bachiller Técnico',
+        entity: 'Institución Educativa Educación Media',
+        date: 'Diciembre 2016',
         description: 'Educación secundaria con énfasis en tecnología e informática.',
         tags: ['Educación media', 'Tecnología', 'Informática'],
-        icon: 'fa fa-school'
+        icon: 'fa fa-graduation-cap'
     },
 ];
