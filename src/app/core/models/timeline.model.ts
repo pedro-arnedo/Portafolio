@@ -6,4 +6,9 @@ export interface TimelineItem {
     description: string;
     stack: string[];
     icon: string;
+
+    modules?: string[]; 
+    responsibilities?: string[];    
+    architecture?: string;  
+    results?: string[]; 
 }

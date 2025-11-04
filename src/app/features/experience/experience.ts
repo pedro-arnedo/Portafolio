@@ -15,11 +15,8 @@ export class Experience implements AfterViewInit {
     @ViewChild('cardContainer', { static: true }) cardContainer!: ElementRef<HTMLDivElement>;
     @ViewChild('dotsContainer', { static: true }) dotsContainer!: ElementRef<HTMLDivElement>;
 
-    // Items come from your data file
     items: TimelineItem[] = timeline;
     currentIndex = 0;
-
-    // Filters left in place (you said keep filters, but viewport shows one card at a time)
     selectedFilter: 'work' | 'education' | 'cert' | 'all' = 'all';
 
     get filteredItems(): TimelineItem[] {
@@ -28,20 +25,20 @@ export class Experience implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        // initial visual setup
-        this.syncView();
-        // little entrance animation
+        // initial setup & small entrance animation
+        this.syncView(true);
         gsap.from(this.cardContainer.nativeElement.querySelectorAll('.card'), {
             duration: 0.6,
-            y: 20,
+            y: 18,
             opacity: 0,
-            stagger: 0.05,
+            stagger: 0.04,
             ease: 'power3.out'
         });
-        this.animatePointPulse();
+        this.animatePulse();
+        // ensure dots exist
+        setTimeout(() => this.updateDots(), 120);
     }
 
-    // NAV
     previous() {
         if (this.currentIndex > 0) {
             this.currentIndex--;
@@ -65,71 +62,66 @@ export class Experience implements AfterViewInit {
 
     setFilter(type: 'work' | 'education' | 'cert' | 'all') {
         this.selectedFilter = type;
-        // reset index safely
         this.currentIndex = 0;
-        this.syncView(true);
+        // small timeout to ensure DOM updated
+        setTimeout(() => this.syncView(true), 80);
     }
 
-    // Keyboard left/right
     @HostListener('window:keydown', ['$event'])
     handleKey(e: KeyboardEvent) {
         if (e.key === 'ArrowLeft') this.previous();
         if (e.key === 'ArrowRight') this.next();
     }
 
-    private syncView(skipAnimation = false) {
+    private syncView(skipAnim = false) {
         const container = this.cardContainer.nativeElement;
-        const items = Array.from(container.querySelectorAll('.card')) as HTMLElement[];
+        const cards = Array.from(container.querySelectorAll('.card')) as HTMLElement[];
+        if (!cards.length) return;
 
-        // compute center transform so single card is visible centered
-        const viewportWidth = container.clientWidth;
-        const card = items[this.currentIndex];
-        if (!card) return;
+        // center the active card in the viewport area
+        const active = cards[this.currentIndex];
+        const vpWidth = container.parentElement?.clientWidth ?? container.clientWidth;
+        const cardCenter = active.offsetLeft + active.offsetWidth / 2;
+        const translateX = Math.max(0, cardCenter - vpWidth / 2);
 
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const translate = Math.max(0, cardCenter - viewportWidth / 2);
-
-        // move container
-        if (skipAnimation) {
-            container.style.transform = `translateX(${-translate}px)`;
+        if (skipAnim) {
+            container.style.transform = `translateX(${-translateX}px)`;
         } else {
-            gsap.to(container, { x: -translate, duration: 0.6, ease: 'power3.out' });
+            gsap.to(container, { x: -translateX, duration: 0.55, ease: 'power3.out' });
         }
 
-        // visual states
-        items.forEach((el, idx) => {
+        // state visual classes + subtle scaling
+        cards.forEach((c, idx) => {
             if (idx === this.currentIndex) {
-                el.classList.add('active');
-                gsap.to(el, { scale: 1, opacity: 1, duration: 0.45, ease: 'power3.out' });
-                // highlight point
-                gsap.to(el.querySelector('.point-circle'), { scale: 1.06, boxShadow: '0 0 24px rgba(0,195,255,0.55)', duration: 0.45 });
+                c.classList.add('active');
+                gsap.to(c, { scale: 1, opacity: 1, duration: 0.35, ease: 'power3.out' });
+                gsap.to(c.querySelector('.point-circle'), { scale: 1.02, boxShadow: '0 0 30px rgba(0,195,255,0.38)', duration: 0.35 });
             } else {
-                el.classList.remove('active');
-                gsap.to(el, { scale: 0.92, opacity: 0.55, duration: 0.35, ease: 'power3.out' });
-                gsap.to(el.querySelector('.point-circle'), { scale: 0.86, boxShadow: '0 0 8px rgba(0,195,255,0.12)', duration: 0.35 });
+                c.classList.remove('active');
+                gsap.to(c, { scale: 0.94, opacity: 0.58, duration: 0.28, ease: 'power3.out' });
+                gsap.to(c.querySelector('.point-circle'), { scale: 0.86, boxShadow: '0 0 8px rgba(0,195,255,0.10)', duration: 0.28 });
             }
         });
 
-        // animate dots
         this.updateDots();
-        // small point pulse
-        this.animatePointPulse();
+        this.animatePulse();
     }
 
     private updateDots() {
         const dots = this.dotsContainer?.nativeElement?.querySelectorAll('.dot') ?? [];
-        dots.forEach((d: Element, idx: number) => {
-            d.classList.toggle('selected', idx === this.currentIndex);
+        dots.forEach((d: Element, i: number) => {
+            d.classList.toggle('selected', i === this.currentIndex);
         });
     }
 
-    private animatePointPulse() {
-        // subtle loop on the active point circle
+    private animatePulse() {
+        // pulse only on the active card point
         const container = this.cardContainer.nativeElement;
-        const active = container.querySelector('.card.active .point-circle') as HTMLElement | null;
-        gsap.killTweensOf('.pulse-tween');
-        if (active) {
-            gsap.fromTo(active, { scale: 0.98 }, { scale: 1.08, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut', overwrite: true, onRepeat: () => { /* nothing */ } });
+        const activePoint: HTMLElement | null = container.querySelector('.card.active .point-circle');
+        // clear previous tweens
+        gsap.killTweensOf('.pulse-loop');
+        if (activePoint) {
+            gsap.fromTo(activePoint, { scale: 0.98 }, { scale: 1.08, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut', overwrite: true, repeatDelay: 0.05 });
         }
     }
 }
