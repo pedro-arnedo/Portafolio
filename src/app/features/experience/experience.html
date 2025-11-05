@@ -92,9 +92,11 @@
                     </ul>
                 </div>
 
-                <div *ngIf="selectedItem.architecture" class="grid-cell">
+                <div *ngIf="selectedItem.architecture?.length" class="grid-cell">
                     <strong>Arquitectura</strong>
-                    <p>{{ selectedItem.architecture }}</p>
+                    <ul>
+                        <li *ngFor="let n of selectedItem.architecture">{{ n }}</li>
+                    </ul>
                 </div>
 
                 <div *ngIf="selectedItem.results?.length" class="grid-cell">
