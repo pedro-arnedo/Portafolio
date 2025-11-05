@@ -1,5 +1,5 @@
 <section class="slider-experience" id="experience">
-    <h2 class="section-title">Trayectoria</h2>
+    <h2 class="section-title">Experiencia</h2>
 
     <div class="controls">
         <div class="filters">
@@ -23,40 +23,40 @@
         <div class="card-viewport-inner">
             <div class="card-container" #cardContainer>
                 <div class="card" *ngFor="let item of filteredItems; let i = index" [class.active]="i === currentIndex">
-                    <div class="card-info">
-                        <div class="card-top">
-                            <h3 class="title">{{ item.title }}</h3>
+                    <h3 class="title">{{ item.title }}</h3>
 
-                            <div class="meta-grid">
-                                <div class="meta-col">
-                                    <strong>Empresa:</strong> <span>{{ item.entity }}</span>
-                                </div>
-                                <div class="meta-col right">
-                                    <strong>Lugar:</strong> <span>{{ item.location }}</span>
-                                </div>
-                                <div class="meta-col">
-                                    <strong>Modalidad:</strong> <span>{{ item.modality }}</span>
-                                </div>
-                                <div class="meta-col right">
-                                    <strong>Duración:</strong> <span>{{ item.date }}</span>
-                                </div>
-                            </div>
+                    <!-- NUEVA SECCIÓN DE META EN 4 BLOQUES -->
+                    <div class="meta-grid">
+                        <div class="meta-item">
+                            <strong>Empresa:</strong>
+                            <span>{{ item.entity }}</span>
                         </div>
-
-                        <div class="card-body">
-                            <p class="description">{{ item.description }}</p>
-
-                            <div class="stack-list">
-                                <span *ngFor="let tech of item.stack" class="stack-badge">
-                                    {{ tech }}
-                                </span>
-                            </div>
-
-                            <div class="view-more-container">
-                                <button class="view-more" (click)="openDetails(item)">Ver más</button>
-                            </div>
+                        <div class="meta-item">
+                            <strong>Lugar:</strong>
+                            <span>{{ item.location }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Modalidad:</strong>
+                            <span>{{ item.modality || 'No especificado' }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Duración:</strong>
+                            <span>{{ item.date }}</span>
                         </div>
                     </div>
+
+                    <!-- DESCRIPCIÓN CON SCROLL -->
+                    <p class="description">{{ item.description }}</p>
+
+                    <!-- STACK -->
+                    <div class="stack-list">
+                        <span *ngFor="let t of (item.stack || [])" class="stack-badge">{{ t }}</span>
+                    </div>
+
+                    <!-- BOTÓN CENTRADO -->
+                    <button class="view-more" (click)="openDetails(item)">
+                        Ver más
+                    </button>
                 </div>
             </div>
         </div>
@@ -72,6 +72,7 @@
             (click)="goTo(i)"></span>
     </div>
 
+    <!-- MODAL -->
     <div class="modal-overlay" *ngIf="selectedItem" (click)="closeDetails()">
         <div class="modal-card" (click)="$event.stopPropagation()">
             <button class="close-btn" (click)="closeDetails()" aria-label="Cerrar">×</button>
@@ -79,36 +80,28 @@
             <div class="modal-grid">
                 <div *ngIf="selectedItem.modules?.length" class="grid-cell">
                     <strong>Módulos</strong>
-                    <div class="cell-scroll">
-                        <ul>
-                            <li *ngFor="let m of selectedItem.modules">{{ m }}</li>
-                        </ul>
-                    </div>
+                    <ul>
+                        <li *ngFor="let m of selectedItem.modules">{{ m }}</li>
+                    </ul>
                 </div>
 
                 <div *ngIf="selectedItem.responsibilities?.length" class="grid-cell">
                     <strong>Responsabilidades</strong>
-                    <div class="cell-scroll">
-                        <ul>
-                            <li *ngFor="let r of selectedItem.responsibilities">{{ r }}</li>
-                        </ul>
-                    </div>
+                    <ul>
+                        <li *ngFor="let r of selectedItem.responsibilities">{{ r }}</li>
+                    </ul>
                 </div>
 
                 <div *ngIf="selectedItem.architecture" class="grid-cell">
                     <strong>Arquitectura</strong>
-                    <div class="cell-scroll">
-                        <p>{{ selectedItem.architecture }}</p>
-                    </div>
+                    <p>{{ selectedItem.architecture }}</p>
                 </div>
 
                 <div *ngIf="selectedItem.results?.length" class="grid-cell">
                     <strong>Resultados</strong>
-                    <div class="cell-scroll">
-                        <ul>
-                            <li *ngFor="let res of selectedItem.results">{{ res }}</li>
-                        </ul>
-                    </div>
+                    <ul>
+                        <li *ngFor="let res of selectedItem.results">{{ res }}</li>
+                    </ul>
                 </div>
             </div>
         </div>

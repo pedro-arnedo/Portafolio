@@ -32,7 +32,7 @@ export class Experience implements AfterViewInit {
         setTimeout(() => this.setActiveVisualState(), 300);
     }
 
-    private waitForCardsAndInit(maxWaitMs = 1000) {
+    private waitForCardsAndInit(maxWaitMs = 1200) {
         if (this.waitingForCards) return;
         this.waitingForCards = true;
         const start = performance.now();
@@ -62,7 +62,11 @@ export class Experience implements AfterViewInit {
     }
 
     private quickEntrance(cards: HTMLElement[]) {
-        gsap.fromTo(cards, { y: 20, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, stagger: 0.05, ease: 'power3.out' });
+        gsap.fromTo(
+            cards,
+            { y: 20, opacity: 0, scale: 0.94 },
+            { y: 0, opacity: 1, scale: 1, duration: 0.45, stagger: 0.05, ease: 'power3.out' }
+        );
     }
 
     private setActiveVisualState() {
@@ -78,7 +82,7 @@ export class Experience implements AfterViewInit {
             if (idx === this.currentIndex) {
                 gsap.to(c, { scale: 1, opacity: 1, duration: 0.22, ease: 'power2.out' });
             } else {
-                gsap.to(c, { scale: 0.94, opacity: 0.68, duration: 0.22, ease: 'power2.out' });
+                gsap.to(c, { scale: 0.93, opacity: 0.66, duration: 0.22, ease: 'power2.out' });
             }
         });
 
@@ -128,6 +132,9 @@ export class Experience implements AfterViewInit {
         const container = this.cardContainer.nativeElement;
         const cards = Array.from(container.querySelectorAll('.card')) as HTMLElement[];
         if (!cards.length) return;
+
+        if (this.currentIndex >= cards.length) this.currentIndex = cards.length - 1;
+        if (this.currentIndex < 0) this.currentIndex = 0;
 
         const active = cards[this.currentIndex];
         const vpWidth = container.parentElement?.clientWidth ?? container.clientWidth;
