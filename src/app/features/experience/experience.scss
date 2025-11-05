@@ -286,7 +286,7 @@
 
         &:hover {
             transform: rotate(90deg);
-            color: lighten($accent-color, 12%);
+            color: color.adjust($accent-color, $lightness: 12%);
         }
     }
 
