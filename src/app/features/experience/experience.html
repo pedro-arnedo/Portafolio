@@ -24,34 +24,38 @@
             <div class="card-container" #cardContainer>
                 <div class="card" *ngFor="let item of filteredItems; let i = index" [class.active]="i === currentIndex">
                     <div class="card-info">
-                        <h3 class="title">{{ item.title }}</h3>
-                        <hr class="glow-line" />
+                        <div class="card-top">
+                            <h3 class="title">{{ item.title }}</h3>
 
-                        <div class="meta-grid">
-                            <div><strong>Empresa:</strong> {{ item.entity }}</div>
-                            <div><strong>Duración:</strong> {{ item.date }}</div>
-                            <div *ngIf="item.location"><strong>Lugar:</strong> {{ item.location }}</div>
-                            <div *ngIf="item.modality"><strong>Modalidad:</strong> {{ item.modality }}</div>
+                            <div class="meta-grid">
+                                <div class="meta-col">
+                                    <strong>Empresa:</strong> <span>{{ item.entity }}</span>
+                                </div>
+                                <div class="meta-col right">
+                                    <strong>Lugar:</strong> <span>{{ item.location }}</span>
+                                </div>
+                                <div class="meta-col">
+                                    <strong>Modalidad:</strong> <span>{{ item.modality }}</span>
+                                </div>
+                                <div class="meta-col right">
+                                    <strong>Duración:</strong> <span>{{ item.date }}</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <hr class="glow-line" />
+                        <div class="card-body">
+                            <p class="description">{{ item.description }}</p>
 
-                        <p class="description">{{ item.description }}</p>
+                            <div class="stack-list">
+                                <span *ngFor="let tech of item.stack" class="stack-badge">
+                                    {{ tech }}
+                                </span>
+                            </div>
 
-                        <hr class="glow-line" />
-
-                        <div class="stack-line">
-                            <strong>Stack:</strong>
-                            <span *ngFor="let tech of item.stack" class="stack-badge">
-                                {{ tech }}
-                            </span>
+                            <div class="view-more-container">
+                                <button class="view-more" (click)="openDetails(item)">Ver más</button>
+                            </div>
                         </div>
-
-                        <hr class="glow-line" />
-
-                        <button class="view-more" (click)="openDetails(item)">
-                            <i class="fa fa-eye"></i> Ver más
-                        </button>
                     </div>
                 </div>
             </div>
@@ -104,15 +108,6 @@
                         <ul>
                             <li *ngFor="let res of selectedItem.results">{{ res }}</li>
                         </ul>
-                    </div>
-                </div>
-
-                <div class="grid-cell">
-                    <strong>Stack</strong>
-                    <div class="cell-scroll">
-                        <div class="stack-list">
-                            <span *ngFor="let t of (selectedItem.stack || [])" class="stack-badge">{{ t }}</span>
-                        </div>
                     </div>
                 </div>
             </div>

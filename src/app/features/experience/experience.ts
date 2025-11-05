@@ -19,7 +19,6 @@ export class Experience implements AfterViewInit {
     currentIndex = 0;
     selectedFilter: 'work' | 'education' | 'cert' = 'work';
     selectedItem: TimelineItem | null = null;
-
     private waitingForCards = false;
 
     constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) { }
@@ -33,7 +32,7 @@ export class Experience implements AfterViewInit {
         setTimeout(() => this.setActiveVisualState(), 300);
     }
 
-    private waitForCardsAndInit(maxWaitMs = 1200) {
+    private waitForCardsAndInit(maxWaitMs = 1000) {
         if (this.waitingForCards) return;
         this.waitingForCards = true;
         const start = performance.now();
@@ -63,11 +62,7 @@ export class Experience implements AfterViewInit {
     }
 
     private quickEntrance(cards: HTMLElement[]) {
-        gsap.fromTo(
-            cards,
-            { y: 20, opacity: 0, scale: 0.94 },
-            { y: 0, opacity: 1, scale: 1, duration: 0.45, stagger: 0.05, ease: 'power3.out' }
-        );
+        gsap.fromTo(cards, { y: 20, opacity: 0, scale: 0.95 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, stagger: 0.05, ease: 'power3.out' });
     }
 
     private setActiveVisualState() {
@@ -80,7 +75,11 @@ export class Experience implements AfterViewInit {
 
         cards.forEach((c, idx) => {
             c.classList.toggle('active', idx === this.currentIndex);
-            gsap.to(c, { scale: idx === this.currentIndex ? 1 : 0.94, opacity: idx === this.currentIndex ? 1 : 0.65, duration: 0.25 });
+            if (idx === this.currentIndex) {
+                gsap.to(c, { scale: 1, opacity: 1, duration: 0.22, ease: 'power2.out' });
+            } else {
+                gsap.to(c, { scale: 0.94, opacity: 0.68, duration: 0.22, ease: 'power2.out' });
+            }
         });
 
         this.syncView(true);
@@ -135,8 +134,11 @@ export class Experience implements AfterViewInit {
         const cardCenter = active.offsetLeft + active.offsetWidth / 2;
         const translateX = Math.max(0, cardCenter - vpWidth / 2);
 
-        if (skipAnim) container.style.transform = `translateX(${-translateX}px)`;
-        else gsap.to(container, { x: -translateX, duration: 0.36, ease: 'power3.out' });
+        if (skipAnim) {
+            container.style.transform = `translateX(${-translateX}px)`;
+        } else {
+            gsap.to(container, { x: -translateX, duration: 0.36, ease: 'power3.out' });
+        }
 
         this.updateDots();
     }
