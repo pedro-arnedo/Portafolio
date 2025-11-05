@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './navbar.html',
-    styleUrl: './navbar.scss'
+    styleUrls: ['./navbar.scss']
 })
 export class Navbar implements AfterViewInit, OnDestroy {
 

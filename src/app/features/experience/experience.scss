@@ -1,4 +1,5 @@
 @use '../../core/config/variables.scss' as *;
+@use "sass:color";
 
 .slider-experience {
     background: $bg-experience;
@@ -89,26 +90,76 @@
             transition: all 0.4s ease;
             opacity: 0.7;
             transform: scale(0.94);
+            display: flex;
+            align-items: stretch;
 
             &.active {
                 opacity: 1;
                 transform: scale(1);
             }
 
-            .view-more {
-                background: none;
-                color: $accent-color;
-                border: 1px solid rgba(0, 195, 255, 0.3);
-                border-radius: 10px;
-                padding: 0.4rem 1rem;
-                cursor: pointer;
-                transition: all 0.2s ease;
-                display: inline-block;
-                margin-top: 0.6rem;
+            .card-info {
+                width: 100%;
 
-                &:hover {
-                    background: rgba(0, 195, 255, 0.08);
-                    transform: translateY(-2px);
+                .card-top {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    margin-bottom: .6rem;
+
+                    .title-wrap {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .35rem;
+                    }
+
+                    .title {
+                        font-size: 1.15rem;
+                        font-weight: 700;
+                        color: #fff;
+                    }
+
+                    .meta-inline {
+                        display: flex;
+                        gap: .8rem;
+                        margin-top: .2rem;
+                        align-items: center;
+
+                        .entity {
+                            color: #9fc9ff;
+                            font-size: .9rem;
+                        }
+
+                        .date {
+                            color: $accent-color;
+                            font-size: .85rem;
+                        }
+                    }
+                }
+
+                .card-body {
+                    .description {
+                        color: color.adjust($text-muted, $lightness: 6%);
+                        margin-bottom: .8rem;
+                        line-height: 1.55;
+                    }
+
+                    .view-more {
+                        background: none;
+                        color: $accent-color;
+                        border: 1px solid rgba(0, 195, 255, 0.3);
+                        border-radius: 10px;
+                        padding: 0.4rem 1rem;
+                        cursor: pointer;
+                        transition: all 0.2s ease;
+                        display: inline-block;
+                        margin-top: 0.6rem;
+
+                        &:hover {
+                            background: rgba(0, 195, 255, 0.08);
+                            transform: translateY(-2px);
+                        }
+                    }
                 }
             }
         }
@@ -136,106 +187,131 @@
         }
     }
 
-    /* MODAL */
+    /* MODAL COMPACTO */
     .modal-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(5, 10, 20, 0.92);
+        background: rgba(5, 10, 20, 0.86);
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 999;
-        animation: fadeIn 0.3s ease;
+        animation: fadeIn 0.22s ease;
+    }
 
-        .modal-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(0, 195, 255, 0.15);
-            border-radius: 16px;
-            padding: 1.8rem;
-            width: min(900px, 92%);
-            height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            overflow: hidden;
+    .modal-card {
+        position: relative;
+        background: $bg-experience;
+        border: 1px solid rgba(0, 195, 255, 0.15);
+        border-radius: 12px;
+        padding: 1.2rem 1.4rem;
+        max-height: 78vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
 
-            h3 {
-                color: $accent-color;
-                margin-bottom: 0.4rem;
-            }
+    .modal-card h3 {
+        color: $accent-color;
+        margin: 0;
+        font-size: 1.05rem;
+    }
 
-            .meta {
-                color: $text-muted;
-                margin-bottom: 1.2rem;
-            }
+    .modal-card .meta {
+        color: $text-muted;
+        font-size: 0.85rem;
+        margin-bottom: 0.4rem;
+    }
 
-            .modal-grid {
-                flex: 1;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.2rem;
-                overflow-y: auto;
-                padding-right: 0.5rem;
-            }
+    .modal-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0.8rem;
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 6px;
+    }
 
-            .grid-cell {
-                background: rgba(0, 195, 255, 0.03);
-                border: 1px solid rgba(0, 195, 255, 0.08);
-                border-radius: 12px;
-                padding: 0.8rem;
+    .grid-cell {
+        background: rgba(0, 195, 255, 0.03);
+        border: 1px solid rgba(0, 195, 255, 0.08);
+        border-radius: 10px;
+        padding: 0.6rem;
+        font-size: 0.88rem;
+        line-height: 1.4;
+        display: flex;
+        flex-direction: column;
+        min-height: 80px;
+    }
 
-                strong {
-                    display: block;
-                    color: $accent-color;
-                    margin-bottom: 0.4rem;
-                }
+    /* cada celda con scroll si se extiende */
+    .cell-scroll {
+        overflow-y: auto;
+        max-height: 12.6rem;
+        /* limita la altura dentro de cada celda */
+        padding-right: 4px;
+    }
 
-                ul {
-                    padding-left: 1rem;
-                    color: lighten($text-muted, 6%);
-                }
-            }
+    .cell-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
 
-            .stack-list {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.4rem;
+    .cell-scroll::-webkit-scrollbar-thumb {
+        background: rgba(0, 195, 255, 0.16);
+        border-radius: 4px;
+    }
 
-                .stack-badge {
-                    background: rgba(0, 195, 255, 0.1);
-                    border: 1px solid rgba(0, 195, 255, 0.2);
-                    color: $accent-color;
-                    padding: 0.3rem 0.6rem;
-                    border-radius: 12px;
-                    font-size: 0.8rem;
-                }
-            }
+    .stack-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
 
-            .close-btn {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                font-size: 1.5rem;
-                color: $accent-color;
-                background: none;
-                border: none;
-                cursor: pointer;
-                transition: transform 0.2s ease;
+    .stack-badge {
+        background: rgba(0, 195, 255, 0.1);
+        border: 1px solid rgba(0, 195, 255, 0.2);
+        color: $accent-color;
+        padding: 0.3rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.78rem;
+    }
 
-                &:hover {
-                    transform: scale(1.1);
-                }
-            }
-        }
+    .close-btn {
+        position: absolute;
+        top: 0.01rem;
+        right: 0.01rem;
+        font-size: 2rem;
+        color: $accent-color;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 
     @keyframes fadeIn {
         from {
             opacity: 0;
+            transform: translateY(6px);
         }
 
         to {
             opacity: 1;
+            transform: translateY(0);
         }
+    }
+}
+
+/* small screens: stack */
+@media (max-width: 880px) {
+    .card {
+        min-width: 96%;
+        max-width: 96%;
+        flex-direction: column;
+    }
+
+    .modal-card {
+        width: 94%;
+        max-height: 82vh;
+        padding: 1rem;
     }
 }

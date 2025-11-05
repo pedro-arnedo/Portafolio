@@ -9,7 +9,7 @@ import { gsap } from 'gsap';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './experience.html',
-    styleUrl: './experience.scss'
+    styleUrls: ['./experience.scss']
 })
 export class Experience implements AfterViewInit {
     @ViewChild('cardContainer', { static: true }) cardContainer!: ElementRef<HTMLDivElement>;
@@ -25,15 +25,21 @@ export class Experience implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.syncView(true);
-        gsap.from(this.cardContainer.nativeElement.querySelectorAll('.card'), {
-            duration: 0.6,
-            y: 20,
-            opacity: 0,
-            stagger: 0.05,
-            ease: 'power3.out'
-        });
-        this.updateDots();
+        // Espera micro-tick para que DOM esté listo
+        setTimeout(() => {
+            this.syncView(true);
+            // fuerza que la primera tarjeta aparezca activa
+            const first = this.cardContainer.nativeElement.querySelector('.card') as HTMLElement | null;
+            if (first) first.classList.add('active');
+            // entrada suave
+            gsap.from(this.cardContainer.nativeElement.querySelectorAll('.card'), {
+                duration: 0.6,
+                y: 18,
+                opacity: 0,
+                stagger: 0.04,
+                ease: 'power3.out'
+            });
+        }, 40);
     }
 
     previous() {
@@ -60,7 +66,8 @@ export class Experience implements AfterViewInit {
     setFilter(type: 'work' | 'education' | 'cert') {
         this.selectedFilter = type;
         this.currentIndex = 0;
-        setTimeout(() => this.syncView(true), 100);
+        // small delay so DOM updates and syncView centers correctly
+        setTimeout(() => this.syncView(true), 80);
     }
 
     openDetails(item: TimelineItem) {
@@ -78,6 +85,10 @@ export class Experience implements AfterViewInit {
         const cards = Array.from(container.querySelectorAll('.card')) as HTMLElement[];
         if (!cards.length) return;
 
+        // clamp currentIndex (por si cambias filtro y hay menos items)
+        if (this.currentIndex >= cards.length) this.currentIndex = cards.length - 1;
+        if (this.currentIndex < 0) this.currentIndex = 0;
+
         const active = cards[this.currentIndex];
         const vpWidth = container.parentElement?.clientWidth ?? container.clientWidth;
         const cardCenter = active.offsetLeft + active.offsetWidth / 2;
@@ -86,21 +97,11 @@ export class Experience implements AfterViewInit {
         if (skipAnim) {
             container.style.transform = `translateX(${-translateX}px)`;
         } else {
-            gsap.to(container, { x: -translateX, duration: 0.55, ease: 'power3.out' });
+            gsap.to(container, { x: -translateX, duration: 0.5, ease: 'power3.out' });
         }
 
-        cards.forEach((c, idx) => {
-            c.classList.toggle('active', idx === this.currentIndex);
-        });
-
-        this.updateDots();
-    }
-
-    private updateDots() {
-        const dots = this.dotsContainer?.nativeElement?.querySelectorAll('.dot') ?? [];
-        dots.forEach((d: Element, i: number) => {
-            d.classList.toggle('selected', i === this.currentIndex);
-        });
+        // clases visuales (Angular ya marca active en template, pero dejamos sincronización visual por si acaso)
+        cards.forEach((c, idx) => c.classList.toggle('active', idx === this.currentIndex));
     }
 
     @HostListener('window:keydown', ['$event'])

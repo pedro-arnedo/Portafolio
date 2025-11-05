@@ -8,7 +8,7 @@ import { stack } from '../../core/env/data-stack';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './stack.html',
-    styleUrl: './stack.scss'
+    styleUrls: ['./stack.scss']
 })
 export class Stack implements AfterViewInit, OnDestroy {
     @ViewChild('stackCanvas', { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;

@@ -12,7 +12,7 @@ import { RecaptchaService } from '../../core/services/recaptcha.service';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './contact.html',
-    styleUrl: './contact.scss'
+    styleUrls: ['./contact.scss']
 })
 export class Contact implements OnInit, OnDestroy {
 

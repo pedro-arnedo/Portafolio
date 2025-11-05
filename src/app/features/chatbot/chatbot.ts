@@ -8,7 +8,7 @@ import { GeminiService } from '../../core/services/gemini.service';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './chatbot.html',
-    styleUrl: './chatbot.scss'
+    styleUrls: ['./chatbot.scss']
 })
 export class Chatbot {
     isChatOpen = false;

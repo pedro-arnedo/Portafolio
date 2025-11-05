@@ -8,7 +8,7 @@ import { ViewEncapsulation } from '@angular/core';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './project.html',
-    styleUrl: './project.scss',
+    styleUrls: ['./project.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class Project implements OnInit, OnDestroy {
