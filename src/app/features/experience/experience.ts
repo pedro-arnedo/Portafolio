@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, HostListener, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TimelineItem } from '../../core/models/timeline.model';
 import { timeline } from '../../core/env/data-experience';
@@ -20,54 +20,99 @@ export class Experience implements AfterViewInit {
     selectedFilter: 'work' | 'education' | 'cert' = 'work';
     selectedItem: TimelineItem | null = null;
 
+    private waitingForCards = false;
+
+    constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) { }
+
     get filteredItems(): TimelineItem[] {
         return this.items.filter(i => i.type === this.selectedFilter);
     }
 
     ngAfterViewInit() {
-        // Espera micro-tick para que DOM esté listo
-        setTimeout(() => {
-            this.syncView(true);
-            // fuerza que la primera tarjeta aparezca activa
-            const first = this.cardContainer.nativeElement.querySelector('.card') as HTMLElement | null;
-            if (first) first.classList.add('active');
-            // entrada suave
-            gsap.from(this.cardContainer.nativeElement.querySelectorAll('.card'), {
-                duration: 0.6,
-                y: 18,
-                opacity: 0,
-                stagger: 0.04,
-                ease: 'power3.out'
-            });
-        }, 40);
+        this.waitForCardsAndInit();
+    }
+
+    private waitForCardsAndInit(maxWaitMs = 1000) {
+        if (this.waitingForCards) return;
+        this.waitingForCards = true;
+        const start = performance.now();
+
+        const tryInit = () => {
+            const container = this.cardContainer?.nativeElement;
+            const cards = container ? Array.from(container.querySelectorAll('.card')) as HTMLElement[] : [];
+            if (cards.length && cards.length === this.filteredItems.length) {
+                this.cdr.detectChanges();
+                this.quickEntrance(cards);
+                this.setActiveVisualState();
+                this.updateDots();
+                this.waitingForCards = false;
+                return;
+            }
+            if (performance.now() - start > maxWaitMs) {
+                this.cdr.detectChanges();
+                this.setActiveVisualState();
+                this.updateDots();
+                this.waitingForCards = false;
+                return;
+            }
+            this.ngZone.runOutsideAngular(() => requestAnimationFrame(tryInit));
+        };
+
+        tryInit();
+    }
+
+    private quickEntrance(cards: HTMLElement[]) {
+        gsap.fromTo(cards, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.36, stagger: 0.03, ease: 'power3.out' });
+    }
+
+    private setActiveVisualState() {
+        const container = this.cardContainer?.nativeElement;
+        if (!container) return;
+
+        const cards = Array.from(container.querySelectorAll('.card')) as HTMLElement[];
+        if (this.currentIndex >= cards.length) this.currentIndex = Math.max(0, cards.length - 1);
+        if (this.currentIndex < 0) this.currentIndex = 0;
+
+        cards.forEach((c, idx) => {
+            c.classList.toggle('active', idx === this.currentIndex);
+            if (idx === this.currentIndex) {
+                gsap.to(c, { scale: 1, opacity: 1, duration: 0.18, ease: 'power2.out' });
+            } else {
+                gsap.to(c, { scale: 0.94, opacity: 0.68, duration: 0.18, ease: 'power2.out' });
+            }
+        });
+
+        this.syncView(true);
+        this.animateActivePulse();
     }
 
     previous() {
         if (this.currentIndex > 0) {
             this.currentIndex--;
-            this.syncView();
+            this.setActiveVisualState();
         }
     }
 
     next() {
         if (this.currentIndex < this.filteredItems.length - 1) {
             this.currentIndex++;
-            this.syncView();
+            this.setActiveVisualState();
         }
     }
 
     goTo(i: number) {
         if (i >= 0 && i < this.filteredItems.length) {
             this.currentIndex = i;
-            this.syncView();
+            this.setActiveVisualState();
         }
     }
 
     setFilter(type: 'work' | 'education' | 'cert') {
+        if (this.selectedFilter === type) return;
         this.selectedFilter = type;
         this.currentIndex = 0;
-        // small delay so DOM updates and syncView centers correctly
-        setTimeout(() => this.syncView(true), 80);
+        this.cdr.detectChanges();
+        Promise.resolve().then(() => this.waitForCardsAndInit());
     }
 
     openDetails(item: TimelineItem) {
@@ -85,7 +130,6 @@ export class Experience implements AfterViewInit {
         const cards = Array.from(container.querySelectorAll('.card')) as HTMLElement[];
         if (!cards.length) return;
 
-        // clamp currentIndex (por si cambias filtro y hay menos items)
         if (this.currentIndex >= cards.length) this.currentIndex = cards.length - 1;
         if (this.currentIndex < 0) this.currentIndex = 0;
 
@@ -97,11 +141,24 @@ export class Experience implements AfterViewInit {
         if (skipAnim) {
             container.style.transform = `translateX(${-translateX}px)`;
         } else {
-            gsap.to(container, { x: -translateX, duration: 0.5, ease: 'power3.out' });
+            gsap.to(container, { x: -translateX, duration: 0.38, ease: 'power3.out' });
         }
 
-        // clases visuales (Angular ya marca active en template, pero dejamos sincronización visual por si acaso)
-        cards.forEach((c, idx) => c.classList.toggle('active', idx === this.currentIndex));
+        this.updateDots();
+    }
+
+    private updateDots() {
+        const dots = this.dotsContainer?.nativeElement?.querySelectorAll('.dot') ?? [];
+        dots.forEach((d: Element, i: number) => d.classList.toggle('selected', i === this.currentIndex));
+    }
+
+    private animateActivePulse() {
+        const container = this.cardContainer.nativeElement;
+        const activePoint: HTMLElement | null = container.querySelector('.card.active .point-circle');
+        gsap.killTweensOf('.pulse-loop');
+        if (activePoint) {
+            gsap.fromTo(activePoint, { scale: 0.98 }, { scale: 1.06, duration: 1.1, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+        }
     }
 
     @HostListener('window:keydown', ['$event'])
