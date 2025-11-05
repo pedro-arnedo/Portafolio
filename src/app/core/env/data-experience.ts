@@ -5,113 +5,114 @@ export const timeline: TimelineItem[] = [
     {
         type: 'work',
         title: 'Full Stack Developer Junior',
-        entity: 'SBX Technologies · Canadá (Remoto)',
-        date: 'Dic 2023 – Jun 2025',
+        entity: 'SBX TECHNOLOGIES [Salesforce CPG Expert Solutions] · (Remoto) Canadá, Quebec',
+        date: 'Diciembre 2023 – Junio 2025',
         description:
-            'Desarrollo y mantenimiento de una aplicación interna integrada con Salesforce, optimizando la gestión de datos y procesos técnicos internos. Aplicación de arquitectura limpia (Clean Architecture) y desarrollo modular en Angular y Node.js.',
+            'Desarrollo full stack de una aplicación web interna para centralizar consultas y gestión de datos de Salesforce, reduciendo la dependencia del CRM y mejorando el acceso a la información. Implementación de módulos Angular, APIs Node.js y base de datos PostgreSQL bajo Layered Architecture, con integración bidireccional a Salesforce mediante Connected Apps y REST/SOAP. Gestión de metadata, autenticación SSO, control de acceso por roles y despliegue con Bitbucket y Jira.',
         icon: 'fa fa-briefcase',
-        stack: ['Angular', 'Node.js', 'PostgreSQL', 'Salesforce', 'REST APIs', 'Clean Architecture'],
+        stack: [
+            'Angular', 'Node.js', 'PostgreSQL', 'Salesforce', 'REST/SOAP', 'Layered Architecture', 'Bitbucket', 'Jira'
+        ],
         modules: [
             'Dashboard de consultas Salesforce: visualización de registros, filtros dinámicos y métricas.',
-            'Gestión de usuarios y roles con control de acceso granular.',
+            'Gestión de usuarios, roles y permisos con autenticación SSO.',
             'Integración bidireccional de datos mediante APIs REST/SOAP con Salesforce.',
-            'Reportes automatizados (PDF/Excel) con programación de envíos internos.'
+            'Módulo de reportes automáticos (PDF/Excel) y envío programado de resultados.'
         ],
         responsibilities: [
-            'Implementación de componentes frontend reutilizables en Angular.',
+            'Implementación de componentes modulares reutilizables en Angular.',
             'Desarrollo de servicios backend desacoplados en Node.js con PostgreSQL.',
-            'Integración y pruebas de APIs Salesforce.',
-            'Gestión del versionamiento en Bitbucket y automatización con Jira.'
+            'Integración y pruebas unitarias de APIs Salesforce.',
+            'Gestión de versionamiento y despliegue en Bitbucket con seguimiento en Jira.'
         ],
         architecture:
-            'Clean Architecture basada en capas desacopladas (presentación, dominio y datos) con autenticación SSO y control de acceso por roles.',
+            'Arquitectura en capas desacopladas (presentación, dominio y datos) basada en Clean/Layered Architecture, con integración Salesforce y autenticación SSO.',
         results: [
-            'Centralización de datos internos.',
-            'Reducción de tiempos de consulta en más del 40%.',
-            'Automatización de procesos de reportes internos.'
+            'Centralización total de consultas internas.',
+            'Automatización de procesos técnicos internos.'
         ]
     },
     {
         type: 'work',
         title: 'Full Stack Developer (Proyecto colaborativo freelance)',
-        entity: 'Kingdom Grace Foundation · Colombia (Remoto)',
-        date: 'Ago 2024 – Oct 2024',
+        entity: 'Kingdom Grace Foundation · Guayaquil, Ecuador (Remoto)',
+        date: 'Agosto 2024 – Octubre 2024',
         description:
-            'Desarrollo del portal institucional con enfoque en escalabilidad, modularidad y accesibilidad, bajo arquitectura N-Layer. Integración full stack con Node.js y Angular.',
+            'Contribuí al desarrollo full stack del portal institucional de Kingdom Grace, mejorando la velocidad de carga y la gestión de contenidos. Implementación de arquitectura modular, autenticación, formularios dinámicos y panel administrativo en Angular y Node.js.',
         icon: 'fa fa-briefcase',
-        stack: ['Angular', 'Node.js', 'TypeScript', 'MySQL', 'SCSS', 'Firebase'],
+        stack: ['Angular', 'Node.js', 'TypeScript', 'SCSS', 'Firebase', 'Diseño responsivo'],
         modules: [
-            'Gestión de programas y actividades institucionales (CRUD completo).',
-            'Módulo de donaciones y pasarela de pagos con validaciones.',
-            'Panel administrativo de contenido con control de roles.',
-            'Despliegue y monitoreo en entorno cloud.'
+            'Gestión de programas, eventos y actividades institucionales.',
+            'Panel administrativo con control de roles.',
+            'Integración de pasarela de donaciones y validaciones dinámicas.',
+            'Despliegue continuo y monitoreo de rendimiento en Firebase.'
         ],
         responsibilities: [
-            'Planificación ágil y levantamiento de requerimientos.',
-            'Desarrollo frontend y backend modular.',
-            'Documentación técnica y despliegue continuo en Firebase.',
-            'Diseño visual responsivo y optimización de carga.'
+            'Planificación ágil del proyecto y levantamiento de requerimientos.',
+            'Desarrollo modular frontend y backend.',
+            'Optimización de rendimiento y carga visual responsiva.',
         ],
         architecture:
-            'Arquitectura N-Layer con separación por capas, autenticación institucional y control de permisos en endpoints.',
+            'Arquitectura modular con separación por capas (presentación, negocio y datos), autenticación por roles y servicios asincrónicos REST.',
         results: [
-            'Portal escalable y administrable en tiempo real.',
-            'Incremento en la visibilidad digital de la institución.',
-            'Gestión autónoma del contenido por parte del cliente.'
+            'Portal institucional estable y escalable.',
+            'Reducción de tiempos de carga y mayor accesibilidad.',
+            'Gestión autónoma de contenido por parte del cliente.'
         ]
     },
     {
         type: 'work',
         title: 'Desarrollador de Contenido Educativo Digital',
         entity: 'UPARSISTEM · Valledupar, Colombia',
-        date: 'Oct 2023 – Dic 2023',
+        date: 'Octubre 2023 – Diciembre 2023',
         description:
-            'Diseño y desarrollo de módulos educativos multimedia para la plataforma Moodle, priorizando interactividad y accesibilidad visual.',
+            'Diseño y desarrollo de módulos educativos multimedia para Moodle, priorizando interactividad y accesibilidad visual. Creación de contenidos audiovisuales, cuestionarios dinámicos y material gráfico con enfoque pedagógico.',
         icon: 'fa fa-briefcase',
-        stack: ['Moodle', 'Canva Pro', 'Diseño instruccional', 'E-learning', 'UX'],
+        stack: ['Moodle', 'Canva Pro', 'Diseño instruccional', 'E-learning', 'UX/UI'],
         modules: [
-            'Lecciones interactivas con videos, quizzes y recursos multimedia.',
-            'Evaluaciones dinámicas con feedback instantáneo.',
-            'Material gráfico y animaciones pedagógicas.'
+            'Diseño de lecciones interactivas con videos, quizzes y recursos visuales.',
+            'Evaluaciones automáticas con retroalimentación inmediata.',
+            'Diseño de material gráfico y animaciones educativas.'
         ],
         responsibilities: [
-            'Desarrollo de contenido digital interactivo para Moodle.',
-            'Optimización visual y accesibilidad educativa.',
-            'Pruebas de usabilidad y retroalimentación con instructores.'
+            'Desarrollo y adaptación de contenido multimedia interactivo.',
+            'Optimización de la usabilidad en entornos Moodle.',
+            'Pruebas de accesibilidad y colaboración con el equipo pedagógico.'
         ],
         architecture:
-            'Estructura modular basada en recursos SCORM integrados en Moodle con capas de presentación y evaluación adaptativa.',
+            'Estructura modular basada en recursos SCORM integrados en Moodle, con capas de presentación y evaluación adaptativa.',
         results: [
-            'Mayor interacción estudiante-plataforma.',
-            'Reducción del abandono en módulos formativos.',
-            'Alineación con las guías de diseño instruccional.'
+            'Mayor participación estudiantil en los módulos.',
+            'Reducción del abandono académico.',
+            'Experiencia de aprendizaje más inmersiva y accesible.'
         ]
     },
     {
         type: 'work',
         title: 'Full Stack Developer Trainee',
         entity: 'Universidad Popular del Cesar · Valledupar, Colombia',
-        date: 'Sep 2022 – Abr 2023',
+        date: 'Septiembre 2022 – Abril 2023',
         description:
-            'Desarrollo de un sistema web institucional para la digitalización de procesos administrativos de la sección de cultura, bajo arquitectura MVC N-Layer.',
+            'Construcción de un sistema de información institucional con autenticación por roles, siguiendo arquitectura MVC N-Layer. Desarrollo frontend en Angular y backend en .NET Core con base de datos MySQL.',
         icon: 'fa fa-briefcase',
-        stack: ['Angular', '.NET Core', 'MySQL', 'MVC', 'Repository Pattern', 'Autenticación'],
+        stack: ['Angular', '.NET Core', 'MySQL', 'MVC', 'Repository Pattern', 'JWT'],
         modules: [
             'Gestión de usuarios y roles institucionales.',
-            'Formularios digitales de solicitud de actividades culturales.',
-            'Dashboard administrativo para seguimiento y métricas.'
+            'Formularios digitales de registro y solicitud de eventos culturales.',
+            'Dashboard administrativo con estadísticas y reportes.'
         ],
         responsibilities: [
-            'Desarrollo frontend en Angular y backend en .NET Core.',
-            'Implementación de autenticación por roles y middleware de seguridad.',
-            'Pruebas funcionales y documentación del sistema.'
+            'Desarrollo del frontend en Angular con diseño modular.',
+            'Implementación de API REST segura en .NET Core.',
+            'Pruebas unitarias e integración continua.',
+            'Documentación técnica y despliegue del sistema.'
         ],
         architecture:
-            'Arquitectura N-Layer con patrón Repository, desacople de servicios y capa de autenticación basada en JWT.',
+            'Arquitectura N-Layer con patrón Repository y autenticación JWT, implementando principios SOLID para modularidad y mantenibilidad.',
         results: [
-            'Digitalización total de procesos administrativos.',
-            'Reducción de tiempos de gestión en un 50%.',
-            'Sistema estable con control de roles y reportes dinámicos.'
+            'Digitalización total de procesos institucionales.',
+            'Reducción de tiempos administrativos en un 50%.',
+            'Optimización en la trazabilidad de actividades culturales.'
         ]
     },
 
@@ -124,25 +125,25 @@ export const timeline: TimelineItem[] = [
         description:
             'Certificación en fundamentos de programación, estructuras de control y manipulación de datos con Python.',
         icon: 'fa fa-trophy',
-        stack: ['Python', 'Cisco', 'Lógica de programación']
+        stack: ['Python', 'Cisco', 'Programación estructurada']
     },
     {
         type: 'cert',
         title: 'Introduction to Data Science',
         entity: 'Cisco Networking Academy',
-        date: 'Sept 2023',
+        date: 'Septiembre 2023',
         description:
-            'Introducción a la ciencia de datos, estadística descriptiva y visualización con librerías de análisis en Python.',
+            'Certificación en fundamentos de ciencia de datos, estadística y visualización de información con Python.',
         icon: 'fa fa-trophy',
-        stack: ['Python', 'Data Science', 'Visualización', 'Análisis estadístico']
+        stack: ['Python', 'Data Science', 'Visualización', 'Análisis de datos']
     },
     {
         type: 'cert',
         title: 'Cloud Computing Foundations',
         entity: 'Google Cloud / AWS Academy',
-        date: 'Oct 2022',
+        date: 'Octubre 2022',
         description:
-            'Fundamentos de infraestructura cloud, redes, despliegue de servicios y seguridad en entornos AWS y Google Cloud.',
+            'Certificación en fundamentos de infraestructura cloud, redes, despliegue de servicios y seguridad en entornos AWS y Google Cloud.',
         icon: 'fa fa-trophy',
         stack: ['Cloud', 'AWS', 'Google Cloud', 'Infraestructura']
     },
@@ -150,9 +151,9 @@ export const timeline: TimelineItem[] = [
         type: 'cert',
         title: 'Inteligencia Artificial',
         entity: 'Talento Tech Colombia',
-        date: 'Nov 2025',
+        date: 'Noviembre 2025',
         description:
-            'Formación intensiva en fundamentos de IA, machine learning y aplicaciones prácticas de modelos predictivos.',
+            'Formación intensiva en fundamentos de IA, machine learning y aplicaciones prácticas de modelos predictivos y automatización.',
         icon: 'fa fa-trophy',
         stack: ['IA', 'Machine Learning', 'Data', 'Automatización']
     },
@@ -161,20 +162,21 @@ export const timeline: TimelineItem[] = [
     {
         type: 'education',
         title: 'Ingeniería de Sistemas',
-        entity: 'Universidad Popular del Cesar',
-        date: 'Feb 2017 – Jun 2023',
+        entity: 'Universidad Popular del Cesar · Valledupar, Colombia',
+        date: 'Febrero 2017 – Junio 2023',
         description:
-            'Formación en desarrollo de software, arquitectura de sistemas, bases de datos y gestión de proyectos. Proyecto de grado basado en digitalización de procesos institucionales.',
+            'Formación en desarrollo de software, arquitectura de sistemas, bases de datos y gestión de proyectos. Proyecto de grado enfocado en la digitalización de procesos institucionales y gestión documental.',
         icon: 'fa fa-graduation-cap',
         stack: ['Desarrollo de software', 'Arquitectura', 'Bases de datos', 'Gestión de proyectos']
     },
     {
         type: 'education',
         title: 'Bachiller Técnico',
-        entity: 'Institución Educativa Técnica Secundaria',
-        date: 'Dic 2016',
-        description: 'Educación secundaria con formación técnica en fundamentos informáticos.',
+        entity: 'Institución Educativa Técnica Secundaria · Valledupar, Colombia',
+        date: 'Diciembre 2016',
+        description:
+            'Educación secundaria con formación técnica',
         icon: 'fa fa-graduation-cap',
-        stack: ['Educación media', 'Bachillerato técnico']
+        stack: ['Educación secundaria', 'Bachillerato técnico']
     }
 ];
