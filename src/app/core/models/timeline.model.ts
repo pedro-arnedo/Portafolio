@@ -9,7 +9,7 @@ export interface TimelineItem {
     stack?: string[];
     modules?: string[];
     responsibilities?: string[];
-    architecture?: string;
+    architecture?: string[];
     results?: string[];
     icon?: string;
     id?: string | number;

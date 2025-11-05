@@ -13,7 +13,8 @@ export const timeline: TimelineItem[] = [
             'Desarrollo full stack de una aplicación web interna para centralizar consultas y gestión de datos de Salesforce, reduciendo la dependencia del CRM y mejorando el acceso a la información. Implementación de módulos Angular, APIs Node.js y base de datos PostgreSQL bajo Layered Architecture, con integración bidireccional a Salesforce mediante Connected Apps y REST/SOAP. Gestión de metadata, autenticación SSO, control de acceso por roles y despliegue con Bitbucket y Jira.',
         icon: 'fa fa-briefcase',
         stack: [
-            'Angular', 'Node.js', 'PostgreSQL', 'Salesforce', 'REST/SOAP', 'Layered Architecture', 'Bitbucket', 'Jira'
+            'Angular', 'Node.js', 'PostgreSQL', 'Salesforce', 'REST/SOAP',
+            'Layered Architecture', 'Bitbucket', 'Jira'
         ],
         modules: [
             'Dashboard de consultas Salesforce: visualización de registros, filtros dinámicos y métricas.',
@@ -27,8 +28,11 @@ export const timeline: TimelineItem[] = [
             'Integración y pruebas unitarias de APIs Salesforce.',
             'Gestión de versionamiento y despliegue en Bitbucket con seguimiento en Jira.'
         ],
-        architecture:
-            'Arquitectura en capas desacopladas (presentación, dominio y datos) basada en Clean/Layered Architecture, con integración Salesforce y autenticación SSO.',
+        architecture: [
+            'Arquitectura en capas desacopladas (presentación, dominio y datos).',
+            'Basada en Clean/Layered Architecture.',
+            'Integración Salesforce y autenticación SSO.'
+        ],
         results: [
             'Centralización total de consultas internas.',
             'Automatización de procesos técnicos internos.'
@@ -48,16 +52,17 @@ export const timeline: TimelineItem[] = [
         modules: [
             'Gestión de programas, eventos y actividades institucionales.',
             'Panel administrativo con control de roles.',
-            'Integración de pasarela de donaciones y validaciones dinámicas.',
-            'Despliegue continuo y monitoreo de rendimiento en Firebase.'
+            'Integración de pasarela de donaciones y validaciones dinámicas.'
         ],
         responsibilities: [
             'Planificación ágil del proyecto y levantamiento de requerimientos.',
             'Desarrollo modular frontend y backend.',
             'Optimización de rendimiento y carga visual responsiva.'
         ],
-        architecture:
-            'Arquitectura modular con separación por capas (presentación, negocio y datos), autenticación por roles y servicios asincrónicos REST.',
+        architecture: [
+            'Arquitectura modular con separación por capas (presentación, negocio y datos).',
+            'Autenticación por roles y servicios asincrónicos REST.'
+        ],
         results: [
             'Portal institucional estable y escalable.',
             'Reducción de tiempos de carga y mayor accesibilidad.',
@@ -85,8 +90,10 @@ export const timeline: TimelineItem[] = [
             'Optimización de la usabilidad en entornos Moodle.',
             'Pruebas de accesibilidad y colaboración con el equipo pedagógico.'
         ],
-        architecture:
-            'Estructura modular basada en recursos SCORM integrados en Moodle, con capas de presentación y evaluación adaptativa.',
+        architecture: [
+            'Estructura modular basada en recursos SCORM integrados en Moodle.',
+            'Capas de presentación y evaluación adaptativa.'
+        ],
         results: [
             'Mayor participación estudiantil en los módulos.',
             'Reducción del abandono académico.',
@@ -99,7 +106,7 @@ export const timeline: TimelineItem[] = [
         entity: 'Universidad Popular del Cesar',
         location: 'Valledupar, Colombia',
         date: 'Septiembre 2022 – Abril 2023',
-        modality: 'Prácticas Academicas / Presencial',
+        modality: 'Prácticas Académicas / Presencial',
         description:
             'Construcción de un sistema de información institucional con autenticación por roles, siguiendo arquitectura MVC N-Layer. Desarrollo frontend en Angular y backend en .NET Core con base de datos MySQL.',
         icon: 'fa fa-briefcase',
@@ -110,13 +117,15 @@ export const timeline: TimelineItem[] = [
             'Dashboard administrativo con estadísticas y reportes.'
         ],
         responsibilities: [
-            'Desarrollo del frontend en Angular con diseño modular.',
+            'Desarrollo del frontend modular en Angular.',
             'Implementación de API REST segura en .NET Core.',
             'Pruebas unitarias e integración continua.',
             'Documentación técnica y despliegue del sistema.'
         ],
-        architecture:
-            'Arquitectura N-Layer con patrón Repository y autenticación JWT, implementando principios SOLID para modularidad y mantenibilidad.',
+        architecture: [
+            'Arquitectura N-Layer con patrón Repository y autenticación JWT.',
+            'Implementación de principios SOLID para modularidad y mantenibilidad.'
+        ],
         results: [
             'Digitalización total de procesos institucionales.',
             'Reducción de tiempos administrativos en un 50%.',
@@ -125,6 +134,21 @@ export const timeline: TimelineItem[] = [
     },
 
     // === CERTIFICACIONES ===
+        {
+        type: 'cert',
+        title: 'Inteligencia Artificial',
+        entity: 'Talento Tech Colombia',
+        date: 'Noviembre 2025',
+        description:
+            'Formación intensiva en fundamentos de IA, machine learning y aplicaciones prácticas de modelos predictivos y automatización.',
+        icon: 'fa fa-trophy',
+        stack: ['IA', 'Machine Learning', 'Data', 'Automatización'],
+        results: [
+            'Entrenamiento de modelos de machine learning básicos.',
+            'Aplicación de algoritmos supervisados y no supervisados.',
+            'Comprensión del flujo de trabajo de proyectos de IA.'
+        ]
+    },
     {
         type: 'cert',
         title: 'Python Essentials',
@@ -133,7 +157,12 @@ export const timeline: TimelineItem[] = [
         description:
             'Certificación en fundamentos de programación, estructuras de control y manipulación de datos con Python.',
         icon: 'fa fa-trophy',
-        stack: ['Python', 'Cisco', 'Programación estructurada']
+        stack: ['Python', 'Cisco', 'Programación estructurada'],
+        results: [
+            'Comprensión de la sintaxis y estructuras básicas de Python.',
+            'Capacidad para desarrollar scripts de automatización simples.',
+            'Fundamentos sólidos para programación orientada a objetos.'
+        ]
     },
     {
         type: 'cert',
@@ -143,7 +172,12 @@ export const timeline: TimelineItem[] = [
         description:
             'Certificación en fundamentos de ciencia de datos, estadística y visualización de información con Python.',
         icon: 'fa fa-trophy',
-        stack: ['Python', 'Data Science', 'Visualización', 'Análisis de datos']
+        stack: ['Python', 'Data Science', 'Visualización', 'Análisis de datos'],
+        results: [
+            'Entendimiento del ciclo de vida de la ciencia de datos.',
+            'Uso básico de bibliotecas para análisis y visualización.',
+            'Aplicación de conceptos estadísticos en escenarios prácticos.'
+        ]
     },
     {
         type: 'cert',
@@ -153,17 +187,12 @@ export const timeline: TimelineItem[] = [
         description:
             'Certificación en fundamentos de infraestructura cloud, redes, despliegue de servicios y seguridad en entornos AWS y Google Cloud.',
         icon: 'fa fa-trophy',
-        stack: ['Cloud', 'AWS', 'Google Cloud', 'Infraestructura']
-    },
-    {
-        type: 'cert',
-        title: 'Inteligencia Artificial',
-        entity: 'Talento Tech Colombia',
-        date: 'Noviembre 2025',
-        description:
-            'Formación intensiva en fundamentos de IA, machine learning y aplicaciones prácticas de modelos predictivos y automatización.',
-        icon: 'fa fa-trophy',
-        stack: ['IA', 'Machine Learning', 'Data', 'Automatización']
+        stack: ['Cloud', 'AWS', 'Google Cloud', 'Infraestructura'],
+        results: [
+            'Comprensión de modelos de servicio IaaS, PaaS y SaaS.',
+            'Diseño básico de arquitecturas en la nube seguras y escalables.',
+            'Manejo de servicios esenciales en AWS y Google Cloud.'
+        ]
     },
 
     // === EDUCACIÓN ===
@@ -176,7 +205,12 @@ export const timeline: TimelineItem[] = [
         description:
             'Formación en desarrollo de software, arquitectura de sistemas, bases de datos y gestión de proyectos. Proyecto de grado enfocado en la digitalización de procesos institucionales y gestión documental.',
         icon: 'fa fa-graduation-cap',
-        stack: ['Desarrollo de software', 'Arquitectura', 'Bases de datos', 'Gestión de proyectos']
+        stack: ['Desarrollo de software', 'Arquitectura', 'Bases de datos', 'Gestión de proyectos'],
+        results: [
+            'Dominio de conceptos de programación orientada a objetos.',
+            'Diseño y modelado de sistemas bajo arquitecturas MVC y N-Layer.',
+            'Gestión de proyectos con metodologías ágiles.'
+        ]
     },
     {
         type: 'education',
@@ -186,6 +220,11 @@ export const timeline: TimelineItem[] = [
         date: 'Diciembre 2016',
         description: 'Educación secundaria con formación técnica.',
         icon: 'fa fa-graduation-cap',
-        stack: ['Educación secundaria', 'Bachillerato técnico']
+        stack: ['Educación secundaria', 'Bachillerato técnico'],
+        results: [
+            'Graduación de bachillerato técnico.',
+            'Formación en competencias técnicas básicas.',
+            'Desarrollo de habilidades lógicas y de resolución de problemas.',
+        ]
     }
 ];
