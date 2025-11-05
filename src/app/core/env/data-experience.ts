@@ -5,8 +5,10 @@ export const timeline: TimelineItem[] = [
     {
         type: 'work',
         title: 'Full Stack Developer Junior',
-        entity: 'SBX TECHNOLOGIES [Salesforce CPG Expert Solutions] · (Remoto) Canadá, Quebec',
+        entity: 'SBX TECHNOLOGIES',
+        location: 'Canadá, Quebec (Remoto)',
         date: 'Diciembre 2023 – Junio 2025',
+        modality: 'Contrato indefinido / Tiempo completo',
         description:
             'Desarrollo full stack de una aplicación web interna para centralizar consultas y gestión de datos de Salesforce, reduciendo la dependencia del CRM y mejorando el acceso a la información. Implementación de módulos Angular, APIs Node.js y base de datos PostgreSQL bajo Layered Architecture, con integración bidireccional a Salesforce mediante Connected Apps y REST/SOAP. Gestión de metadata, autenticación SSO, control de acceso por roles y despliegue con Bitbucket y Jira.',
         icon: 'fa fa-briefcase',
@@ -34,9 +36,11 @@ export const timeline: TimelineItem[] = [
     },
     {
         type: 'work',
-        title: 'Full Stack Developer (Proyecto colaborativo freelance)',
-        entity: 'Kingdom Grace Foundation · Guayaquil, Ecuador (Remoto)',
+        title: 'Full Stack Developer Freelance',
+        entity: 'Kingdom Grace Foundation',
+        location: 'Guayaquil, Ecuador (Remoto)',
         date: 'Agosto 2024 – Octubre 2024',
+        modality: 'Freelance / Proyecto Colaborativo',
         description:
             'Contribuí al desarrollo full stack del portal institucional de Kingdom Grace, mejorando la velocidad de carga y la gestión de contenidos. Implementación de arquitectura modular, autenticación, formularios dinámicos y panel administrativo en Angular y Node.js.',
         icon: 'fa fa-briefcase',
@@ -50,7 +54,7 @@ export const timeline: TimelineItem[] = [
         responsibilities: [
             'Planificación ágil del proyecto y levantamiento de requerimientos.',
             'Desarrollo modular frontend y backend.',
-            'Optimización de rendimiento y carga visual responsiva.',
+            'Optimización de rendimiento y carga visual responsiva.'
         ],
         architecture:
             'Arquitectura modular con separación por capas (presentación, negocio y datos), autenticación por roles y servicios asincrónicos REST.',
@@ -63,8 +67,10 @@ export const timeline: TimelineItem[] = [
     {
         type: 'work',
         title: 'Desarrollador de Contenido Educativo Digital',
-        entity: 'UPARSISTEM · Valledupar, Colombia',
+        entity: 'UPARSISTEM',
+        location: 'Valledupar, Colombia',
         date: 'Octubre 2023 – Diciembre 2023',
+        modality: 'Contrato temporal / Presencial',
         description:
             'Diseño y desarrollo de módulos educativos multimedia para Moodle, priorizando interactividad y accesibilidad visual. Creación de contenidos audiovisuales, cuestionarios dinámicos y material gráfico con enfoque pedagógico.',
         icon: 'fa fa-briefcase',
@@ -90,8 +96,10 @@ export const timeline: TimelineItem[] = [
     {
         type: 'work',
         title: 'Full Stack Developer Trainee',
-        entity: 'Universidad Popular del Cesar · Valledupar, Colombia',
+        entity: 'Universidad Popular del Cesar',
+        location: 'Valledupar, Colombia',
         date: 'Septiembre 2022 – Abril 2023',
+        modality: 'Prácticas Academicas / Presencial',
         description:
             'Construcción de un sistema de información institucional con autenticación por roles, siguiendo arquitectura MVC N-Layer. Desarrollo frontend en Angular y backend en .NET Core con base de datos MySQL.',
         icon: 'fa fa-briefcase',
@@ -162,7 +170,8 @@ export const timeline: TimelineItem[] = [
     {
         type: 'education',
         title: 'Ingeniería de Sistemas',
-        entity: 'Universidad Popular del Cesar · Valledupar, Colombia',
+        entity: 'Universidad Popular del Cesar',
+        location: 'Valledupar, Colombia',
         date: 'Febrero 2017 – Junio 2023',
         description:
             'Formación en desarrollo de software, arquitectura de sistemas, bases de datos y gestión de proyectos. Proyecto de grado enfocado en la digitalización de procesos institucionales y gestión documental.',
@@ -172,10 +181,10 @@ export const timeline: TimelineItem[] = [
     {
         type: 'education',
         title: 'Bachiller Técnico',
-        entity: 'Institución Educativa Técnica Secundaria · Valledupar, Colombia',
+        entity: 'Institución Educativa Técnica Secundaria',
+        location: 'Valledupar, Colombia',
         date: 'Diciembre 2016',
-        description:
-            'Educación secundaria con formación técnica',
+        description: 'Educación secundaria con formación técnica.',
         icon: 'fa fa-graduation-cap',
         stack: ['Educación secundaria', 'Bachillerato técnico']
     }

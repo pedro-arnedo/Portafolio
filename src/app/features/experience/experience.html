@@ -16,34 +16,51 @@
     </div>
 
     <div class="card-viewport">
-        <button class="nav-arrow left" (click)="previous()" [disabled]="currentIndex === 0"
-            aria-label="Anterior">&larr;</button>
+        <button class="nav-arrow left" (click)="previous()" [disabled]="currentIndex === 0" aria-label="Anterior">
+            &larr;
+        </button>
 
         <div class="card-viewport-inner">
             <div class="card-container" #cardContainer>
                 <div class="card" *ngFor="let item of filteredItems; let i = index" [class.active]="i === currentIndex">
                     <div class="card-info">
-                        <div class="card-top">
-                            <div class="title-wrap">
-                                <h3 class="title">{{ item.title }}</h3>
-                                <div class="meta-inline">
-                                    <span class="entity">{{ item.entity }}</span>
-                                    <span class="date">{{ item.date }}</span>
-                                </div>
-                            </div>
+                        <h3 class="title">{{ item.title }}</h3>
+                        <hr class="glow-line" />
+
+                        <div class="meta-grid">
+                            <div><strong>Empresa:</strong> {{ item.entity }}</div>
+                            <div><strong>Duración:</strong> {{ item.date }}</div>
+                            <div *ngIf="item.location"><strong>Lugar:</strong> {{ item.location }}</div>
+                            <div *ngIf="item.modality"><strong>Modalidad:</strong> {{ item.modality }}</div>
                         </div>
 
-                        <div class="card-body">
-                            <p class="description">{{ item.description }}</p>
-                            <button class="view-more" (click)="openDetails(item)">Ver más</button>
+                        <hr class="glow-line" />
+
+                        <p class="description">{{ item.description }}</p>
+
+                        <hr class="glow-line" />
+
+                        <div class="stack-line">
+                            <strong>Stack:</strong>
+                            <span *ngFor="let tech of item.stack" class="stack-badge">
+                                {{ tech }}
+                            </span>
                         </div>
+
+                        <hr class="glow-line" />
+
+                        <button class="view-more" (click)="openDetails(item)">
+                            <i class="fa fa-eye"></i> Ver más
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <button class="nav-arrow right" (click)="next()" [disabled]="currentIndex === (filteredItems.length - 1)"
-            aria-label="Siguiente">&rarr;</button>
+        <button class="nav-arrow right" (click)="next()" [disabled]="currentIndex === filteredItems.length - 1"
+            aria-label="Siguiente">
+            &rarr;
+        </button>
     </div>
 
     <div class="dots" #dotsContainer>
@@ -54,6 +71,7 @@
     <div class="modal-overlay" *ngIf="selectedItem" (click)="closeDetails()">
         <div class="modal-card" (click)="$event.stopPropagation()">
             <button class="close-btn" (click)="closeDetails()" aria-label="Cerrar">×</button>
+
             <div class="modal-grid">
                 <div *ngIf="selectedItem.modules?.length" class="grid-cell">
                     <strong>Módulos</strong>

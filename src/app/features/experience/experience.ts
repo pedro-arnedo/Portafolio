@@ -30,9 +30,10 @@ export class Experience implements AfterViewInit {
 
     ngAfterViewInit() {
         this.waitForCardsAndInit();
+        setTimeout(() => this.setActiveVisualState(), 300);
     }
 
-    private waitForCardsAndInit(maxWaitMs = 1000) {
+    private waitForCardsAndInit(maxWaitMs = 1200) {
         if (this.waitingForCards) return;
         this.waitingForCards = true;
         const start = performance.now();
@@ -62,7 +63,11 @@ export class Experience implements AfterViewInit {
     }
 
     private quickEntrance(cards: HTMLElement[]) {
-        gsap.fromTo(cards, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.36, stagger: 0.03, ease: 'power3.out' });
+        gsap.fromTo(
+            cards,
+            { y: 20, opacity: 0, scale: 0.94 },
+            { y: 0, opacity: 1, scale: 1, duration: 0.45, stagger: 0.05, ease: 'power3.out' }
+        );
     }
 
     private setActiveVisualState() {
@@ -75,15 +80,10 @@ export class Experience implements AfterViewInit {
 
         cards.forEach((c, idx) => {
             c.classList.toggle('active', idx === this.currentIndex);
-            if (idx === this.currentIndex) {
-                gsap.to(c, { scale: 1, opacity: 1, duration: 0.18, ease: 'power2.out' });
-            } else {
-                gsap.to(c, { scale: 0.94, opacity: 0.68, duration: 0.18, ease: 'power2.out' });
-            }
+            gsap.to(c, { scale: idx === this.currentIndex ? 1 : 0.94, opacity: idx === this.currentIndex ? 1 : 0.65, duration: 0.25 });
         });
 
         this.syncView(true);
-        this.animateActivePulse();
     }
 
     previous() {
@@ -130,19 +130,13 @@ export class Experience implements AfterViewInit {
         const cards = Array.from(container.querySelectorAll('.card')) as HTMLElement[];
         if (!cards.length) return;
 
-        if (this.currentIndex >= cards.length) this.currentIndex = cards.length - 1;
-        if (this.currentIndex < 0) this.currentIndex = 0;
-
         const active = cards[this.currentIndex];
         const vpWidth = container.parentElement?.clientWidth ?? container.clientWidth;
         const cardCenter = active.offsetLeft + active.offsetWidth / 2;
         const translateX = Math.max(0, cardCenter - vpWidth / 2);
 
-        if (skipAnim) {
-            container.style.transform = `translateX(${-translateX}px)`;
-        } else {
-            gsap.to(container, { x: -translateX, duration: 0.38, ease: 'power3.out' });
-        }
+        if (skipAnim) container.style.transform = `translateX(${-translateX}px)`;
+        else gsap.to(container, { x: -translateX, duration: 0.36, ease: 'power3.out' });
 
         this.updateDots();
     }
@@ -150,15 +144,6 @@ export class Experience implements AfterViewInit {
     private updateDots() {
         const dots = this.dotsContainer?.nativeElement?.querySelectorAll('.dot') ?? [];
         dots.forEach((d: Element, i: number) => d.classList.toggle('selected', i === this.currentIndex));
-    }
-
-    private animateActivePulse() {
-        const container = this.cardContainer.nativeElement;
-        const activePoint: HTMLElement | null = container.querySelector('.card.active .point-circle');
-        gsap.killTweensOf('.pulse-loop');
-        if (activePoint) {
-            gsap.fromTo(activePoint, { scale: 0.98 }, { scale: 1.06, duration: 1.1, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-        }
     }
 
     @HostListener('window:keydown', ['$event'])
