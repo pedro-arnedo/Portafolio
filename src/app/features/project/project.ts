@@ -75,7 +75,7 @@ export class Project implements OnInit, OnDestroy {
         }
 
         const screenWidth = window.innerWidth;
-        const itemsToShow = screenWidth <= 600 ? 1 : 2;
+        const itemsToShow = screenWidth <= 700 ? 1 : 2;
 
         const endIndex = this.currentIndex + itemsToShow;
         if (endIndex <= total) {
@@ -87,6 +87,22 @@ export class Project implements OnInit, OnDestroy {
                 ...this.projects.slice(0, overflow)
             ];
         }
+    }
+
+    isDotActive(index: number): boolean {
+        if (this.isMobile) {
+            return index === this.currentIndex;
+        }
+
+        const screenWidth = window.innerWidth;
+        const itemsToShow = screenWidth <= 700 ? 1 : 2;
+
+        for (let i = 0; i < itemsToShow; i++) {
+            if ((this.currentIndex + i) % this.projects.length === index) {
+                return true;
+            }
+        }
+        return false;
     }
 
     getTransform() {

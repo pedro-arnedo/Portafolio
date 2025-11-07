@@ -33,7 +33,7 @@
         </div>
 
         <div class="carousel-dots" *ngIf="!isMobile">
-            <span *ngFor="let dot of projects; let i = index" [class.active]="i === currentIndex"></span>
+            <span *ngFor="let dot of projects; let i = index" [class.active]="isDotActive(i)"></span>
         </div>
     </div>
 </section>
