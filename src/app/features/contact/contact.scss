@@ -346,9 +346,8 @@
     }
 }
 
-// === RESPONSIVE CONTACT-FOOTER ===
+// === RESPONSIVE CONTACT ===
 
-/* ≤1200px */
 @media (max-width: 1200px) {
     .contact-footer {
         padding: 3rem 2rem 1rem;
@@ -360,7 +359,6 @@
     }
 }
 
-/* ≤1024px */
 @media (max-width: 1024px) {
     .contact-footer {
         padding: 2.5rem 1.8rem 1rem;
@@ -385,8 +383,6 @@
         }
     }
 }
-
-/* ≤768px (tablet vertical / móvil grande) */
 @media (max-width: 768px) {
     .contact-footer {
         padding: 2rem 1.5rem 1rem;
@@ -433,7 +429,6 @@
     }
 }
 
-/* ≤600px (teléfonos medianos) */
 @media (max-width: 600px) {
     .contact-footer {
         padding: 2rem 1rem 0.8rem;
@@ -476,7 +471,6 @@
     }
 }
 
-/* ≤480px (teléfonos pequeños) */
 @media (max-width: 480px) {
     .contact-footer {
         padding: 1.8rem 0.8rem 0.6rem;

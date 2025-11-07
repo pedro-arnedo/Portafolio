@@ -158,9 +158,7 @@
     }
 }
 
-/* === HERO RESPONSIVE === */
-
-/* Pantallas grandes (≤1200px) */
+// === RESPONSIVE HERO===
 @media (max-width: 1200px) {
     .hero {
         .hero-container {
@@ -180,7 +178,6 @@
     }
 }
 
-/* Tablets horizontales (≤1024px) */
 @media (max-width: 1024px) {
     .hero {
         .hero-container {
@@ -206,7 +203,6 @@
     }
 }
 
-/* Tablets verticales y móviles grandes (≤768px) */
 @media (max-width: 768px) {
     .hero {
         height: auto;
@@ -242,7 +238,6 @@
     }
 }
 
-/* Teléfonos medianos (≤600px) */
 @media (max-width: 600px) {
     .hero {
         .hero-container {
@@ -271,7 +266,6 @@
     }
 }
 
-/* Teléfonos pequeños (≤480px) */
 @media (max-width: 480px) {
     .hero {
         padding: 1rem 0.5rem;

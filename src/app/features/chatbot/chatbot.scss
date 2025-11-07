@@ -213,7 +213,49 @@
     }
 }
 
-/* === RESPONSIVE CHATBOT OPTIMIZATION === */
+// === RESPONSIVE CHATBOT ===
+@media (max-width: 1200px) {
+    .chat-panel {
+        width: 340px;
+        height: 450px;
+        right: 25px;
+        bottom: 85px;
+        border-radius: 18px;
+    }
+
+    .chat-panel .chat-header h3 {
+        font-size: 1rem;
+    }
+
+    .chat-panel .chat-body {
+        padding: 0.9rem;
+    }
+
+    .chat-panel .chat-message .bubble {
+        font-size: 0.88rem;
+        padding: 0.65rem 1rem;
+    }
+
+    .floating-buttons {
+        bottom: 25px;
+        right: 25px;
+
+        .floating-btn {
+            width: 58px;
+            height: 58px;
+
+            img {
+                width: 34px;
+                height: 34px;
+            }
+
+            i {
+                font-size: 22px;
+            }
+        }
+    }
+}
+
 @media (max-width: 1024px) {
     .chat-panel {
         width: 320px;
@@ -306,43 +348,6 @@
 
             i {
                 font-size: 18px;
-            }
-        }
-    }
-}
-
-@media (max-width: 480px) {
-    .chat-panel {
-        width: 94%;
-        height: 62vh;
-        right: 3%;
-        bottom: 70px;
-        border-radius: 14px;
-    }
-
-    .chat-panel .chat-header h3 {
-        font-size: 0.9rem;
-    }
-
-    .chat-panel .chat-message .bubble {
-        font-size: 0.82rem;
-        padding: 0.55rem 0.8rem;
-    }
-
-    .floating-buttons {
-        gap: 10px;
-
-        .floating-btn {
-            width: 45px;
-            height: 45px;
-
-            img {
-                width: 24px;
-                height: 24px;
-            }
-
-            i {
-                font-size: 17px;
             }
         }
     }

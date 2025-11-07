@@ -141,7 +141,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(0, 195, 255, 0.15);
+        background: rgba(0, 195, 255, 0.12);
         border: 1px solid rgba(0, 195, 255, 0.4);
         color: #00c3ff;
         font-size: 1.3rem;
@@ -153,19 +153,72 @@
         justify-content: center;
         cursor: pointer;
         transition: all 0.3s ease;
-        z-index: 10;
+        z-index: 5;
+
+        &.left {
+            left: 1rem;
+        }
+
+        &.right {
+            right: 1rem;
+        }
 
         &:hover {
             background: #00c3ff;
             color: #0b0d13;
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.9),
+                0 0 45px rgba(0, 195, 255, 0.6),
+                0 0 70px rgba(0, 195, 255, 0.4);
+            filter: drop-shadow(0 0 8px #00c3ff);
+            transform: translateY(-50%) scale(1.1);
         }
 
-        &.left {
-            left: -25px;
+        @media (max-width: 1200px) {
+            width: 46px;
+            height: 46px;
         }
 
-        &.right {
-            right: -25px;
+        @media (max-width: 1024px) {
+            width: 42px;
+            height: 42px;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+
+            &.left {
+                left: 0.5rem;
+            }
+
+            &.right {
+                right: 0.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+
+            &.left {
+                left: 1rem;
+            }
+
+            &.right {
+                right: 1rem;
+            }
+
+            &:hover {
+                box-shadow: 0 0 20px rgba(0, 195, 255, 0.8),
+                    0 0 35px rgba(0, 195, 255, 0.5);
+            }
+        }
+
+        @media (max-width: 480px) {
+            display: none;
         }
     }
 
@@ -247,7 +300,7 @@ $techColors: (
     }
 }
 
-/* === RESPONSIVE PROJECTS === */
+// === RESPONSIVE PROJECTS ===
 @media (max-width: 1200px) {
     .projects-section {
         padding: 4rem 2rem;

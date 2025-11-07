@@ -30,7 +30,6 @@ export const projects = [
             { name: 'Swagger', icon: 'fa fa-book' },
             { name: 'GitHub', icon: 'fa fa-github' },
             { name: 'Jira', icon: 'fa fa-tasks' },
-            { name: 'CI/CD', icon: 'fa fa-rocket' },
             { name: 'XAMPP', icon: 'fa fa-server' },
         ],
     },

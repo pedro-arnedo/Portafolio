@@ -74,12 +74,13 @@ export class Project implements OnInit, OnDestroy {
             return;
         }
 
-        // Muestra solo 2 proyectos en todas las pantallas grandes
-        const endIndex = this.currentIndex + 2;
+        const screenWidth = window.innerWidth;
+        const itemsToShow = screenWidth <= 600 ? 1 : 2;
+
+        const endIndex = this.currentIndex + itemsToShow;
         if (endIndex <= total) {
             this.visibleProjects = this.projects.slice(this.currentIndex, endIndex);
         } else {
-            // Si se pasa del final, concatenar el inicio
             const overflow = endIndex - total;
             this.visibleProjects = [
                 ...this.projects.slice(this.currentIndex),
