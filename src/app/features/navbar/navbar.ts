@@ -96,14 +96,12 @@ export class Navbar implements AfterViewInit, OnDestroy {
             const rect = targetEl.getBoundingClientRect();
             const containerRect = containerEl.getBoundingClientRect();
 
-            // 🔧 FIX: take horizontal scroll offset into account
             const offsetX =
                 rect.left - containerRect.left + containerEl.scrollLeft;
 
             pillEl.style.transform = `translateX(${offsetX}px)`;
             pillEl.style.width = `${rect.width}px`;
 
-            // ✅ Keep pill in sync with scroll movement
             containerEl.scrollTo({
                 left: offsetX - containerEl.clientWidth / 2 + rect.width / 2,
                 behavior: 'smooth',
