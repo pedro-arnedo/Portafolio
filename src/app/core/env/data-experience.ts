@@ -43,7 +43,7 @@ export const timeline: TimelineItem[] = [
         title: 'Full Stack Developer Freelance',
         entity: 'Kingdom Grace Foundation',
         location: 'Guayaquil, Ecuador (Remoto)',
-        date: 'Agosto 2024 – Octubre 2024',
+        date: 'Agosto 2024 – Septiembre 2024',
         modality: 'Freelance / Proyecto Colaborativo',
         description:
             'Contribuí al desarrollo full stack del portal institucional de Kingdom Grace, mejorando la velocidad de carga y la gestión de contenidos. Implementación de arquitectura modular, autenticación, formularios dinámicos y panel administrativo en Angular y Node.js.',

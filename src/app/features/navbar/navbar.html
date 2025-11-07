@@ -4,7 +4,7 @@
             <img src="assets/icon.jpg" alt="Foto" class="logo-img" />
         </a>
 
-        <ul class="navbar-links">
+        <ul class="navbar-links" #navLinksContainer>
             <div class="active-pill" [style.transform]="activeIndicatorTransform"></div>
             <li *ngFor="let link of navLinks; let i = index" [class.active]="activeSection === link.targetId">
                 <a (click)="scrollTo($event, link.targetId, i)">

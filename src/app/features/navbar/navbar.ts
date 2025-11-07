@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, HostListener, ElementRef, AfterViewInit, OnDestroy, ViewChild, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../core/env/environment';
 import { Title } from '@angular/platform-browser';
@@ -8,11 +8,11 @@ import { Title } from '@angular/platform-browser';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './navbar.html',
-    styleUrls: ['./navbar.scss']
+    styleUrls: ['./navbar.scss'],
 })
 export class Navbar implements AfterViewInit, OnDestroy {
+    @ViewChild('navLinksContainer') navLinksContainer!: ElementRef<HTMLUListElement>;
 
-    menuOpen = false;
     scrolled = false;
     navLinks = environment.navLinks;
     activeSection = 'home';
@@ -33,7 +33,7 @@ export class Navbar implements AfterViewInit, OnDestroy {
                 setTimeout(() => {
                     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     this.activeSection = initialHash;
-                    const idx = this.navLinks.findIndex(l => l.targetId === initialHash);
+                    const idx = this.navLinks.findIndex((l) => l.targetId === initialHash);
                     if (idx !== -1) this.moveActivePill(idx);
                 }, 50);
             }
@@ -55,7 +55,7 @@ export class Navbar implements AfterViewInit, OnDestroy {
                 for (const entry of entries) {
                     if (entry.isIntersecting) {
                         const id = entry.target.id;
-                        const index = this.navLinks.findIndex(l => l.targetId === id);
+                        const index = this.navLinks.findIndex((l) => l.targetId === id);
                         if (index !== -1 && this.currentIndex !== index) {
                             this.currentIndex = index;
                             this.activeSection = id;
@@ -77,9 +77,7 @@ export class Navbar implements AfterViewInit, OnDestroy {
     scrollTo(event: Event, targetId: string, index: number): void {
         event.preventDefault();
         const element = document.getElementById(targetId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         this.activeSection = targetId;
         this.currentIndex = index;
         this.moveActivePill(index);
@@ -90,16 +88,26 @@ export class Navbar implements AfterViewInit, OnDestroy {
         const linkEls = Array.from(
             this.el.nativeElement.querySelectorAll('.navbar-links li a')
         ) as HTMLElement[];
-
         const targetEl = linkEls[index];
         const pillEl = this.el.nativeElement.querySelector('.active-pill') as HTMLElement;
+        const containerEl = this.navLinksContainer?.nativeElement;
 
-        if (targetEl && pillEl) {
+        if (targetEl && pillEl && containerEl) {
             const rect = targetEl.getBoundingClientRect();
-            const containerRect = targetEl.closest('.navbar-links')!.getBoundingClientRect();
-            const offsetX = rect.left - containerRect.left;
+            const containerRect = containerEl.getBoundingClientRect();
+
+            // 🔧 FIX: take horizontal scroll offset into account
+            const offsetX =
+                rect.left - containerRect.left + containerEl.scrollLeft;
+
             pillEl.style.transform = `translateX(${offsetX}px)`;
             pillEl.style.width = `${rect.width}px`;
+
+            // ✅ Keep pill in sync with scroll movement
+            containerEl.scrollTo({
+                left: offsetX - containerEl.clientWidth / 2 + rect.width / 2,
+                behavior: 'smooth',
+            });
         }
 
         const sectionLabel = this.navLinks[index]?.label || 'Inicio';
