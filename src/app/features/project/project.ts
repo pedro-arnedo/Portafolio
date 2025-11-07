@@ -1,7 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { projects } from '../../core/env/data-project';
 import { ViewEncapsulation } from '@angular/core';
+
+interface Technology {
+    name: string;
+    icon: string;
+}
+
+interface ProjectItem {
+    title: string;
+    description: string;
+    image: string;
+    technologies: Technology[];
+}
 
 @Component({
     selector: 'app-project',
@@ -12,12 +24,15 @@ import { ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class Project implements OnInit, OnDestroy {
-    projects = projects;
-    visibleProjects = this.projects.slice(0, 3);
+    projects: ProjectItem[] = projects as ProjectItem[];
+    visibleProjects: ProjectItem[] = [];
     currentIndex = 0;
     interval: any;
+    isMobile = false;
 
     ngOnInit() {
+        this.checkScreen();
+        this.updateVisibleProjects();
         this.startAutoSlide();
     }
 
@@ -25,30 +40,55 @@ export class Project implements OnInit, OnDestroy {
         clearInterval(this.interval);
     }
 
+    @HostListener('window:resize', [])
+    onResize() {
+        this.checkScreen();
+        this.updateVisibleProjects();
+    }
+
+    checkScreen() {
+        this.isMobile = window.innerWidth <= 480;
+    }
+
     startAutoSlide() {
         this.interval = setInterval(() => this.nextSlide(), 15000);
     }
 
     nextSlide() {
+        if (this.isMobile) return;
         this.currentIndex = (this.currentIndex + 1) % this.projects.length;
         this.updateVisibleProjects();
     }
 
     prevSlide() {
+        if (this.isMobile) return;
         this.currentIndex = (this.currentIndex - 1 + this.projects.length) % this.projects.length;
         this.updateVisibleProjects();
     }
 
     updateVisibleProjects() {
         const total = this.projects.length;
-        this.visibleProjects = [
-            this.projects[this.currentIndex % total],
-            this.projects[(this.currentIndex + 1) % total],
-            this.projects[(this.currentIndex + 2) % total]
-        ];
+
+        if (this.isMobile) {
+            this.visibleProjects = this.projects;
+            return;
+        }
+
+        // Muestra solo 2 proyectos en todas las pantallas grandes
+        const endIndex = this.currentIndex + 2;
+        if (endIndex <= total) {
+            this.visibleProjects = this.projects.slice(this.currentIndex, endIndex);
+        } else {
+            // Si se pasa del final, concatenar el inicio
+            const overflow = endIndex - total;
+            this.visibleProjects = [
+                ...this.projects.slice(this.currentIndex),
+                ...this.projects.slice(0, overflow)
+            ];
+        }
     }
 
     getTransform() {
-        return `translateX(0)`;
+        return 'translateX(0)';
     }
 }

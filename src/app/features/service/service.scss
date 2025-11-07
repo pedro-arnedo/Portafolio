@@ -94,3 +94,116 @@
         }
     }
 }
+
+/* === RESPONSIVE SERVICE OPTIMIZATION === */
+@media (max-width: 1024px) {
+    .service-section {
+        padding: 4rem 1.5rem;
+
+        .service-card {
+            padding: 2rem 1.3rem;
+
+            .icon-wrapper {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .service-section {
+        padding: 3.5rem 1rem;
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+        }
+
+        .service-card {
+            padding: 1.8rem 1.2rem;
+
+            .icon-wrapper {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+
+            p {
+                font-size: 0.88rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .service-section {
+        padding: 3rem 1rem;
+
+        .service-card {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 1.6rem 1.2rem;
+
+            .icon-wrapper {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 0.95rem;
+            }
+
+            p {
+                font-size: 0.85rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .service-section {
+        padding: 2.5rem 1rem;
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+
+        .service-card {
+            padding: 1.4rem 1rem;
+
+            .icon-wrapper {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
+            }
+
+            h3 {
+                font-size: 0.9rem;
+            }
+
+            p {
+                font-size: 0.82rem;
+                line-height: 1.5;
+            }
+        }
+    }
+}

@@ -115,29 +115,4 @@
                 0 0 40px rgba(0, 204, 181, 0.3);
         }
     }
-
-    @media (max-width: 768px) {
-        padding: 0.4rem 1rem;
-        border-radius: 30px;
-        top: 10px;
-
-        .navbar-links {
-            gap: 1rem;
-            padding: 0 0.5rem;
-
-            a {
-                font-size: 0.85rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .active-pill {
-                height: 26px;
-            }
-        }
-
-        .navbar-logo .logo-img {
-            width: 36px;
-            height: 36px;
-        }
-    }
 }

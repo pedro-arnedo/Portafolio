@@ -121,11 +121,129 @@
                 right: 8px;
             }
         }
+    }
+}
 
-        @media (max-width: 480px) {
-            width: 280px;
-            height: 280px;
+/* === RESPONSIVE: ABOUT SECTION === */
+
+/* Pantallas grandes (≤1200px) */
+@media (max-width: 1200px) {
+    .about-section {
+        padding: 3rem 2rem;
+
+        .about-container {
+            gap: 2.5rem;
+        }
+
+        .about-carousel {
+            width: 340px;
+            height: 340px;
         }
     }
+}
 
+/* Tablets horizontales (≤1024px) */
+@media (max-width: 1024px) {
+    .about-section {
+        padding: 3rem 1.5rem;
+
+        .about-container {
+            gap: 2rem;
+        }
+
+        .about-carousel {
+            width: 320px;
+            height: 320px;
+        }
+
+        .about-text p {
+            font-size: 0.95rem;
+        }
+    }
+}
+
+/* Tablets verticales y móviles grandes (≤768px) */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 3rem 1.2rem;
+        text-align: center;
+
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 700px;
+        }
+
+        .about-carousel {
+            order: -1;
+            width: 300px;
+            height: 300px;
+        }
+
+        .about-text {
+            p {
+                text-align: justify;
+                font-size: 0.92rem;
+            }
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+        }
+    }
+}
+
+/* Teléfonos medianos (≤600px) */
+@media (max-width: 600px) {
+    .about-section {
+        padding: 2.5rem 1rem;
+
+        .about-container {
+            gap: 2rem;
+        }
+
+        .about-carousel {
+            width: 260px;
+            height: 260px;
+        }
+
+        .about-text p {
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+/* Teléfonos pequeños (≤480px) */
+@media (max-width: 480px) {
+    .about-section {
+        padding: 2rem 0.8rem;
+
+        .about-container {
+            gap: 1.8rem;
+        }
+
+        .about-carousel {
+            width: 230px;
+            height: 230px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+        }
+
+        .intro-quote {
+            font-size: 0.9rem;
+            padding-left: 0.6rem;
+        }
+
+        .about-text p {
+            font-size: 0.85rem;
+        }
+    }
 }

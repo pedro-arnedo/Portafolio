@@ -62,6 +62,7 @@ export const projects = [
             { name: 'GSAP', icon: 'fa fa-bolt' },
             { name: 'N-layer', icon: 'fa fa-th-large' },
             { name: 'Responsive', icon: 'fa fa-mobile' },
+            { name: 'GitHub', icon: 'fa fa-github' },
         ],
     },
 ];

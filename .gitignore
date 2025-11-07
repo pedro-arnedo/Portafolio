@@ -8,6 +8,7 @@
 /src/assets
 src/app/core/env/data-email.ts
 src/app/core/env/data-chatbot.ts
+src/estructura.txt
 
 # Node
 /node_modules

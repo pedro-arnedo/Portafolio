@@ -157,3 +157,149 @@
         }
     }
 }
+
+/* === HERO RESPONSIVE === */
+
+/* Pantallas grandes (≤1200px) */
+@media (max-width: 1200px) {
+    .hero {
+        .hero-container {
+            max-width: 1000px;
+            padding: 3rem;
+            gap: 2rem;
+        }
+
+        .hero-title .hero-name,
+        .hero-title .hero-lastname {
+            font-size: 3.2rem;
+        }
+
+        .hero-intro {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+/* Tablets horizontales (≤1024px) */
+@media (max-width: 1024px) {
+    .hero {
+        .hero-container {
+            flex-direction: column;
+            padding: 3rem 2rem;
+            min-height: auto;
+            gap: 0rem;
+        }
+
+        .hero-photo-wrapper {
+            width: 220px;
+            height: 220px;
+        }
+
+        .hero-title .hero-name,
+        .hero-title .hero-lastname {
+            font-size: 2.8rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+/* Tablets verticales y móviles grandes (≤768px) */
+@media (max-width: 768px) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+
+        .hero-container {
+            flex-direction: column;
+            gap: 0rem;
+            padding: 2rem 1rem;
+        }
+
+        .hero-photo-wrapper {
+            width: 180px;
+            height: 180px;
+        }
+
+        .hero-title .hero-name,
+        .hero-title .hero-lastname {
+            font-size: 2.4rem;
+        }
+
+        .hero-intro {
+            font-size: 1.1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            height: auto;
+            min-height: 2.4rem;
+            line-height: 1.4;
+        }
+    }
+}
+
+/* Teléfonos medianos (≤600px) */
+@media (max-width: 600px) {
+    .hero {
+        .hero-container {
+            padding: 1.5rem;
+            gap: 0rem;
+        }
+
+        .hero-photo-wrapper {
+            width: 160px;
+            height: 160px;
+        }
+
+        .hero-title .hero-name,
+        .hero-title .hero-lastname {
+            font-size: 2rem;
+        }
+
+        .hero-intro {
+            font-size: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            min-height: 2.4rem;
+        }
+    }
+}
+
+/* Teléfonos pequeños (≤480px) */
+@media (max-width: 480px) {
+    .hero {
+        padding: 1rem 0.5rem;
+
+        .hero-container {
+            padding: 1rem;
+            gap: 0rem;
+        }
+
+        .hero-photo-wrapper {
+            width: 140px;
+            height: 140px;
+        }
+
+        .hero-title .hero-name,
+        .hero-title .hero-lastname {
+            font-size: 1.7rem;
+        }
+
+        .hero-intro {
+            font-size: 0.95rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0 0.5rem;
+            min-height: 2.4rem;
+        }
+    }
+}

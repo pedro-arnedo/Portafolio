@@ -3,7 +3,7 @@
         <h2 class="section-title">Proyectos</h2>
 
         <div class="carousel-wrapper">
-            <button class="nav-btn left" (click)="prevSlide()">
+            <button class="nav-btn left" (click)="prevSlide()" *ngIf="!isMobile">
                 <i class="fa fa-chevron-left"></i>
             </button>
 
@@ -27,12 +27,12 @@
                 </div>
             </div>
 
-            <button class="nav-btn right" (click)="nextSlide()">
+            <button class="nav-btn right" (click)="nextSlide()" *ngIf="!isMobile">
                 <i class="fa fa-chevron-right"></i>
             </button>
         </div>
 
-        <div class="carousel-dots">
+        <div class="carousel-dots" *ngIf="!isMobile">
             <span *ngFor="let dot of projects; let i = index" [class.active]="i === currentIndex"></span>
         </div>
     </div>
