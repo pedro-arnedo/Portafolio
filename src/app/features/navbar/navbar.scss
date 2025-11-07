@@ -1,5 +1,3 @@
-@use '../../core/config/variables.scss' as *;
-
 .navbar {
     position: fixed;
     top: 20px;
@@ -86,15 +84,25 @@
             height: 30px;
             left: 0;
             background: linear-gradient(90deg, #0097cc, #7fded1);
-            box-shadow:
-                0 0 15px rgba(0, 151, 204, 0.6),
-                0 0 30px rgba(0, 204, 181, 0.25);
+            box-shadow: 0 0 15px rgba(0, 151, 204, 0.6), 0 0 30px rgba(0, 204, 181, 0.25);
+            color: #fff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
             border-radius: 10px;
             z-index: 1;
             opacity: 0.9;
-            transition: transform 0.45s cubic-bezier(0.25, 1.25, 0.5, 1),
-                width 0.3s ease, opacity 0.3s ease;
+            transition: transform 0.45s cubic-bezier(0.25, 1.25, 0.5, 1), width 0.3s ease, opacity 0.3s ease;
+            animation: glowMove 3s ease-in-out infinite alternate;
             pointer-events: none;
+        }
+    }
+
+    @keyframes glowMove {
+        from {
+            box-shadow: 0 0 10px rgba(0, 151, 204, 0.6), 0 0 25px rgba(0, 204, 181, 0.2);
+        }
+
+        to {
+            box-shadow: 0 0 20px rgba(0, 151, 204, 0.9), 0 0 40px rgba(0, 204, 181, 0.3);
         }
     }
 
