@@ -10,11 +10,10 @@ export const timeline: TimelineItem[] = [
         date: 'Diciembre 2023 – Junio 2025',
         modality: 'Contrato indefinido / Tiempo completo',
         description:
-            'Desarrollo full stack de una aplicación web interna para centralizar consultas y gestión de datos de Salesforce, reduciendo la dependencia del CRM y mejorando el acceso a la información. Implementación de módulos Angular, APIs Node.js y base de datos PostgreSQL bajo Layered Architecture, con integración bidireccional a Salesforce mediante Connected Apps y REST/SOAP. Gestión de metadata, autenticación SSO, control de acceso por roles y despliegue con Bitbucket y Jira.',
+            'Desarrollo full stack de una aplicación web interna para centralizar la gestión de datos y consultas de Salesforce, reduciendo la dependencia del CRM y mejorando el acceso a la información. Implementación de módulos Angular, APIs Node.js y base de datos PostgreSQL bajo arquitectura en capas, con integración bidireccional a Salesforce mediante Connected Apps y REST/SOAP.',
         icon: 'fa fa-briefcase',
         stack: [
-            'Angular', 'Node.js', 'PostgreSQL', 'Salesforce', 'REST/SOAP',
-            'Layered Architecture', 'Bitbucket', 'Jira'
+            'Angular', 'Node.js', 'PostgreSQL', 'Salesforce', 'REST/SOAP', 'Bitbucket', 'Jira'
         ],
         modules: [
             'Dashboard de consultas Salesforce: visualización de registros, filtros dinámicos y métricas.',
