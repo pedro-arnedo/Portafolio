@@ -47,7 +47,7 @@ export const timeline: TimelineItem[] = [
         description:
             'Contribuí al desarrollo full stack del portal institucional de Kingdom Grace, mejorando la velocidad de carga y la gestión de contenidos. Implementación de arquitectura modular, autenticación, formularios dinámicos y panel administrativo en Angular y Node.js.',
         icon: 'fa fa-briefcase',
-        stack: ['Angular', 'Node.js', 'TypeScript', 'SCSS', 'Firebase', 'Diseño responsivo'],
+        stack: ['Angular', 'Node.js', 'TypeScript', 'SCSS', 'Firebase', 'Responsive'],
         modules: [
             'Gestión de programas, eventos y actividades institucionales.',
             'Panel administrativo con control de roles.',
@@ -133,10 +133,12 @@ export const timeline: TimelineItem[] = [
     },
 
     // === CERTIFICACIONES ===
-        {
+    {
         type: 'cert',
         title: 'Inteligencia Artificial',
         entity: 'Talento Tech Colombia',
+        location: 'Valledupar, Colombia',
+        modality: 'Diplomado / Presencial',
         date: 'Noviembre 2025',
         description:
             'Formación intensiva en fundamentos de IA, machine learning y aplicaciones prácticas de modelos predictivos y automatización.',
@@ -152,6 +154,8 @@ export const timeline: TimelineItem[] = [
         type: 'cert',
         title: 'Python Essentials',
         entity: 'Cisco Networking Academy',
+        location: 'Plataforma',
+        modality: 'Curso / Virtual',
         date: 'Mayo 2023',
         description:
             'Certificación en fundamentos de programación, estructuras de control y manipulación de datos con Python.',
@@ -167,6 +171,8 @@ export const timeline: TimelineItem[] = [
         type: 'cert',
         title: 'Introduction to Data Science',
         entity: 'Cisco Networking Academy',
+        location: 'Plataforma',
+        modality: 'Curso / Virtual',
         date: 'Septiembre 2023',
         description:
             'Certificación en fundamentos de ciencia de datos, estadística y visualización de información con Python.',
@@ -182,6 +188,8 @@ export const timeline: TimelineItem[] = [
         type: 'cert',
         title: 'Cloud Computing Foundations',
         entity: 'Google Cloud / AWS Academy',
+        location: 'Plataforma',
+        modality: 'Curso / Virtual',
         date: 'Octubre 2022',
         description:
             'Certificación en fundamentos de infraestructura cloud, redes, despliegue de servicios y seguridad en entornos AWS y Google Cloud.',
@@ -200,6 +208,7 @@ export const timeline: TimelineItem[] = [
         title: 'Ingeniería de Sistemas',
         entity: 'Universidad Popular del Cesar',
         location: 'Valledupar, Colombia',
+        modality: 'Presencial Diurno',
         date: 'Febrero 2017 – Junio 2023',
         description:
             'Formación en desarrollo de software, arquitectura de sistemas, bases de datos y gestión de proyectos. Proyecto de grado enfocado en la digitalización de procesos institucionales y gestión documental.',
@@ -216,7 +225,8 @@ export const timeline: TimelineItem[] = [
         title: 'Bachiller Técnico',
         entity: 'Institución Educativa Técnica Secundaria',
         location: 'Valledupar, Colombia',
-        date: 'Diciembre 2016',
+        modality: 'Presencial Diurno',
+        date: 'Enero 2010 - Diciembre 2016',
         description: 'Educación secundaria con formación técnica.',
         icon: 'fa fa-graduation-cap',
         stack: ['Educación secundaria', 'Bachillerato técnico'],
