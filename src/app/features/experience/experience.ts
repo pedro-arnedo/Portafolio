@@ -75,7 +75,6 @@ export class Experience implements AfterViewInit {
             });
         });
 
-        // centramos el card activo
         const activeCard = cards[this.currentIndex];
         const viewport = container.parentElement!;
         const vpWidth = viewport.clientWidth;

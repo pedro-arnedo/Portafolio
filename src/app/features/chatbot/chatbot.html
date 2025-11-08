@@ -1,17 +1,13 @@
-<!-- Botones flotantes -->
 <div class="floating-buttons">
-    <!-- Botón scroll -->
     <button class="floating-btn scroll-btn" (click)="toggleScroll()" aria-label="Subir o bajar">
         <i [class]="isAtTop ? 'fa fa-chevron-down' : 'fa fa-chevron-up'"></i>
     </button>
 
-    <!-- Botón Chatbot -->
     <button class="floating-btn chat-btn" (click)="toggleChat()" aria-label="Agente inteligente">
         <img src="assets/avatar.png" alt="Agente" />
     </button>
 </div>
 
-<!-- Panel de chat -->
 <div class="chat-panel" [class.open]="isChatOpen">
     <div class="chat-header">
         <div class="avatar">
@@ -26,7 +22,6 @@
             <p>Hola, soy un agente inteligente. Aquí responderé todas tus preguntas sobre el portafolio de Pedro Arnedo.</p>
         </div>
 
-        <!-- Historial de mensajes -->
         <div *ngFor="let msg of messages" [ngClass]="msg.from" class="chat-message">
             <div class="bubble">
                 <span>{{ msg.text }}</span>

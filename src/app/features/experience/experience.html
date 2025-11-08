@@ -25,7 +25,6 @@
                 <div class="card" *ngFor="let item of filteredItems; let i = index" [class.active]="i === currentIndex">
                     <h3 class="title">{{ item.title }}</h3>
 
-                    <!-- META GRID -->
                     <div class="meta-grid">
                         <div class="meta-item">
                             <strong>Empresa:</strong>
@@ -45,15 +44,13 @@
                         </div>
                     </div>
 
-                    <!-- DESCRIPCIÓN -->
                     <p class="description">
                         <strong>Descripción:</strong> {{ item.description }}
                     </p>
 
-                    <!-- STACK -->
                     <div class="stack-list" *ngIf="item.stack?.length">
                         <strong>Stack:</strong>
-                        <span *ngFor="let t of item.stack" class="stack-badge">
+                        <span *ngFor="let t of item.stack" class="stack-badge" [attr.data-tech]="t.trim()">
                             {{ t }}
                         </span>
                     </div>
@@ -68,13 +65,11 @@
         </button>
     </div>
 
-    <!-- DOTS -->
     <div class="carousel-dots">
         <span *ngFor="let dot of filteredItems; let i = index" [class.active]="i === currentIndex"
             (click)="goTo(i)"></span>
     </div>
 
-    <!-- MODAL -->
     <div class="modal-overlay" *ngIf="selectedItem" (click)="closeDetails()">
         <div class="modal-card" (click)="$event.stopPropagation()">
             <button class="close-btn" (click)="closeDetails()" aria-label="Cerrar">×</button>

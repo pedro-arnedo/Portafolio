@@ -1,0 +1,105 @@
+@use "sass:list";
+
+$techColors: (
+    // === BACKEND / FRONTEND ===
+    'Angular': (#DD1B31, rgba(221, 27, 49, 0.15)),
+    'Node.js': (#4CAF50, rgba(76, 175, 80, 0.15)),
+    'TypeScript': (#007ACC, rgba(0, 122, 204, 0.15)),
+    'SCSS': (#CC6699, rgba(204, 102, 153, 0.15)),
+    'CSS': (#264DE4, rgba(38, 77, 228, 0.15)),
+    '.NET Core': (#512BD4, rgba(81, 43, 212, 0.15)),
+    'PostgreSQL': (#336791, rgba(51, 103, 145, 0.15)),
+    'MySQL': (#00758F, rgba(0, 117, 143, 0.15)),
+    'Firebase': (#FFCA28, rgba(255, 202, 40, 0.15)),
+
+    // === HERRAMIENTAS / DEVOPS ===
+    'Salesforce': (#00A1E0, rgba(0, 161, 224, 0.15)),
+    'Bitbucket': (#2684FF, rgba(38, 132, 255, 0.15)),
+    'Jira': (#0052CC, rgba(0, 82, 204, 0.15)),
+    'GitHub': (#5C6BC0, rgba(92, 107, 192, 0.15)),
+    'Swagger': (#85EA2D, rgba(133, 234, 45, 0.15)),
+    'Postman': (#FF6C37, rgba(255, 108, 55, 0.15)),
+    'CI/CD': (#00C3FF, rgba(0, 195, 255, 0.15)),
+
+    // === SEGURIDAD / API ===
+    'JWT': (#5865F2, rgba(88, 101, 242, 0.15)),
+    'REST/SOAP': (#26A69A, rgba(38, 166, 154, 0.15)),
+
+    // === FRAMEWORKS Y PATRONES ===
+    'MVC': (#8E44AD, rgba(142, 68, 173, 0.15)),
+    'Repository Pattern': (#9C27B0, rgba(156, 39, 176, 0.15)),
+    'N-layer': (#673AB7, rgba(103, 58, 183, 0.15)),
+
+    // === CLOUD Y DEVOPS ===
+    'AWS': (#FF9900, rgba(255, 153, 0, 0.15)),
+    'Google Cloud': (#4285F4, rgba(66, 133, 244, 0.15)),
+    'Cloud': (#2196F3, rgba(33, 150, 243, 0.15)),
+    'Infraestructura': (#607D8B, rgba(96, 125, 139, 0.15)),
+
+    // === DISEÑO / UX ===
+    'Canva Pro': (#8E24AA, rgba(142, 36, 170, 0.15)),
+    'Diseño instruccional': (#E91E63, rgba(233, 30, 99, 0.15)),
+    'E-learning': (#F57C00, rgba(245, 124, 0, 0.15)),
+    'UX/UI': (#009688, rgba(0, 150, 136, 0.15)),
+
+    // === EDUCACIÓN / ACADÉMICO ===
+    'Moodle': (#F7931E, rgba(247, 147, 30, 0.15)),
+    'Educación secundaria': (#3F51B5, rgba(63, 81, 181, 0.15)),
+    'Bachillerato técnico': (#009688, rgba(0, 150, 136, 0.15)),
+    'Desarrollo de software': (#03A9F4, rgba(3, 169, 244, 0.15)),
+    'Arquitectura': (#795548, rgba(121, 85, 72, 0.15)),
+    'Bases de datos': (#607D8B, rgba(96, 125, 139, 0.15)),
+    'Gestión de proyectos': (#00BCD4, rgba(0, 188, 212, 0.15)),
+
+    // === DATA / IA ===
+    'Python': (#3776AB, rgba(55, 118, 171, 0.15)),
+    'IA': (#9C27B0, rgba(156, 39, 176, 0.15)),
+    'Machine Learning': (#4CAF50, rgba(76, 175, 80, 0.15)),
+    'Data': (#3F51B5, rgba(63, 81, 181, 0.15)),
+    'Automatización': (#0099CC, rgba(0, 153, 204, 0.15)),
+    'Data Science': (#4B8BBE, rgba(75, 139, 190, 0.15)),
+    'Visualización': (#E91E63, rgba(233, 30, 99, 0.15)),
+    'Análisis de datos': (#2196F3, rgba(33, 150, 243, 0.15)),
+
+    // === OTROS ===
+    'Google Login': (#4285F4, rgba(66, 133, 244, 0.15)),
+    'Scrum': (#009688, rgba(0, 150, 136, 0.15)),
+    'Responsive': (#0099CC, rgba(0, 153, 204, 0.15)),
+    'GSAP': (#88CE02, rgba(136, 206, 2, 0.15)),
+    'XAMPP': (#FB7A24, rgba(251, 122, 36, 0.15)),
+    'Cisco': (#1BA0D7, rgba(27, 160, 215, 0.15)),
+    'Programacion': (#607D8B, rgba(96, 125, 139, 0.15))
+);
+
+.tag,
+.tag-badge,
+.stack-badge {
+    border-radius: 20px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+    }
+
+    @each $tech, $colors in $techColors {
+        &[data-tech='#{$tech}'] {
+            color: list.nth($colors, 1);
+            background: list.nth($colors, 2);
+            border-color: rgba(list.nth($colors, 1), 0.25);
+        }
+    }
+
+    &:not([data-tech]) {
+        background: rgba(0, 195, 255, 0.08);
+        color: #00C3FF;
+        border-color: rgba(0, 195, 255, 0.25);
+    }
+}

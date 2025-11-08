@@ -1,5 +1,6 @@
 @use '../../core/config/variables.scss' as *;
 @use "sass:color";
+@use '../../core/config/tags.scss' as tags;
 
 .slider-experience {
     background: $bg-experience;
@@ -177,18 +178,7 @@
                 }
 
                 .stack-badge {
-                    background: rgba(0, 195, 255, 0.1);
-                    border: 1px solid rgba(0, 195, 255, 0.3);
-                    color: $accent-color;
-                    padding: 0.3rem 0.6rem;
-                    border-radius: 12px;
-                    font-size: 0.78rem;
-                    transition: 0.2s ease;
-
-                    &:hover {
-                        background: rgba(0, 195, 255, 0.2);
-                        transform: translateY(-1px);
-                    }
+                    @extend .tag-badge;
                 }
             }
 

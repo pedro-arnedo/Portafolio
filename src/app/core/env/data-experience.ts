@@ -160,7 +160,7 @@ export const timeline: TimelineItem[] = [
         description:
             'Certificación en fundamentos de programación, estructuras de control y manipulación de datos con Python.',
         icon: 'fa fa-trophy',
-        stack: ['Python', 'Cisco', 'Programación estructurada'],
+        stack: ['Python', 'Cisco', 'Programacion'],
         results: [
             'Comprensión de la sintaxis y estructuras básicas de Python.',
             'Capacidad para desarrollar scripts de automatización simples.',
