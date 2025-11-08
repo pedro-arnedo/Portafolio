@@ -16,7 +16,7 @@
     </div>
 
     <div class="card-viewport">
-        <button class="nav-arrow left" (click)="previous()" [disabled]="currentIndex === 0" aria-label="Anterior">
+        <button class="nav-arrow left" (click)="previous()" aria-label="Anterior">
             &larr;
         </button>
 
@@ -25,7 +25,7 @@
                 <div class="card" *ngFor="let item of filteredItems; let i = index" [class.active]="i === currentIndex">
                     <h3 class="title">{{ item.title }}</h3>
 
-                    <!-- NUEVA SECCIÓN DE META EN 4 BLOQUES -->
+                    <!-- META GRID -->
                     <div class="meta-grid">
                         <div class="meta-item">
                             <strong>Empresa:</strong>
@@ -45,30 +45,32 @@
                         </div>
                     </div>
 
-                    <!-- DESCRIPCIÓN CON SCROLL -->
-                    <p class="description">{{ item.description }}</p>
+                    <!-- DESCRIPCIÓN -->
+                    <p class="description">
+                        <strong>Descripción:</strong> {{ item.description }}
+                    </p>
 
                     <!-- STACK -->
-                    <div class="stack-list">
-                        <span *ngFor="let t of (item.stack || [])" class="stack-badge">{{ t }}</span>
+                    <div class="stack-list" *ngIf="item.stack?.length">
+                        <strong>Stack:</strong>
+                        <span *ngFor="let t of item.stack" class="stack-badge">
+                            {{ t }}
+                        </span>
                     </div>
 
-                    <!-- BOTÓN CENTRADO -->
-                    <button class="view-more" (click)="openDetails(item)">
-                        Ver más
-                    </button>
+                    <button class="view-more" (click)="openDetails(item)">Ver más</button>
                 </div>
             </div>
         </div>
 
-        <button class="nav-arrow right" (click)="next()" [disabled]="currentIndex === filteredItems.length - 1"
-            aria-label="Siguiente">
+        <button class="nav-arrow right" (click)="next()" aria-label="Siguiente">
             &rarr;
         </button>
     </div>
 
-    <div class="dots" #dotsContainer>
-        <span *ngFor="let _ of filteredItems; let i = index" class="dot" [class.selected]="i === currentIndex"
+    <!-- DOTS -->
+    <div class="carousel-dots">
+        <span *ngFor="let dot of filteredItems; let i = index" [class.active]="i === currentIndex"
             (click)="goTo(i)"></span>
     </div>
 
