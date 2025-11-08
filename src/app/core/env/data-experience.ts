@@ -186,19 +186,36 @@ export const timeline: TimelineItem[] = [
     },
     {
         type: 'cert',
-        title: 'Cloud Computing Foundations',
-        entity: 'Google Cloud / AWS Academy',
+        title: 'Google Cloud Foundations',
+        entity: 'Google Cloud',
         location: 'Plataforma',
         modality: 'Curso / Virtual',
         date: 'Octubre 2022',
         description:
-            'Certificación en fundamentos de infraestructura cloud, redes, despliegue de servicios y seguridad en entornos AWS y Google Cloud.',
+            'Certificación en fundamentos de infraestructura cloud, redes y despliegue de servicios en la plataforma Google Cloud. Enfoque en conceptos de virtualización, seguridad y escalabilidad en la nube.',
         icon: 'fa fa-trophy',
-        stack: ['Cloud', 'AWS', 'Google Cloud', 'Infraestructura'],
+        stack: ['Cloud', 'Google Cloud', 'Infraestructura'],
         results: [
-            'Comprensión de modelos de servicio IaaS, PaaS y SaaS.',
-            'Diseño básico de arquitecturas en la nube seguras y escalables.',
-            'Manejo de servicios esenciales en AWS y Google Cloud.'
+            'Comprensión del modelo de servicios de Google Cloud y sus componentes principales.',
+            'Configuración básica de redes, máquinas virtuales y almacenamiento.',
+            'Diseño de arquitecturas seguras y eficientes en la nube de Google.'
+        ]
+    },
+    {
+        type: 'cert',
+        title: 'AWS Cloud Foundations',
+        entity: 'AWS Academy',
+        location: 'Plataforma',
+        modality: 'Curso / Virtual',
+        date: 'Octubre 2022',
+        description:
+            'Certificación introductoria en fundamentos de AWS, cubriendo arquitectura cloud, seguridad, despliegue de servicios y administración de recursos bajo buenas prácticas.',
+        icon: 'fa fa-trophy',
+        stack: ['Cloud', 'AWS', 'Infraestructura'],
+        results: [
+            'Dominio de conceptos de IaaS, PaaS y SaaS en AWS.',
+            'Comprensión de la arquitectura global de AWS y su modelo de regiones y zonas de disponibilidad.',
+            'Implementación y monitoreo básico de servicios en la nube de Amazon.'
         ]
     },
 
