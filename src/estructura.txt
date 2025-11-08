@@ -1,0 +1,117 @@
+Listado de rutas de carpetas
+El n£mero de serie del volumen es 4CF9-7310
+src:.
+|   estructura.txt
+|   index.html
+|   main.ts
+|   styles.scss
+|   
++---app
+|   +---core
+|   |   +---config
+|   |   |       app.config.ts
+|   |   |       tags.scss
+|   |   |       variables.scss
+|   |   |       
+|   |   +---env
+|   |   |       data-chatbot.ts
+|   |   |       data-email.ts
+|   |   |       data-experience.ts
+|   |   |       data-project.ts
+|   |   |       data-stack.ts
+|   |   |       environment.ts
+|   |   |       
+|   |   +---models
+|   |   |       environment.model.ts
+|   |   |       link.model.ts
+|   |   |       navlink.model.ts
+|   |   |       profile.model.ts
+|   |   |       timeline.model.ts
+|   |   |       
+|   |   \---services
+|   |           email.service.ts
+|   |           gemini.service.ts
+|   |           particles.service.ts
+|   |           recaptcha.service.ts
+|   |           
+|   +---features
+|   |   +---about
+|   |   |       about.html
+|   |   |       about.scss
+|   |   |       about.ts
+|   |   |       
+|   |   +---chatbot
+|   |   |       chatbot.html
+|   |   |       chatbot.scss
+|   |   |       chatbot.ts
+|   |   |       
+|   |   +---contact
+|   |   |       contact.html
+|   |   |       contact.scss
+|   |   |       contact.ts
+|   |   |       
+|   |   +---experience
+|   |   |       experience.html
+|   |   |       experience.scss
+|   |   |       experience.ts
+|   |   |       
+|   |   +---hero
+|   |   |       hero.html
+|   |   |       hero.scss
+|   |   |       hero.ts
+|   |   |       
+|   |   +---navbar
+|   |   |       navbar.html
+|   |   |       navbar.scss
+|   |   |       navbar.ts
+|   |   |       
+|   |   +---project
+|   |   |       project.html
+|   |   |       project.scss
+|   |   |       project.ts
+|   |   |       
+|   |   +---service
+|   |   |       service.html
+|   |   |       service.scss
+|   |   |       service.ts
+|   |   |       
+|   |   \---stack
+|   |           stack.html
+|   |           stack.scss
+|   |           stack.ts
+|   |           
+|   +---layout
+|   |   +---body
+|   |   |       body.html
+|   |   |       body.scss
+|   |   |       body.ts
+|   |   |       
+|   |   +---footer
+|   |   |       footer.html
+|   |   |       footer.scss
+|   |   |       footer.ts
+|   |   |       
+|   |   \---header
+|   |           header.html
+|   |           header.scss
+|   |           header.ts
+|   |           
+|   \---main
+|           app.html
+|           app.scss
+|           app.ts
+|           
+\---assets
+        avatar.png
+        cursor-arrow.png
+        cursor-hand.png
+        favicon.ico
+        foto.png
+        foto1.png
+        icon.jpg
+        img1.jpeg
+        kingdom.png
+        sbx.png
+        tarjeta.png
+        unicesar.png
+        

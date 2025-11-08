@@ -3,12 +3,15 @@
         <h2 class="section-title">Proyectos</h2>
 
         <div class="carousel-wrapper">
-            <button class="nav-btn left" (click)="prevSlide()" *ngIf="!isMobile">
+            @if (!isMobile) {
+            <button class="nav-btn left" (click)="prevSlide()">
                 <i class="fa fa-chevron-left"></i>
             </button>
+            }
 
             <div class="carousel-track" [style.transform]="getTransform()">
-                <div class="project-card" *ngFor="let project of visibleProjects; let i = index">
+                @for (project of visibleProjects; track $index) {
+                <div class="project-card">
                     <div class="project-image">
                         <img [src]="project.image" [alt]="project.title" />
                     </div>
@@ -18,22 +21,30 @@
                         <p class="project-description">{{ project.description }}</p>
 
                         <div class="project-tags">
-                            <span *ngFor="let tech of project.technologies | slice:0:10" class="tag"
-                                [attr.data-tech]="tech.name.trim()">
+                            @for (tech of project.technologies | slice:0:10; track $index) {
+                            <span class="tag" [attr.data-tech]="tech.name.trim()">
                                 <i [class]="tech.icon"></i> {{ tech.name }}
                             </span>
+                            }
                         </div>
                     </div>
                 </div>
+                }
             </div>
 
-            <button class="nav-btn right" (click)="nextSlide()" *ngIf="!isMobile">
+            @if (!isMobile) {
+            <button class="nav-btn right" (click)="nextSlide()">
                 <i class="fa fa-chevron-right"></i>
             </button>
+            }
         </div>
 
-        <div class="carousel-dots" *ngIf="!isMobile">
-            <span *ngFor="let dot of projects; let i = index" [class.active]="isDotActive(i)"></span>
+        @if (!isMobile) {
+        <div class="carousel-dots">
+            @for (dot of projects; track $index) {
+            <span [class.active]="isDotActive($index)"></span>
+            }
         </div>
+        }
     </div>
 </section>
